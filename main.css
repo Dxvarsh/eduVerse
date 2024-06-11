@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+      font-family: 'gilroy';
+      src: url(./src/font/Gilroy-Regular.woff);
+    }
+    @font-face {
+        font-family: 'monument';
+        src: url(./src/font/MonumentExtended-Regular.woff);
+    }
+  }
