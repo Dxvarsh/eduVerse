@@ -46,11 +46,110 @@
 
 
         <main class="px-3 md:px-16">
-            <section class="flex justify-center items-center h-96">
+            <section class="flex justify-center items-center h-96 hidden">
                 <div class="flex justify-center items-center flex-col">
                     <img src="./img/evLOGO.png" width="50" alt="logo" class="mb-32">
                     <a href="./login.html" class=" text-white px-6 py-2 border border-tailblue rounded-md bg-tailblue hover:rounded-xl transition-all">Log in</a>
                 </div>
+            </section>
+
+
+            <section class="flex items-center justify-center flex-col">
+                <div class="flex items-center justify-center flex-col shadow-sm rounded-md shadow-blue-500 mt-4 py-5 px-7 max-w-sm">
+                    <div class="innerDiv flex">
+                        <img src="./img/evLOGO.png" width="30" alt="logo" class="mb-8">
+                        <p class="text-tailblue ml-3 items-center justify-center text-2xl">Add a Document.</p>
+                    </div>
+                    <form action="" method="get" class="flex flex-col w-full">
+                        
+                        <p class="text-white">Select Semester: </p>
+                        <div class="select-sem flex flex-wrap gap-5 p-2 mb-5">
+
+                            <input type="radio" name="semester" id="s1" class="peer/s1" checked> 
+                            <label for="s1" class="text-white">Sem 1</label>
+
+                            <input type="radio" name="semester" id="s2" class="peer/s2">
+                            <label for="s2" class="text-white">Sem 2</label>
+
+                            <input type="radio" name="semester" id="s3" class="peer/s3">
+                            <label for="s3" class="text-white">Sem 3</label> <br>
+
+                            <input type="radio" name="semester" id="s4" class="peer/s4">
+                            <label for="s4" class="text-white">Sem 4</label>
+
+                            <input type="radio" name="semester" id="s5" class="peer/s5">
+                            <label for="s5" class="text-white">Sem 5</label>
+
+                            <input type="radio" name="semester" id="s6" class="peer/s6">
+                            <label for="s6" class="text-white">Sem 6</label>
+
+
+                            <div class="hidden peer-checked/s1:block"></div>
+                            <div class="hidden peer-checked/s2:block">Sem 2 selected</div>
+                            <div class="hidden peer-checked/s3:block">Sem 3 selected</div>
+                            <div class="hidden peer-checked/s4:block">Sem 4 selected</div>
+                            <div class="hidden peer-checked/s5:block text-tailblue">
+                                <label for="subject" class="text-white">Select Where to add PDF?</label>
+                                <select id="subject" class="border border-tailblue bg-darkblue mt-3">
+                                    <option value="cc-304">WAD-1 Practicals</option>
+                                    <option value="cc-305">Python Practicals</option>
+                                    <option value="cc-301-old-paper">WAD-1 (oldpaper)</option>
+                                    <option value="cc-302-old-paper">Python (oldpaper)</option>
+                                    <option value="cc-303-old-paper">Computer Network (oldpaper)</option>
+                                    <option value="sec-301-c-old-paper">MAD (oldpaper)</option>
+                                    <option value="cc-301">WAD-1</option>
+                                    <option value="cc-302">Python</option>
+                                    <option value="cc-303">Computer Network </option>
+                                    <option value="sec-301-c">MAD</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="hidden peer-checked/s6:block"></div>
+
+                        </div>
+
+                        <input 
+                            class="mb-3 rounded py-1 px-2 " 
+                            type="text" 
+                            name="" 
+                            placeholder="PDF Name" 
+                            id="pdf-name" 
+                            required
+                        >
+                        
+                        <input 
+                            class="mb-3 rounded py-1 px-2 " 
+                            type="text" 
+                            name="" placeholder="PDF Provided by" 
+                            id="provider-name"
+                        >
+                        
+                        <input 
+                            class="mb-3 rounded py-1 px-2 text-tailblue" 
+                            type="file" name="" 
+                            accept=".pdf, .docx" 
+                            id="file-input" required
+                        >
+
+                        <input 
+                            class="mb-3 rounded py-1 px-2 border-2 border-tailblue text-tailblue" 
+                            type="submit" 
+                            value="Add PDF"
+                            id="submit"
+                        >
+                    </form>
+                </div>
+            </section>
+
+
+            <section>
+                <ul 
+                    id="subject-list"
+                    class=""
+                >
+
+                </ul>
+
             </section>
         </main>
     </div>
