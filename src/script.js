@@ -2,6 +2,8 @@
 let tab = document.querySelectorAll('.tab');
 let textContent = document.querySelectorAll('.content');
 
+console.log(tab, textContent);
+
 textContent[0].style.display = "block";
 tab[0].style.borderColor = "#38bdf8";
 tab[0].style.color = "#38bdf8";
