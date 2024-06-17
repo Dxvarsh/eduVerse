@@ -43,7 +43,7 @@ function generateContent(containerSelector, data, downloadPrefix) {
             <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
                 <div class="p-4 md:w-[70%]">
                     <div class="font-bold text-xl mb-2 tracking-wider ">${elem.subject}</div>
-                    <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${elem.provider_name}</span>.
+                    <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${elem.provider_name}</span> on <span class="text-tailblue tracking-wider">{Date}</span>.
                     </p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">

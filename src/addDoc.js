@@ -31,7 +31,6 @@
 let addDocForm = document.querySelector("#add-doc-form")
 let subjectSem5Inp = document.querySelector("#subject-sem5");
 let pdfNameInp = document.querySelector("#pdf-name");
-let providerNameInp = document.querySelector("#provider-name");
 let fileInp = document.querySelector("#file-input");
 
 const wadContainer = document.querySelector("#subject-list-cc-301")
@@ -74,22 +73,20 @@ addDocForm.addEventListener("submit", (e) => {
 
     const subjectSem5 = subjectSem5Inp.value.trim();
     const pdfName = pdfNameInp.value.trim();
-    const providerName = providerNameInp.value.trim();
     const file = fileInp.value;
 
-
-    modal(pdfName);
-    addBook(subjectSem5, pdfName, providerName, file);
+    addBook(subjectSem5, pdfName, file);
 
 
     subjectSem5Inp.value = "";
     pdfNameInp.value = "";
-    providerNameInp.value = "";
+
+    alert(`${pdfName} Added Successfully`)
 
 })
     
     
-const addBook = (subjectSem5, pdfName, providerName, file) => {
+const addBook = (subjectSem5, pdfName, file) => {
         // console.log(subjectSem5);
         // console.log(pdfName);
         // console.log(providerName);
@@ -99,7 +96,6 @@ const addBook = (subjectSem5, pdfName, providerName, file) => {
         id: Date.now(),
         subject: subjectSem5,
         pdfName: pdfName,
-        providerName: providerName,
         link: file
     }
 
@@ -107,12 +103,8 @@ const addBook = (subjectSem5, pdfName, providerName, file) => {
     showKaro(book);
 }
 
-const modal = (fName) => {
-    console.log(`${fName} Added successfully..!`);
-}
-
 const showKaro = (book) => {
-    console.log(book.id, book.providerName);
+    // console.log(book.id, book.providerName);
 
     let li = document.createElement('li');
 
@@ -122,7 +114,7 @@ const showKaro = (book) => {
             <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
                 <div class="p-4 md:w-[70%]">
                     <div class="font-bold text-xl mb-2 tracking-wider ">${book.pdfName}</div>
-                    <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${book.providerName}</span>.
+                    <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${book.providerName}</span> on <span class="text-tailblue tracking-wider">{Date}</span>.
                     </p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
