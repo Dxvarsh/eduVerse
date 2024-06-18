@@ -8,7 +8,6 @@
 // tab[0].style.borderColor = "#38bdf8";
 // tab[0].style.color = "#38bdf8";
 
-
 // tab.forEach(function(tabs, index){
 //     tabs.addEventListener("click", function(){
 //         udaDo();
@@ -27,89 +26,95 @@
 //     })
 // }
 
-
-let addDocForm = document.querySelector("#add-doc-form")
+let addDocForm = document.querySelector("#add-doc-form");
 let subjectSem5Inp = document.querySelector("#subject-sem5");
 let pdfNameInp = document.querySelector("#pdf-name");
 let fileInp = document.querySelector("#file-input");
+let vid = document.querySelector("#vid");
 
-const wadContainer = document.querySelector("#subject-list-cc-301")
-const wadOldContainer = document.querySelector("#subject-list-cc-301-old-paper")
-
+const wadContainer = document.querySelector("#subject-list-cc-301");
+const wadOldContainer = document.querySelector(
+  "#subject-list-cc-301-old-paper"
+);
 
 let wad = [
+  {
+    id: Math.floor(Math.random() * 100),
+    subject: "jethalal gada",
+    pdfName: "sem6 syllabus",
+    providerName: "@jethalal gada",
+    link: "./DOCS/BCA SEM 6 SYLLABUS-feb 2020.pdf",
+  },
 
-    {
-        id: Math.floor(Math.random()*100),
-        subject: "jethalal gada",
-        pdfName: "sem6 syllabus",
-        providerName: "@jethalal gada",
-        link: "./DOCS/BCA SEM 6 SYLLABUS-feb 2020.pdf"
-    },
-    
-    {
-        id: Math.floor(Math.random()*100),
-        subject: "jethalal gada",
-        pdfName: "sem6 syllabus",
-        providerName: "@jethalal gada",
-        link: "./DOCS/BCA SEM 6 SYLLABUS-feb 2020.pdf"
-    },
+  {
+    id: Math.floor(Math.random() * 100),
+    subject: "jethalal gada",
+    pdfName: "sem6 syllabus",
+    providerName: "@jethalal gada",
+    link: "./DOCS/BCA SEM 6 SYLLABUS-feb 2020.pdf",
+  },
 
-    {
-        id: Math.floor(Math.random()*100),
-        subject: "cc-301",
-        pdfName: "sem5 Syllabus",
-        providerName: "@Jayantilal gada",
-        link: "./DOCS/Syllabus BCA Semester 5 2019.pdf"
-    },
-
+  {
+    id: Math.floor(Math.random() * 100),
+    subject: "cc-301",
+    pdfName: "sem5 Syllabus",
+    providerName: "@Jayantilal gada",
+    link: "./DOCS/Syllabus BCA Semester 5 2019.pdf",
+  },
 ];
 
-
 addDocForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    
-    // console.log("hellow submit");
+  e.preventDefault();
 
-    const subjectSem5 = subjectSem5Inp.value.trim();
-    const pdfName = pdfNameInp.value.trim();
-    const file = fileInp.value;
+  // console.log("hellow submit");
 
-    addBook(subjectSem5, pdfName, file);
+  const subjectSem5 = subjectSem5Inp.value.trim();
+  const pdfName = pdfNameInp.value.trim();
+  const file = fileInp.value;
 
+  addBook(subjectSem5, pdfName, file);
 
-    subjectSem5Inp.value = "";
-    pdfNameInp.value = "";
+  subjectSem5Inp.value = "";
+  pdfNameInp.value = "";
 
-    alert(`${pdfName} Added Successfully`)
+  document.querySelector("#yes").style.top = "25px";
+  document.querySelector("#yes").style.opacity = 1;
+  document.querySelector("#video").style.opacity = 1;
+  vid.play();
 
-})
-    
-    
+  setTimeout(function () {
+    console.log("hello");
+    document.querySelector("#yes").style.top = "12px";
+    document.querySelector("#yes").style.opacity = 0;
+  }, 4000);
+  setTimeout(function () {
+    document.querySelector("#video").style.opacity = 0;
+  }, 11000);
+});
+
 const addBook = (subjectSem5, pdfName, file) => {
-        // console.log(subjectSem5);
-        // console.log(pdfName);
-        // console.log(providerName);
-        // console.log(file);
+  // console.log(subjectSem5);
+  // console.log(pdfName);
+  // console.log(providerName);
+  // console.log(file);
 
-    const book = {
-        id: Date.now(),
-        subject: subjectSem5,
-        pdfName: pdfName,
-        link: file
-    }
+  const book = {
+    id: Date.now(),
+    subject: subjectSem5,
+    pdfName: pdfName,
+    link: file,
+  };
 
-    wad.push(book);
-    showKaro(book);
-}
+  wad.push(book);
+  showKaro(book);
+};
 
 const showKaro = (book) => {
-    // console.log(book.id, book.providerName);
+  // console.log(book.id, book.providerName);
 
-    let li = document.createElement('li');
+  let li = document.createElement("li");
 
-    li.innerHTML = 
-    `
+  li.innerHTML = `
         <div class="theory mb-2">
             <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
                 <div class="p-4 md:w-[70%]">
@@ -134,37 +139,34 @@ const showKaro = (book) => {
         </div>
     `;
 
+  li.querySelector("#dlt-btn").addEventListener("click", () => {
+    // console.log(book.id);
+    if (
+      confirm(
+        `You want to delete ${book.pdfName}, which is provided by ${book.providerName}?`
+      ) === true
+    )
+      pdfDltKaro(book.id);
+    else saariPdfDikha();
+  });
 
-    li.querySelector("#dlt-btn").addEventListener("click", () => {
-        // console.log(book.id);
-        if(confirm(`You want to delete ${book.pdfName}, which is provided by ${book.providerName}?`) === true)
-            pdfDltKaro(book.id);
-        else saariPdfDikha();
-    });
-
-
-
-    if(book.subject === 'cc-301') wadContainer.appendChild(li);
-    else wadOldContainer.appendChild(li);
-}
-
-
-
+  if (book.subject === "cc-301") wadContainer.appendChild(li);
+  else wadOldContainer.appendChild(li);
+};
 
 const pdfDltKaro = (bookId) => {
-    console.log(bookId);
-    wad = wad.filter(book => book.id != bookId)
-    saariPdfDikha();
-}
-
+  console.log(bookId);
+  wad = wad.filter((book) => book.id != bookId);
+  saariPdfDikha();
+};
 
 const saariPdfDikha = () => {
-    wadContainer.innerHTML = '';
-    wadOldContainer.innerHTML = '';
+  wadContainer.innerHTML = "";
+  wadOldContainer.innerHTML = "";
 
-    wad.forEach((data) => {
-        showKaro(data)
-    })
-}
+  wad.forEach((data) => {
+    showKaro(data);
+  });
+};
 
 saariPdfDikha();

@@ -45,7 +45,7 @@
 
 
 
-        <main class="px-3 md:px-16">
+        <main class="px-3 md:px-16 relative">
 
             <section class="flex items-center justify-center flex-col">
                 <div class="flex items-center justify-center flex-col shadow-sm rounded-md shadow-blue-500 mt-4 py-5 px-7 max-w-sm">
@@ -162,10 +162,25 @@
 
             </section>
 
-
-            <section id="modal" class="hidden">
-                <h3 class="">File added successfully...!</h3>
+            <section id="yes" class="bg-green-300 absolute p-8 rounded-lg top-3 opacity-0 transition-all">
+                <h2 class="text-2xl font-semibold"> ✅File added Successfully</h2>
             </section>
+
+
+            <section id="video" class="w-80
+             overflow-hidden absolute p-8 rounded-lg top-36 opacity-0 pointer-events-none transition-all ">
+                <video src="./img/Thanks meme Akshey k.mp4" id="vid"></video>
+            </section>
+
+            <!-- 
+            opacity: 0;
+            transition: all 1s ease;
+            left: 50%;
+            top: 10%;
+            transform: translate(-50%, -50%); -->
+
+
+
 
         </main>
     </div>
