@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       fontFamily: {
         gilroy: ["gilroy", "sans-serif"],
-        monument: ["monument", "serif"]
+        monument: ["monument", "serif"],
+        ptserif: ["ptserif", "serif"],
       },
       colors: {
         tailblue: "#38bdf8",

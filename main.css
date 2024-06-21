@@ -11,4 +11,30 @@
         font-family: 'monument';
         src: url(./src/font/MonumentExtended-Regular.woff);
     }
-  }
+    @font-face {
+        font-family: 'ptserif';
+        src: url(./src/font/PTSerif-Regular.woff);
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 20px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #38bdf8;
+    border-radius: 25px;
+}
+ 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
