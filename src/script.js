@@ -30,6 +30,7 @@ function udaDo(){
 
 
 
+fetch('http://192.168.0.105:5000/api/v1/getpdf?subject=cc-302&sem=5').then(res => res.json()).then(res => console.log(res.data))
 
 function generateContent(containerSelector, data, downloadPrefix) {
     let container = document.querySelector(containerSelector);

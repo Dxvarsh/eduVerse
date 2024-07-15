@@ -55,11 +55,11 @@
 
                     <form action="" class="flex flex-col justify-center items-center gap-2">
 
-                        <input class="w-full focus:text-tailblue rounded p-1" type="text" name="" id="" placeholder="Username">
+                        <input class="w-full focus:text-tailblue rounded p-1" type="text" name="" id="username" placeholder="Username">
 
-                        <input class="w-full rounded p-1" type="password" name="" id="" placeholder="password">
+                        <input class="w-full rounded p-1" type="password" name="" placeholder="password" id="password">
                         
-                        <input class="w-[50%] mt-4 rounded p-1 border border-tailblue text-white font-medium" type="submit" value="Log in">
+                        <input class="w-[50%] mt-4 rounded p-1 border border-tailblue text-white font-medium" type="submit" value="Log in" id="login-submit">
                         
                         <h3 class="text-white text-sm">
                             Don't have an account? <a href="./signup.html" class="text-tailblue">Sign Up.</a>
@@ -71,5 +71,26 @@
             </section>
         </main>
     </div>
+
+
+    <script>
+        document.querySelector('#login-submit').addEventListener('click', function(e){
+            e.preventDefault();
+
+            let username = document.getElementById("username").value; 
+            let password = document.getElementById("password").value; 
+ 
+             fetch("https://kirtanmojidra.pythonanywhere.com/api/v1/login",{ 
+                method : 'POST', 
+                credentials: 'include', 
+                body: JSON.stringify({"username":username,"password":password}) 
+            }).then(res=>{ 
+                if(res.status == 200){ 
+                    window.location.replace("../index.html"); 
+                } 
+            })
+
+        })
+    </script>
 </body>
 </html>

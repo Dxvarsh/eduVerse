@@ -1,44 +1,32 @@
-// /*Individual  Subject Tab script */
-// let tab = document.querySelectorAll('.tab');
-// let textContent = document.querySelectorAll('.content');
-
-// console.log(tab, textContent);
-
-// textContent[0].style.display = "block";
-// tab[0].style.borderColor = "#38bdf8";
-// tab[0].style.color = "#38bdf8";
-
-// tab.forEach(function(tabs, index){
-//     tabs.addEventListener("click", function(){
-//         udaDo();
-//         textContent[index].style.display = "block";
-//         tab[index].style.borderColor = "#38bdf8";
-//         tab[index].style.color = "#38bdf8";
-//     })
-// });
-
-// function udaDo(){
-//     textContent.forEach(function(texts, index){
-//         console.log(texts);
-//         texts.style.display = 'none';
-//         tab[index].style.borderColor = '#ffffff';
-//         tab[index].style.color = '#ffffff';
-//     })
-// }
-
 let addDocForm = document.querySelector("#add-doc-form");
-let subjectSem5Inp = document.querySelector("#subject-sem5");
-let pdfNameInp = document.querySelector("#pdf-name");
-let fileInp = document.querySelector("#file-input");
-let vid = document.querySelector("#vid");
+const vid = document.querySelector("#vid");
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+const selects = document.querySelectorAll("selects");
+const pdfNameInp = document.querySelector("#pdf-name");
+const fileInp = document.querySelector("#file-input");
+let sem;
+let subject;
 
-const wadContainer = document.querySelector("#subject-list-cc-301");
-const wadOldContainer = document.querySelector(
-  "#subject-list-cc-301-old-paper"
-);
 
-let wad = [
+/* 
   {
+    "data": [
+        {
+            "Sem": "sem5",
+            "date": "Monday-01-07-24",
+            "path": "755a2fc7-37a4-11ef-8c62-000000000005.pdf",
+            "subject": "cc-305",
+            "title": "python practical",
+            "username": "devarsh_8810"
+        }
+    ],
+    "message": "success",
+    "status_code": 200
+  }
+*/
+
+/*let wad = [
+   {
     id: Math.floor(Math.random() * 100),
     subject: "jethalal gada",
     pdfName: "sem6 syllabus",
@@ -60,70 +48,91 @@ let wad = [
     pdfName: "sem5 Syllabus",
     providerName: "@Jayantilal gada",
     link: "./DOCS/Syllabus BCA Semester 5 2019.pdf",
-  },
-];
+  }, 
+];*/
+
+
+
+
+
+radioButtons.forEach((radio) => {
+  radio.addEventListener("change", (e) => {
+    const selectedRadio = e.target.value;
+    sem = selectedRadio;
+
+    const correspondingSelect = document.getElementById(
+      `subject-${selectedRadio}`
+    );
+
+    if (correspondingSelect) {
+      correspondingSelect.addEventListener("change", function (e) {
+        console.log(e.target.value);
+        subject = e.target.value
+      });
+    }
+  });
+});
 
 addDocForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
-  // console.log("hellow submit");
-
-  const subjectSem5 = subjectSem5Inp.value.trim();
+  console.log(subject)
   const pdfName = pdfNameInp.value.trim();
-  const file = fileInp.value;
+  const file = fileInp.files[0];
+  const formdata = new FormData();
 
-  addBook(subjectSem5, pdfName, file);
+  console.log(file);
+  console.log(subject);
+  console.log(sem);
+  console.log(pdfName);
 
-  subjectSem5Inp.value = "";
-  pdfNameInp.value = "";
 
+  formdata.append("pdf", file);
+  formdata.append("subject", subject);
+  formdata.append("sem", sem);
+  formdata.append("title", pdfName);
+  
+
+  fetch('https://kirtanmojidra.pythonanywhere.com/api/v1/upload', {
+    method: 'POST',
+    credentials: 'include',
+    body: formdata
+  }).then((response) => {
+    console.log("hello im in fetch upload");
+    console.log(formdata);
+    console.log(response);
+  })
+  // addBook();
+  document.querySelector("#yes").innerHTML = `<h2 class="text-2xl font-semibold">✅ ${pdfName} added Successfully</h2>`;
   document.querySelector("#yes").style.top = "25px";
   document.querySelector("#yes").style.opacity = 1;
   document.querySelector("#video").style.opacity = 1;
+  document.querySelector("#video").style.bottom = "75px";
   vid.play();
 
   setTimeout(function () {
-    console.log("hello");
     document.querySelector("#yes").style.top = "12px";
     document.querySelector("#yes").style.opacity = 0;
-  }, 4000);
+  }, 5000);
   setTimeout(function () {
     document.querySelector("#video").style.opacity = 0;
+    // location.reload();
   }, 11000);
 });
 
-const addBook = (subjectSem5, pdfName, file) => {
-  // console.log(subjectSem5);
-  // console.log(pdfName);
-  // console.log(providerName);
-  // console.log(file);
-
-  const book = {
-    id: Date.now(),
-    subject: subjectSem5,
-    pdfName: pdfName,
-    link: file,
-  };
-
-  wad.push(book);
-  showKaro(book);
-};
-
-const showKaro = (book) => {
-  // console.log(book.id, book.providerName);
-
+/* const showKaro = (book) => {
+  console.log(book.username, book.title);
   let li = document.createElement("li");
 
   li.innerHTML = `
         <div class="theory mb-2">
             <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
                 <div class="p-4 md:w-[70%]">
-                    <div class="font-bold text-xl mb-2 tracking-wider ">${book.pdfName}</div>
-                    <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${book.providerName}</span> on <span class="text-tailblue tracking-wider">{Date}</span>.
+                    <div class="font-bold text-xl mb-2 tracking-wider ">${book.title}</div>
+                    <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${book.username}</span> on <span class="text-tailblue tracking-wider">${book.date}</span>.
                     </p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                    <a href="${book.link}" download="${book.pdfName} eduVerse" id="download-btn">
+                    <a href="${book.path}" download="${book.title} eduVerse" id="download-btn">
                         <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-tailblue hover:bg-transparent border border-tailblue transition-colors">
                             <i class="ri-download-line mr-2"></i> Download
                         </button>
@@ -140,33 +149,42 @@ const showKaro = (book) => {
     `;
 
   li.querySelector("#dlt-btn").addEventListener("click", () => {
-    // console.log(book.id);
     if (
       confirm(
-        `You want to delete ${book.pdfName}, which is provided by ${book.providerName}?`
+        `Are you sure want to delete ${book.title}, which is provided by ${book.username}?`
       ) === true
     )
-      pdfDltKaro(book.id);
-    else saariPdfDikha();
+      pdfDltKaro(book.path);
+    else saariPdfDikha(wad);
   });
-
-  if (book.subject === "cc-301") wadContainer.appendChild(li);
-  else wadOldContainer.appendChild(li);
 };
 
-const pdfDltKaro = (bookId) => {
-  console.log(bookId);
-  wad = wad.filter((book) => book.id != bookId);
-  saariPdfDikha();
+const pdfDltKaro = (bookPath) => {
+  console.log(bookPath);
+  wad = wad.filter((book) => book.path != bookPath);
+  saariPdfDikha(wad);
 };
 
-const saariPdfDikha = () => {
-  wadContainer.innerHTML = "";
-  wadOldContainer.innerHTML = "";
 
+const saariPdfDikha = (wad) => {
+  console.log(wad);
   wad.forEach((data) => {
     showKaro(data);
   });
 };
 
-saariPdfDikha();
+let wad = [];
+
+function addBook() {
+  fetch('http://192.168.0.105:5000/api/v1/getpdf?subject=cc-302&sem=sem5').then(res => res.json()).then(res => {
+    wad = res.data;
+    saariPdfDikha(wad);
+  })
+  fetch('http://192.168.0.105:5000/api/v1/getpdf?subject=cc-305&sem=sem5').then(res => res.json()).then(res => {
+    wad = res.data;
+    saariPdfDikha(wad);
+    console.log("fetch2");
+    console.log(wad);
+  })
+}
+addBook(); */

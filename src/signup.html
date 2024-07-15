@@ -55,13 +55,15 @@
 
                     <form action="" class="flex flex-col justify-center items-center gap-2">
                         
-                        <input class="w-full focus:text-tailblue rounded p-1" type="text" name="" id="" placeholder="Username">
+                        <input class="w-full focus:text-tailblue rounded p-1" type="text" name="" id="username" placeholder="Username">
+
+                        <input class="w-full focus:text-tailblue rounded p-1" type="text" name="" id="fullname" placeholder="Fullname">
                        
-                        <input class="w-full focus:text-tailblue rounded p-1" type="email" name="" id="" placeholder="xyz@email.com">
+                        <input class="w-full focus:text-tailblue rounded p-1" type="email" name="" id="email" placeholder="xyz@email.com">
                         
-                        <input class="w-full focus:text-tailblue rounded p-1" type="password" name="" id="" placeholder="password">
+                        <input class="w-full focus:text-tailblue rounded p-1" type="password" name="" id="password" placeholder="password">
                         
-                        <input class="w-[50%] mt-4 rounded p-1 border border-tailblue text-white font-medium" type="submit" value="Sign up">
+                        <input class="w-[50%] mt-4 rounded p-1 border border-tailblue text-white font-medium" type="submit" value="Sign up" id="signup-submit">
                         
                         <h3 class="text-white text-sm">
                             already have an account? <a href="./login.html" class="text-tailblue">Sign In.</a>
@@ -73,5 +75,35 @@
             </section>
         </main>
     </div>
+
+    <script>
+        document.querySelector('#signup-submit').addEventListener('click', function(e){
+            e.preventDefault();
+            let username = document.querySelector('#username').value;
+            let fullname = document.querySelector('#fullname').value;
+            let email = document.querySelector('#email').value;
+            let password = document.querySelector('#password').value;
+            console.log(username, fullname, email, password);
+
+            fetch('https://kirtanmojidra.pythonanywhere.com/api/v1/signup', {
+                method: "POST",
+                body: JSON.stringify({"fullname": fullname, "username": username, "password": password, "email": email})
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                if(data.status_code === 200) {
+                    window.location.replace('./login.html');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        })
+    </script>
 </body>
 </html>

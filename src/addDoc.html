@@ -45,60 +45,147 @@
 
 
 
-        <main class="px-3 md:px-16 relative">
+        <main class="px-3 md:px-16 relative pt-5">
 
             <section class="flex items-center justify-center flex-col">
                 <div class="flex items-center justify-center flex-col shadow-sm rounded-md shadow-blue-500 mt-4 py-5 px-7 max-w-sm">
-                    <div class="innerDiv flex">
+                    <div class="innerDiv flex items-center justify-center">
                         <img src="./img/evLOGO.png" width="30" alt="logo" class="mb-8">
-                        <p class="text-tailblue ml-3 items-center justify-center text-2xl">Add a Document.</p>
+                        <p class="text-tailblue ml-3 text-2xl font-semibold">Add a Document.</p>
                     </div>
                     <form action="" method="post" class="flex flex-col w-full" id="add-doc-form">
                         
                         <p class="text-white">Select Semester: </p>
-                        <div class="select-sem flex flex-wrap gap-5 p-2 mb-5">
+                        <div class="select-sem flex flex-wrap gap-5 p-2 mb-5" id="sem-selection">
 
-                            <input type="radio" name="semester" id="s1" class="peer/s1" checked> 
+                            <input type="radio" name="semester" id="s1" value="sem1" class="peer/s1"> 
                             <label for="s1" class="text-white">Sem 1</label>
 
-                            <input type="radio" name="semester" id="s2" class="peer/s2">
+                            <input type="radio" name="semester" id="s2" value="sem2" class="peer/s2">
                             <label for="s2" class="text-white">Sem 2</label>
 
-                            <input type="radio" name="semester" id="s3" class="peer/s3">
+                            <input type="radio" name="semester" id="s3" value="sem3" class="peer/s3">
                             <label for="s3" class="text-white">Sem 3</label> <br>
 
-                            <input type="radio" name="semester" id="s4" class="peer/s4">
+                            <input type="radio" name="semester" id="s4" value="sem4" class="peer/s4">
                             <label for="s4" class="text-white">Sem 4</label>
 
-                            <input type="radio" name="semester" id="s5" class="peer/s5">
+                            <input type="radio" name="semester" id="s5" value="sem5" class="peer/s5">
                             <label for="s5" class="text-white">Sem 5</label>
 
-                            <input type="radio" name="semester" id="s6" class="peer/s6">
+                            <input type="radio" name="semester" id="s6" value="sem6" class="peer/s6">
                             <label for="s6" class="text-white">Sem 6</label>
 
+                            <!-- Sem 1 dropdown Goes here -->
+                            <div class="hidden peer-checked/s1:block text-tailblue">
+                                <label for="subject-sem1" class="text-white">Select Subject:</label>
+                                <select id="subject-sem1" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                    <option value="sem-1-syllabus">Syllabus Sem-1</option>
+                                    <option value="DSC-C-BCA-111T">DSC-C-BCA-111T Elements of Programming & Computer Organization</option>
+                                    <option value="DSC-M-BCA-113T">DSC-M-BCA-113T Introduction to Web Technologies</option>
+                                    <option value="MDC-BCA-114 T">MDC-BCA-114 T Emerging Computer Technologies</option>
+                                    <option value="AEC-ENG-115">AEC-ENG-115 English (Literature and language-1)</option>
+                                    <option value="SEC-OOS-116">SEC-OOS-116 Open Office Software</option>
+                                    <option value="VAC-117">VAC-117 (IKS) Indic Knowledge System</option>
+                                    
+                                    <option value="DSC-C-BCA-112P">👨‍💻 DSC-C-BCA-112P C Programming Practical</option>
+                                    <option value="DSC-M-BCA-113P">👨‍💻 DSC-M-BCA-113P Web Designing - Practical</option>
+                                    <option value="MDC-BCA-114P">👨‍💻 MDC-BCA-114P Office Applications in Business- Practical</option>
 
-                            <div class="hidden peer-checked/s1:block"></div>
-                            <div class="hidden peer-checked/s2:block">Sem 2 selected</div>
-                            <div class="hidden peer-checked/s3:block">Sem 3 selected</div>
-                            <div class="hidden peer-checked/s4:block">Sem 4 selected</div>
+                                    <option value="DSC-C-BCA-111T-old-paper">🚀 Elements of Prog. & Com. Org. (Old Paper)</option>
+                                    <option value="DSC-M-BCA-113T-old-paper">🚀 Introduction to Web Technologies (Old Paper)</option>
+                                    <option value="MDC-BCA-114 T-old-paper">🚀 Emerging Computer Technologies (Old Paper)</option>
+                                    <option value="AEC-ENG-115-old-paper">🚀 English (Old Paper)</option>
+                                    <option value="SEC-OOS-116-old-paper">🚀 Open Office Software (Old Paper)</option>
+                                    <option value="VAC-117-old-paper">🚀 Indic Knowledge System (Old Paper)</option>
+                                
+                                </select>
+                            </div>
+
+
+                                <!-- Sem2 content goes here -->
+
+                            <div class="hidden peer-checked/s2:block text-tailblue">
+                                <label for="subject-sem2" class="text-white">Select Subject:</label>
+                                <select id="subject-sem2" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                    <option value="sem-2-syllabus">Syllabus Sem-2</option>
+                                    <option value="DSC-C-BCA-121 T">DSC-C-BCA-121 T Data Structure using C</option>
+                                    <option value="SEC-BCA-126">SEC-BCA-126 Business Enhancement using WordPress </option>
+                                    <option value="IDC-BCA-124 T">IDC-BCA-124 T Data Management Software for Business</option>
+                                    <option value="DSC-M-BCA-123 T">DSC-M-BCA-123 T Advance Web Technology</option>
+                                    
+                                    <option value="DSC-M-BCA-123 P">👨‍💻 DSC-M-BCA-123 P Application of Dynamic Web Technology</option>
+                                    <option value="DSC-C-BCA-122 P">👨‍💻 DSC-C-BCA-122 P Data Structure using C Practical</option>
+                                    <option value="IDC-BCA-124 P">👨‍💻 IDC-BCA-124 Working with Data using MySQL</option>
+
+                                    <option value="DSC-C-BCA-121 T-old-paper">🚀 Data Structure using C (Old Paper)</option>
+                                    <option value="SEC-BCA-126-old-T-old-paper">🚀 Business Enhancement using WordPress (Old Paper) </option>
+                                    <option value="IDC-BCA-124 T-old-paper">🚀 Data Management Software for Business (Old Paper)</option>
+                                    <option value="DSC-M-BCA-123 T-old-paper">🚀 Advance Web Technology (Old Paper)</option>
+                                </select>
+                            </div>
+
+
+                            <!-- Sem3 content goes here -->
+                            <div class="hidden peer-checked/s3:block text-tailblue">
+                                <label for="subject-sem3" class="text-white">Select Subject:</label>
+                                <select id="subject-sem3" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                    <option value="sem-3-syllabus">Syllabus sem-3</option>
+
+
+                                </select>
+                            </div>
+
+
+                            <!-- Sem 4 -->
+                            <div class="hidden peer-checked/s4:block text-tailblue">
+                                <label for="subject-sem4" class="text-white">Select Subject:</label>
+                                <select id="subject-sem4" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                    <option value="sem-4-syllabus">Syllabus sem-4</option>
+
+                                </select>
+                            </div>
+
                             <div class="hidden peer-checked/s5:block text-tailblue">
                                 <label for="subject-sem5" class="text-white">Select Subject:</label>
-                                <select id="subject-sem5" class="border border-tailblue bg-darkblue mt-3">
-                                    <option value="sem-5-syllabus">Syllabus</option>
-                                    <option value="cc-304">WAD-1 Practicals</option>
-                                    <option value="cc-305">Python Practicals</option>
-                                    <option value="cc-301-old-paper">WAD-1 (oldpaper)</option>
-                                    <option value="cc-302-old-paper">Python (oldpaper)</option>
-                                    <option value="cc-303-old-paper">Computer Network (oldpaper)</option>
-                                    <option value="sec-301-c-old-paper">MAD (oldpaper)</option>
-                                    <option value="cc-301">WAD-1</option>
-                                    <option value="cc-302">Python</option>
-                                    <option value="cc-303">Computer Network </option>
-                                    <option value="sec-301-c">MAD</option>
+                                <select id="subject-sem5" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                    <option value="sem-5-syllabus">Syllabus sem-6</option>
+                                    <option value="cc-301">CC-301 WAD-1 using C#</option>
+                                    <option value="cc-302">CC-302 Python Programming</option>
+                                    <option value="cc-303">CC-303 Computer Network </option>
+                                    <option value="sec-301">SEC-301 Mobile App Development</option>
+
+                                    <option value="cc-304">👨‍💻 CC-304 WAD-1 Practicals</option>
+                                    <option value="cc-305">👨‍💻 CC-305 Python Practicals</option>
+                                    
+                                    <option value="cc-301-old-paper">🚀 WAD-1 (oldpaper)</option>
+                                    <option value="cc-302-old-paper">🚀 Python (oldpaper)</option>
+                                    <option value="cc-303-old-paper">🚀 Computer Network (oldpaper)</option>
+                                    <option value="sec-301-c-old-paper">🚀 MAD (oldpaper)</option>
+                            
                                     
                                 </select>
                             </div>
-                            <div class="hidden peer-checked/s6:block"></div>
+
+                            <!-- Sem6 content goes here -->
+                            <div class="hidden peer-checked/s6:block text-tailblue">
+                                <label for="subject-sem6" class="text-white">Select Subject:</label>
+                                <select id="subject-sem6" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                    <option value="sem-6-syllabus">Syllabus sem-6</option>
+                                    <option value="CC-307">CC-307 Software Testing</option>
+                                    <option value="CC-308">CC-308 Introduction to Data Mining and Data Ware housing</option>
+                                    <option value="CC-309">CC-309 Introduction to Artificial Intelligence and Machine Learning </option>
+                                    <option value="SEC-302 (C)">SEC-302 (C) Advance Java</option>
+
+                                    <option value="cc-310">👨‍💻 CC-310 WAD-2 Practicals</option>
+                                    <option value="cc-311">👨‍💻 CC-311 Shell Programming Practical</option>
+                                    
+                                    <option value="CC-307-oldpaper">🚀 Software Testing (oldpaper)</option>
+                                    <option value="CC-308-oldpaper">🚀 Data Mining and Data Ware housing (oldpaper)</option>
+                                    <option value="CC-309-oldpaper">🚀 AI-ML (oldpaper)</option>
+                                    <option value="SEC-302 (C)-oldpaper">🚀 Advance Java (oldpaper)</option>
+                                </select>
+                            </div>
 
                         </div>
 
@@ -119,14 +206,14 @@
                         >
 
                         <input 
-                            class="mb-3 rounded py-1 px-2 border-2 border-tailblue text-tailblue" 
+                            class="mb-3 rounded py-1 px-2 border-2 border-tailblue bg-[#38bdf8] hover:bg-transparent hover:text-tailblue transition-all font-semibold tracking-wide text-white" 
                             type="submit" 
                             value="Add PDF"
                             id="submit"
                         >
 
                         <input 
-                            class="mb-3 rounded py-1 px-2 border-2 border-pink-500 text-pink-500" 
+                            class="mb-3 rounded py-1 px-2 border-2 border-pink-500 bg-pink-500 hover:bg-transparent hover:text-pink-500 transition-all font-semibold tracking-wide text-white" 
                             type="reset"
                         >
 
@@ -134,50 +221,15 @@
                 </div>
             </section>
 
-
-            <section class="shadow-sm shadow-red-500 my-4 p-4">
-                <h2 class="text-white py-2 mb-2">MAD-1 Old Paper</h2>
-                <ul 
-                    id="subject-list-cc-301-old-paper"
-                    class=""
-                >
-
-
-
-                </ul>
-
-            </section>
-
-
-            <section class="shadow-sm shadow-green-500 my-6 p-4">
-                <h2 class="text-white py-2 mb-2">MAD-1 Theory</h2>
-                <ul 
-                    id="subject-list-cc-301"
-                    class=""
-                >
-
-
-                <!-- <a href="./DOCS/Syllabus BCA Semester 5 2019.pdf"></a> -->
-                </ul>
-
-            </section>
-
-            <section id="yes" class="bg-green-300 absolute p-8 rounded-lg top-3 opacity-0 transition-all">
+            <section id="yes" class="w-[80%] md:w-fit bg-green-300 absolute p-8 rounded-lg top-3 opacity-0 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                 <h2 class="text-2xl font-semibold"> ✅File added Successfully</h2>
             </section>
 
 
             <section id="video" class="w-80
-             overflow-hidden absolute p-8 rounded-lg top-36 opacity-0 pointer-events-none transition-all ">
-                <video src="./img/Thanks meme Akshey k.mp4" id="vid"></video>
+             overflow-hidden absolute p-8 rounded-3xl bottom-40 opacity-0 pointer-events-none transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <video src="./img/Thanks meme Akshey k.mp4" class="rounded-xl" id="vid"></video>
             </section>
-
-            <!-- 
-            opacity: 0;
-            transition: all 1s ease;
-            left: 50%;
-            top: 10%;
-            transform: translate(-50%, -50%); -->
 
 
 
