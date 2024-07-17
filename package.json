@@ -10,5 +10,11 @@
   },
   "dependencies": {
     "feather": "^0.0.5"
-  }
+  },
+  "name": "eduverse",
+  "description": "\u0000 \u0000",
+  "version": "1.0.0",
+  "main": "postcss.config.js",
+  "author": "",
+  "license": "ISC"
 }
