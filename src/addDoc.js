@@ -98,18 +98,27 @@ addDocForm.addEventListener("submit", (e) => {
     credentials: 'include',
     body: formdata
   }).then((response) => {
+    
    if (response){
       loader.classList.add("hidden");
       main.classList.remove("hidden");
-      document.querySelector("#yes").innerHTML = `<h2 class="text-2xl font-semibold">✅ ${pdfName} added Successfully</h2>`;
-      document.querySelector("#yes").style.top = "25px";
-      document.querySelector("#yes").style.opacity = 1;
-      document.querySelector("#video").style.opacity = 1;
-      document.querySelector("#video").style.bottom = "75px";
-      vid.play();
-   }
-  })
-  
+      if(response.status == 200){
+        console.log(response);
+        document.querySelector("#yes").innerHTML = `<h2 class="text-2xl font-semibold">✅ ${pdfName} added Successfully</h2>`;
+        document.querySelector("#yes").style.top = "25px";
+        document.querySelector("#yes").style.opacity = 1;
+        document.querySelector("#video").style.opacity = 1;
+        document.querySelector("#video").style.bottom = "75px";
+        vid.play();
+      }
+      if (response.status > 200) {
+        document.querySelector("#yes").innerHTML = `<h2 class="text-2xl font-semibold">Error While sending file please check sem and subject</h2>`;
+        document.querySelector("#yes").style.top = "25px";
+        document.querySelector("#yes").style.opacity = 1;
+    }
+  }
+}
+)
 
   setTimeout(function () {
     document.querySelector("#yes").style.top = "12px";
