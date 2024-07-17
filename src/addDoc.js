@@ -7,7 +7,8 @@ const fileInp = document.querySelector("#file-input");
 let sem;
 let subject;
 
-
+const loader = document.querySelector(".loader-main");
+const main = document.querySelector("main")
 /* 
   {
     "data": [
@@ -57,23 +58,23 @@ let subject;
 
 radioButtons.forEach((radio) => {
   radio.addEventListener("change", (e) => {
-    const selectedRadio = e.target.value;
-    sem = selectedRadio;
-
-    const correspondingSelect = document.getElementById(
-      `subject-${selectedRadio}`
-    );
+    sem = e.target.value;
+    const correspondingSelect = document.getElementById(`subject-${selectedRadio}`);
+    console.log("Corresponding select element: ", correspondingSelect);
 
     if (correspondingSelect) {
       correspondingSelect.addEventListener("change", function (e) {
-        console.log(e.target.value);
-        subject = e.target.value
+        console.log("subject: " + e.target.value);
+        subject = e.target.value;
+        console.log("Updated subject: " + subject);
       });
     }
   });
 });
 
 addDocForm.addEventListener("submit", (e) => {
+  loader.classList.remove("hidden");
+  main.classList.add("hidden");
   e.preventDefault();
   console.log(subject)
   const pdfName = pdfNameInp.value.trim();
@@ -91,23 +92,24 @@ addDocForm.addEventListener("submit", (e) => {
   formdata.append("sem", sem);
   formdata.append("title", pdfName);
   
-
+  console.log("subject"+ subject);
   fetch('https://kirtanmojidra.pythonanywhere.com/api/v1/upload', {
     method: 'POST',
     credentials: 'include',
     body: formdata
   }).then((response) => {
-    console.log("hello im in fetch upload");
-    console.log(formdata);
-    console.log(response);
+   if (response){
+      loader.classList.add("hidden");
+      main.classList.remove("hidden");
+      document.querySelector("#yes").innerHTML = `<h2 class="text-2xl font-semibold">✅ ${pdfName} added Successfully</h2>`;
+      document.querySelector("#yes").style.top = "25px";
+      document.querySelector("#yes").style.opacity = 1;
+      document.querySelector("#video").style.opacity = 1;
+      document.querySelector("#video").style.bottom = "75px";
+      vid.play();
+   }
   })
-  // addBook();
-  document.querySelector("#yes").innerHTML = `<h2 class="text-2xl font-semibold">✅ ${pdfName} added Successfully</h2>`;
-  document.querySelector("#yes").style.top = "25px";
-  document.querySelector("#yes").style.opacity = 1;
-  document.querySelector("#video").style.opacity = 1;
-  document.querySelector("#video").style.bottom = "75px";
-  vid.play();
+  
 
   setTimeout(function () {
     document.querySelector("#yes").style.top = "12px";

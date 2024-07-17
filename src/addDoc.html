@@ -3,7 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <style>
+        
+        .loader {
+            position: absolute;
+            top: calc(50% - 32px);
+            left: calc(50% - 32px);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            perspective: 800px;
+        }
+        
+        .inner {
+            position: absolute;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;  
+        }
+        
+        .inner.one {
+            left: 0%;
+            top: 0%;
+            animation: rotate-one 1s linear infinite;
+            border-bottom: 3px solid #FF0000;
+        }
+        
+        .inner.two {
+            right: 0%;
+            top: 0%;
+            animation: rotate-two 1s linear infinite;
+            border-right: 3px solid #0000FF;
+        }
+        
+        .inner.three {
+            right: 0%;
+            bottom: 0%;
+            animation: rotate-three 1s linear infinite;
+            border-top: 3px solid #00FF00;
+        }
+        
+        @keyframes rotate-one {
+            0% {
+            transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+            }
+            100% {
+            transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+            }
+        }
+        
+        @keyframes rotate-two {
+            0% {
+            transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+            }
+            100% {
+            transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+            }
+        }
+        
+        @keyframes rotate-three {
+            0% {
+            transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+            }
+            100% {
+            transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+            }
+        }
+    </style>
     <!-- tailwind cdn -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -18,7 +85,17 @@
     <link rel="shortcut icon" href="../src/img/evLOGO.png" type="image/x-icon">
     <title>eduVerse | Add Doc</title>
 </head>
-<body class="bg-darkblue w-full h-screen font-gilroy">
+<body class="bg-darkblue w-full h-full font-gilroy bg-center">
+    <div class="h-screen w-screen z-50 absolute bg-darkblue overflow-hidden loader-main hidden">
+        <div class="loader">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+            <h1 class="text-tailblue w-[300px] pt-20 text-lg pr-20">
+                Sending File . . . . . . . 
+            </h1>
+        </div>
+    </div>
     <div class="main h-screen w-full"> 
 
         <!-- navbar -->
@@ -58,28 +135,28 @@
                         <p class="text-white">Select Semester: </p>
                         <div class="select-sem flex flex-wrap gap-5 p-2 mb-5" id="sem-selection">
 
-                            <input type="radio" name="semester" id="s1" value="sem1" class="peer/s1"> 
+                            <input type="radio" name="semester" id="s1" value="1" class="peer/s1"> 
                             <label for="s1" class="text-white">Sem 1</label>
 
-                            <input type="radio" name="semester" id="s2" value="sem2" class="peer/s2">
+                            <input type="radio" name="semester" id="s2" value="2" class="peer/s2">
                             <label for="s2" class="text-white">Sem 2</label>
 
-                            <input type="radio" name="semester" id="s3" value="sem3" class="peer/s3">
+                            <input type="radio" name="semester" id="s3" value="3" class="peer/s3">
                             <label for="s3" class="text-white">Sem 3</label> <br>
 
-                            <input type="radio" name="semester" id="s4" value="sem4" class="peer/s4">
+                            <input type="radio" name="semester" id="s4" value="4" class="peer/s4">
                             <label for="s4" class="text-white">Sem 4</label>
 
-                            <input type="radio" name="semester" id="s5" value="sem5" class="peer/s5">
+                            <input type="radio" name="semester" id="s5" value="5" class="peer/s5">
                             <label for="s5" class="text-white">Sem 5</label>
 
-                            <input type="radio" name="semester" id="s6" value="sem6" class="peer/s6">
+                            <input type="radio" name="semester" id="s6" value="6" class="peer/s6">
                             <label for="s6" class="text-white">Sem 6</label>
 
                             <!-- Sem 1 dropdown Goes here -->
                             <div class="hidden peer-checked/s1:block text-tailblue">
-                                <label for="subject-sem1" class="text-white">Select Subject:</label>
-                                <select id="subject-sem1" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                <label for="subject-1" class="text-white">Select Subject:</label>
+                                <select id="subject-1" class="border border-tailblue bg-darkblue mt-3 w-full">
                                     <option value="sem-1-syllabus">Syllabus Sem-1</option>
                                     <option value="DSC-C-BCA-111T">DSC-C-BCA-111T Elements of Programming & Computer Organization</option>
                                     <option value="DSC-M-BCA-113T">DSC-M-BCA-113T Introduction to Web Technologies</option>
@@ -106,8 +183,8 @@
                                 <!-- Sem2 content goes here -->
 
                             <div class="hidden peer-checked/s2:block text-tailblue">
-                                <label for="subject-sem2" class="text-white">Select Subject:</label>
-                                <select id="subject-sem2" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                <label for="subject-2" class="text-white">Select Subject:</label>
+                                <select id="subject-2" class="border border-tailblue bg-darkblue mt-3 w-full">
                                     <option value="sem-2-syllabus">Syllabus Sem-2</option>
                                     <option value="DSC-C-BCA-121 T">DSC-C-BCA-121 T Data Structure using C</option>
                                     <option value="SEC-BCA-126">SEC-BCA-126 Business Enhancement using WordPress </option>
@@ -128,8 +205,8 @@
 
                             <!-- Sem3 content goes here -->
                             <div class="hidden peer-checked/s3:block text-tailblue">
-                                <label for="subject-sem3" class="text-white">Select Subject:</label>
-                                <select id="subject-sem3" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                <label for="subject-3" class="text-white">Select Subject:</label>
+                                <select id="subject-3" class="border border-tailblue bg-darkblue mt-3 w-full">
                                     <option value="sem-3-syllabus">Syllabus sem-3</option>
 
 
@@ -139,16 +216,16 @@
 
                             <!-- Sem 4 -->
                             <div class="hidden peer-checked/s4:block text-tailblue">
-                                <label for="subject-sem4" class="text-white">Select Subject:</label>
-                                <select id="subject-sem4" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                <label for="subject-4" class="text-white">Select Subject:</label>
+                                <select id="subject-4" class="border border-tailblue bg-darkblue mt-3 w-full">
                                     <option value="sem-4-syllabus">Syllabus sem-4</option>
 
                                 </select>
                             </div>
 
                             <div class="hidden peer-checked/s5:block text-tailblue">
-                                <label for="subject-sem5" class="text-white">Select Subject:</label>
-                                <select id="subject-sem5" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                <label for="subject-5" class="text-white">Select Subject:</label>
+                                <select id="subject-5" class="border border-tailblue bg-darkblue mt-3 w-full">
                                     <option value="sem-5-syllabus">Syllabus sem-6</option>
                                     <option value="cc-301">CC-301 WAD-1 using C#</option>
                                     <option value="cc-302">CC-302 Python Programming</option>
@@ -169,8 +246,8 @@
 
                             <!-- Sem6 content goes here -->
                             <div class="hidden peer-checked/s6:block text-tailblue">
-                                <label for="subject-sem6" class="text-white">Select Subject:</label>
-                                <select id="subject-sem6" class="border border-tailblue bg-darkblue mt-3 w-full">
+                                <label for="subject-6" class="text-white">Select Subject:</label>
+                                <select id="subject-6" class="border border-tailblue bg-darkblue mt-3 w-full">
                                     <option value="sem-6-syllabus">Syllabus sem-6</option>
                                     <option value="CC-307">CC-307 Software Testing</option>
                                     <option value="CC-308">CC-308 Introduction to Data Mining and Data Ware housing</option>
@@ -236,6 +313,7 @@
 
         </main>
     </div>
+    
 
     <script src="./addDoc.js"></script>
 </body>
