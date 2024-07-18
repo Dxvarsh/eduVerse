@@ -58,15 +58,17 @@ const main = document.querySelector("main")
 
 radioButtons.forEach((radio) => {
   radio.addEventListener("change", (e) => {
-    sem = e.target.value;
-    const correspondingSelect = document.getElementById(`subject-${selectedRadio}`);
-    console.log("Corresponding select element: ", correspondingSelect);
+    const selectedRadio = e.target.value;
+    sem = selectedRadio;
+
+    const correspondingSelect = document.getElementById(
+      `subject-${selectedRadio}`
+    );
 
     if (correspondingSelect) {
       correspondingSelect.addEventListener("change", function (e) {
-        console.log("subject: " + e.target.value);
-        subject = e.target.value;
-        console.log("Updated subject: " + subject);
+        console.log(e.target.value);
+        subject = e.target.value
       });
     }
   });
@@ -91,8 +93,8 @@ addDocForm.addEventListener("submit", (e) => {
   formdata.append("subject", subject);
   formdata.append("sem", sem);
   formdata.append("title", pdfName);
+  
 
-  console.log("subject" + subject);
   fetch('https://kirtanmojidra.pythonanywhere.com/api/v1/upload', {
     method: 'POST',
     credentials: 'include',
@@ -112,6 +114,7 @@ addDocForm.addEventListener("submit", (e) => {
         vid.play();
       }
       if (response.status > 200) {
+        
         document.querySelector("#yes").innerHTML = `<h2 class="text-2xl font-semibold">Error While sending file please check sem and subject</h2>`;
         document.querySelector("#yes").style.top = "25px";
         document.querySelector("#yes").style.opacity = 1;
@@ -126,7 +129,7 @@ addDocForm.addEventListener("submit", (e) => {
   }, 5000);
   setTimeout(function () {
     document.querySelector("#video").style.opacity = 0;
-    // location.reload();
+    window.location.replace('../index.html');
   }, 11000);
 });
 
