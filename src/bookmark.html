@@ -53,61 +53,22 @@
                 </div>
             </section>
 
-            <section class="profile mt-5 bg-[#38bdf8] w-full p-4 rounded-lg shadow-md shadow-[#38bff8ca] mb-10" id="profile-section">
-                <div id="profile" class="flex relative">
-
-                    <div class="profile-pic w-16 h-16 rounded-full overflow-hidden border border-darkblue border-dashed relative mr-3 flex items-center justify-center">
-                        <img width="60" height="60" src="https://img.icons8.com/dotty/80/test-account.png" alt="test-account"/>
-                    </div>
-
-
-                   <div class="profile-info">
-                    <h1 class="text-2xl font-semibold">Username</h1>
-                    <p class="text-lg">@userId</p>
-                   </div>
-
-                   <div id="log-out" class="absolute -right-2 -top-1 flex items-center">
-                    <a href="#">
-                        <button class="text-white px-2 py-1 md:px-6 md:py-2 border border-red-500 rounded-md bg-red-500 hover:rounded-xl transition-all">
-                            <span class="hidden md:block">Logout</span>
-                            <i class="ri-shut-down-line text-xl md:hidden"></i>
-                        </button>
-                    </a>
-                   </div>
-                </div>
+            <section class="profile mt-5 bg-[#38bdf8] w-full p-4 rounded-lg shadow-md shadow-[#38bff8ca] mb-10 hidden" id="profile-section">
+                
             </section>
 
-<!-- 
-            <section>
-                <h1 class="text-tailblue text-2xl font-monument tracking-wide mb-3">Saved Docs</h1>
+            <section id="bookmark-section" class="hidden">
+                <h1 class="text-tailblue text-2xl font-monument tracking-wide mb-3 " >Saved Docs</h1>
                 
-                <div class="border-2 border-tailblue rounded-sm p-2">
-                    <div class="mb-2">
-                        <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
-                            <div class="p-4 md:w-[70%]">
-                                <div class="font-bold text-xl mb-2 tracking-wider">Sem5 Syllabus</div>
-                                 <a href="#" class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">GU</span>.
-                                </a> 
-                            </div>
-                            <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                                <a href="./DOCS/Syllabus BCA Semester 5 2019.pdf" download="sem5 Syllabus eduVerse">
-                                    <button class="text-white font-semibold py-2 px-4 rounded-full tracking-wide bg-tailblue hover:bg-transparent border border-tailblue transition-colors">
-                                        <i class="ri-download-line mr-2"></i> Download
-                                    </button>
-                                </a>
-                                <button class=" text-white text-xl font-bold rounded-full hover:bg-tailblue">
-                                    <i class="ri-delete-bin-line text-red-400"></i>
-                                </button>
-                                <button class=" text-white text-xl font-bold rounded-full hover:bg-tailblue">
-                                    <i class="ri-bookmark-fill"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-    
-    
-                </div>
-            </section> -->
+                <ul class="border-2 list-none border-tailblue rounded-sm p-2" id="bookmark-docs">
+                   
+                </ul>
+            </section>
+
+
+            <section id="notification" class="absolute top-5 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0">
+                
+            </section>
         </main>
     </div>
     <script src="./bookmark.js"></script>

@@ -80,15 +80,25 @@
             let username = document.getElementById("username").value; 
             let password = document.getElementById("password").value; 
  
-             fetch("https://kirtanmojidra.pythonanywhere.com/api/v1/login",{ 
-                method : 'POST', 
-                credentials: 'include', 
-                body: JSON.stringify({"username":username,"password":password}) 
-            }).then(res=>{ 
-                if(res.status == 200){ 
-                    window.location.replace("../index.html"); 
-                } 
+            fetch("https://kirtanmojidra.pythonanywhere.com/api/v1/login", {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "username": username, "password": password })
             })
+            .then(res => {
+                if (res.status === 200) {
+                    window.location.replace("../index.html");
+                } else {
+                    throw new Error('Login failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error logging in:', error);
+                // Handle error, display error message, etc.
+            });
 
         })
     </script>

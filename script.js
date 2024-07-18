@@ -1,9 +1,22 @@
 /* 
     *** back Button ***
 */
+let currentUser;
 function reloadPage(){
     location.reload();
 }
+fetch('https://kirtanmojidra.pythonanywhere.com/api/v1/getuser', {
+    method: 'GET',
+    credentials: 'include'
+}).then((res) => {
+    if (!res.ok) {
+        throw new Error('Failed to fetch user information');
+    }
+    return res.json(); // assuming response is JSON
+}).then((user) => {
+    currentUser = user.data;
+})
+
 
 /* 
     *** Sem and subject selection ***
@@ -115,11 +128,10 @@ const showKaro = (book, index) => {
         path,
         Sem
     } = book;
-
     console.log(title, username, date, path, Sem);
     
     li.innerHTML = `
-        <div class="theory mb-2">
+    <div class="theory mb-2">
             <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
                 <div class="p-4 md:w-[70%]">
                     <div class="font-bold text-xl mb-2 tracking-wider ">${title}</div>
@@ -134,19 +146,63 @@ const showKaro = (book, index) => {
                     </a>
 
                     
-                    <a href="https://kirtanmojidra.pythonanywhere.com/api/v1/deletepdf/${path}">
+                    <a href="https://kirtanmojidra.pythonanywhere.com/api/v1/deletepdf/${path}" class=${currentUser.isadmin ? "block" : "hidden"}>
                         <button class=" text-white text-xl font-bold rounded-full hover:bg-tailblue px-2 py-2 dlt-btn" id="${path}">
                             <i class="ri-delete-bin-line text-red-400"></i>
                         </button>
                     </a>
-                    <button class=" text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-2">
-                        <i class="ri-bookmark-line"></i>
+                    <button class=" text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-2 bookmark-btn" id="${path}">
+                        <i class="ri-bookmark-line" id="${path}"></i>
                     </button>
                 </div>
             </div>
         </div>
+    
     `;
-
+    li.querySelector('.bookmark-btn').addEventListener('click',(e)=>{
+        const path = e.target.id; // Assuming id is set properly as path
+        console.log(path);
+        fetch(`https://kirtanmojidra.pythonanywhere.com/api/v1/bookmark/${path}`, {
+            method: 'GET',
+            credentials: 'include'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Bookmark API request failed');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Bookmark added successfully:', data);
+            // Handle success, update UI if needed
+            document.querySelector("#notification").innerHTML = `
+                <div class="w-[80%] md:w-fit p-8 rounded-lg bg-green-300">
+                    <h2 class="text-2xl font-semibold">✅ Bookmarked</h2>
+                </div>`;
+            document.querySelector("#notification").style.top = "100px";
+            document.querySelector("#notification").style.opacity = 1;
+            setTimeout(function () {
+                document.querySelector("#notification").style.top = "12px";
+                document.querySelector("#notification").style.opacity = 0;
+              }, 5000);
+        })
+        .catch(error => {
+            console.error('Error adding bookmark:', error);
+            document.querySelector("#notification").innerHTML = `
+                <div class="w-[80%] md:w-fit p-8 rounded-lg bg-red-300">
+                    <h2 class="text-2xl font-semibold">🚫${error}</h2>
+                </div>
+            
+            `;
+            document.querySelector("#notification").style.top = "100px";
+            document.querySelector("#notification").style.opacity = 1;
+            setTimeout(function () {
+                document.querySelector("#notification").style.top = "12px";
+                document.querySelector("#notification").style.opacity = 0;
+            }, 5000);
+            // Handle error, display error message or retry logic
+        });
+    })
     document.getElementById(`pdf-container-sem${Sem}`).appendChild(li);
 }
 
