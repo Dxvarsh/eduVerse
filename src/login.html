@@ -59,6 +59,10 @@
 
                         <input class="w-full rounded p-1" type="password" name="" placeholder="password" id="password">
                         
+                        <div id="clicked" class="flex flex-col justify-center items-center gap-2">
+                            
+                        </div>
+                        
                         <input class="w-[50%] mt-4 rounded p-1 border border-tailblue text-white font-medium" type="submit" value="Log in" id="login-submit">
                         
                         <h3 class="text-white text-sm">
@@ -74,33 +78,50 @@
 
 
     <script>
-        document.querySelector('#login-submit').addEventListener('click', function(e){
-            e.preventDefault();
+        document.querySelector('#login-submit').addEventListener('click', function(e) {
+        e.preventDefault();
+        let clickedElement = document.getElementById('clicked');
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
 
-            let username = document.getElementById("username").value; 
-            let password = document.getElementById("password").value; 
- 
-            fetch("https://kirtanmojidra.pythonanywhere.com/api/v1/login", {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ "username": username, "password": password })
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    window.location.replace("../index.html");
-                } else {
-                    throw new Error('Login failed');
-                }
-            })
-            .catch(error => {
-                console.error('Error logging in:', error);
-                // Handle error, display error message, etc.
-            });
-
+        // Perform fetch request to login API
+        fetch("https://kirtanmojidra.pythonanywhere.com/api/v1/login", {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "username": username, "password": password })
         })
+        .then(res => {
+            // Check response status
+            if (res.ok) {
+                clickedElement.innerHTML += `
+                    <h2 class="text-white text-md text-red-300">${res.status}</h2>
+                `;
+                return res.json(); // Parse JSON response
+            } else {
+                console.log(res);
+                throw new Error('Invalid username or password.'); // Throw error for non-200 status
+            }
+        })
+        .then(data => {
+            // Handle successful login response
+            clickedElement.innerHTML += `
+                <h2 class="text-white text-md">${data.message}</h2>
+            `;
+            // Redirect to index.html upon successful login
+            window.location.replace("../index.html");
+        })
+        .catch(error => {
+            // Handle fetch error or login failure
+            console.error('Error logging in:', error);
+            clickedElement.innerHTML += `
+                <h2 class="text-white text-md text-red-400">${error.message}</h2>
+            `;
+        });
+    });
+
     </script>
 </body>
 </html>
