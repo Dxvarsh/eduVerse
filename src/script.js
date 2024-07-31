@@ -33,35 +33,43 @@ const getUser = () => {
     });
 };
 
-// Function to reload page
-function reloadPage() {
-    location.reload();
-}
 
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+const semContainers = document.querySelectorAll('.container');
+const backbtn = document.querySelectorAll('#back-btn')
 
-// Function to handle semester and subject selection
-function selectedSem(semId) {
-    console.log(semId);
-    const semContainers = document.querySelectorAll('.container');
-    semContainers.forEach(container => {
-        container.style.display = 'none';
-    });
-    
-    const semester = document.querySelector('input[type="radio"]:checked').value;
-    document.getElementById(semId).style.display = 'block';
-    
-    const semSelection = document.getElementById('sem-selection');
-    semSelection.style.display = 'none';
-    document.getElementById('greet-area').style.display = 'none';
-    
-    const subjects = document.querySelectorAll('select');
-    subjects.forEach(sub => {
-        sub.addEventListener('change', (e) => {
-            const selectedSubject = e.target.value;
-            selectKar(semester, selectedSubject);
+backbtn.forEach(back => {
+    back.addEventListener('click', ()=>{
+        location.reload();
+    })
+})
+
+radioButtons.forEach(radio => {
+    radio.addEventListener('change', () => {
+        const selectedValue = radio.value;
+        semContainers.forEach(container => {
+            if (container.id === `container-sem${selectedValue}`) {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
+        });
+        
+        const semSelection = document.getElementById('sem-selection'); 
+        semSelection.style.display = 'none';
+        document.getElementById('greet-area').style.display = 'none';
+        
+        // Fetch PDFs based on semester and subject
+        const subjects = document.querySelectorAll('select');
+        subjects.forEach(sub => {
+            sub.addEventListener('change', (e) => {
+                const selectedSubject = e.target.value;
+                console.log(`Subject ${selectedSubject}, sem ${selectedValue}`);
+                selectKar(selectedValue, selectedSubject);
+            });
         });
     });
-}
+}); 
 
 // Function to fetch PDFs based on semester and subject
 const selectKar = (semester, subject) => {

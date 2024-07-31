@@ -152,7 +152,7 @@
                 
                 <div class="main-content flex gap-4 flex-wrap mx-auto justify-center">
                     
-                    <input type="radio" name="semester" id="s1" value="1" class="hidden" onchange="selectedSem('container-sem1')"> 
+                    <input type="radio" name="semester" id="s1" value="1" class="hidden"> 
                     <label for="s1" class="text-white">
                         <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
                             <img width="48" height="48" src="https://img.icons8.com/color/48/1.png" alt="1"/>
@@ -160,7 +160,7 @@
                         </div>
                     </label>
 
-                    <input type="radio" name="semester" id="s2" value="2" class="hidden" onchange="selectedSem('container-sem2')"> 
+                    <input type="radio" name="semester" id="s2" value="2" class="hidden"> 
                     <label for="s2" class="text-white">
                         <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
                             <img width="48" height="48" src="https://img.icons8.com/color/48/2.png" alt="2"/>
@@ -168,7 +168,7 @@
                         </div>
                     </label>
 
-                    <input type="radio" name="semester" id="s3" value="3" class="hidden" onchange="selectedSem('container-sem3')"> 
+                    <input type="radio" name="semester" id="s3" value="3" class="hidden"> 
                     <label for="s3" class="text-white">
                         <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
                             <img width="48" height="48" src="https://img.icons8.com/color/48/3.png" alt="3"/>
@@ -176,7 +176,7 @@
                         </div>
                     </label>
 
-                    <input type="radio" name="semester" id="s4" value="4" class="hidden" onchange="selectedSem('container-sem4')"> 
+                    <input type="radio" name="semester" id="s4" value="4" class="hidden"> 
                     <label for="s4" class="text-white">
                         <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
                             <img width="48" height="48" src="https://img.icons8.com/color/48/4.png" alt="4"/>
@@ -184,7 +184,7 @@
                         </div>
                     </label>
 
-                    <input type="radio" name="semester" id="s5" value="5" class="hidden" onchange="selectedSem('container-sem5')"> 
+                    <input type="radio" name="semester" id="s5" value="5" class="hidden"> 
                     <label for="s5" class="text-white">
                         <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
                             <img width="48" height="48" src="https://img.icons8.com/color/48/5.png" alt="5"/>
@@ -192,7 +192,7 @@
                         </div>
                     </label>
 
-                    <input type="radio" name="semester" id="s6" value="6" class="hidden" onchange="selectedSem('container-sem6')"> 
+                    <input type="radio" name="semester" id="s6" value="6" class="hidden"> 
                     <label for="s6" class="text-white">
                         <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
                             <img width="48" height="48" src="https://img.icons8.com/color/48/6.png" alt="6"/>
@@ -212,7 +212,7 @@
                 <!-- sem1 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
+                        <h2 class="text-2xl text-tailblue font-medium" id="back-btn"><i class="ri-arrow-left-line block md:hidden"></i><span class="hidden md:block cursor-pointer">Back</span></h2>
                         <img width="48" height="48" src="https://img.icons8.com/color/48/1-circle-c--v1.png" alt="1-circle-c--v1"/>
                         <button class="border border-tailblue rounded h-fit">
                             <a href="./addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
@@ -258,7 +258,7 @@
                 <!-- sem2 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
+                        <h2 class="text-2xl text-tailblue font-medium" id="back-btn"><i class="ri-arrow-left-line block md:hidden"></i><span class="hidden md:block cursor-pointer">Back</span></h2>
                         <img width="48" height="48" src="https://img.icons8.com/color/48/2-circle-c--v1.png" alt="2-circle-c--v1"/>
                         <button class="border border-tailblue rounded h-fit">
                             <a href="./addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
@@ -300,7 +300,7 @@
                 <!-- sem3 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
+                        <h2 class="text-2xl text-tailblue font-medium" id="back-btn"><i class="ri-arrow-left-line block md:hidden"></i><span class="hidden md:block cursor-pointer">Back</span></h2>
                         <img width="48" height="48" src="https://img.icons8.com/color/48/3-circle-c--v1.png" alt="3-circle-c--v1"/>
                         <button class="border border-tailblue rounded h-fit">
                             <a href="./addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
@@ -330,7 +330,7 @@
                 <!-- sem4 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
+                        <h2 class="text-2xl text-tailblue font-medium" id="back-btn"><i class="ri-arrow-left-line block md:hidden"></i><span class="hidden md:block cursor-pointer">Back</span></h2>
                         <img width="48" height="48" src="https://img.icons8.com/color/48/4-circle-c--v1.png" alt="5-circle-c--v1"/>
                         <button class="border border-tailblue rounded h-fit">
                             <a href="./addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
@@ -359,7 +359,7 @@
                 <!-- sem5 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
+                        <h2 class="text-2xl text-tailblue font-medium" id="back-btn"><i class="ri-arrow-left-line block md:hidden"></i><span class="hidden md:block cursor-pointer">Back</span></h2>
                         <img width="48" height="48" src="https://img.icons8.com/color/48/5-circle-c--v1.png" alt="5-circle-c--v1"/>
                         <button class="border border-tailblue rounded h-fit">
                             <a href="./addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
@@ -400,7 +400,7 @@
                 <!-- sem6 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer">Back</span></h2>
+                        <h2 class="text-2xl text-tailblue font-medium" id="back-btn"><i class="ri-arrow-left-line block md:hidden"></i><span class="hidden md:block cursor-pointer">Back</span></h2>
                         <img width="48" height="48" src="https://img.icons8.com/color/48/6-circle-c--v1.png" alt="6-circle-c--v1"/>
                         <button class="border border-tailblue rounded h-fit">
                             <a href="./addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
