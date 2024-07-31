@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- tailwind cdn -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        
+        .loader {
+            position: absolute;
+            top: calc(50% - 32px);
+            left: calc(50% - 32px);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            perspective: 800px;
+        }
+        
+        .inner {
+            position: absolute;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;  
+        }
+        
+        .inner.one {
+            left: 0%;
+            top: 0%;
+            animation: rotate-one 1s linear infinite;
+            border-bottom: 3px solid #FF0000;
+        }
+        
+        .inner.two {
+            right: 0%;
+            top: 0%;
+            animation: rotate-two 1s linear infinite;
+            border-right: 3px solid #0000FF;
+        }
+        
+        .inner.three {
+            right: 0%;
+            bottom: 0%;
+            animation: rotate-three 1s linear infinite;
+            border-top: 3px solid #00FF00;
+        }
+        
+        @keyframes rotate-one {
+            0% {
+            transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+            }
+            100% {
+            transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+            }
+        }
+        
+        @keyframes rotate-two {
+            0% {
+            transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+            }
+            100% {
+            transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+            }
+        }
+        
+        @keyframes rotate-three {
+            0% {
+            transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+            }
+            100% {
+            transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+            }
+        }
+    </style>
+
+
+    <!-- Icon pack -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+        rel="stylesheet"
+    />
+    <!-- custom css -->
+    
+    <!-- logo -->
+    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG8AAACYCAYAAADqUrfBAAAACXBIWXMAAC4jAAAuIwF4pT92AAAE9ElEQVR4nO2dz3XTQBCHB17uiAoSKgCO6KCECmIqwFSAqYB0QKgA04FTAbYOOscVkFQQuQPePlZhSeysJWul+e3+vvd83/AxszPaf8/ere5ORGQqBI4jETHyvlIdHs9T/wdAhvKAoTxgKA8YygOG8oChPGAoDxjKA4bygKE8YCgPGMoDhvKAoTxgKA8YygOG8oChPGCOlAz9p4jUIjIRkWMF44FAS+TdVEU2q4rMbIb6YGUSD+rSZlVki6rIzFbElyLySURWCoalEi1p8xFVkZk0Oje/vKybvaVTptV/QBQsVZGZtHph0+p7m1Y3CoY2KmojbxdVkS1FxPwkL+upLXLOVQ42MNCtQlVk86rIjLxXIvJFRNYKhjUYUfR5Nq1eVkX2RkTeisj3FNJqdE16VWTXtu3IYm87ov7CsqXtiCqtwhUsXYi17Uju22ZMbUcSkbcL9LaDqwoWxLaD8h6A1HZQ3hNobzsob080th1JFyxd0NR2MPIOYOy2g5HXE2O0HYy8AAzVdlBeQEK3HZQ3ECHaDsobgb7aDhYsI3Jo28HIU0KXtoORp5B92w5GnnKeajvMZalnIvJr5D/B7Io2JfVi5HFAkJe1aT2mWuQ13IqIEWj+t13rGJJetMlzMSIvjUwzmesZlh40y3NZ2ZJ6Ycvr5BGgguVURH6IyF1e1ou8rM0EnjwokbeNjTM/LvUNLzzI8lyaQucypfkxFnkua2d+jFpkjPJcrmxERlnoxP6F5dwpdOaxFTqxR942Ns78CP0hIEV5LrfNkgzi/Ji6PJe1IxJifqS87UAUOlwS2k5T6NxoLnQYefuzcdKqikKH8rqhYsWD8g5n7YgcdH7knHc4rx+seAz2hCsjLwwbp1oNtrXDyLvgm7FBCba1g1v/wmM20H42v7yse13x4Jw3LGZ+/CYiv/OyXpr5MS/rrOsIKG88Dt7awbSpA/NF5zwv61YrHpSnixci8tH88rL2bu1g2tRLU+iY+fE6L+uZPUl0D+VhcGOfLvgPpk2d7NXkU54e1vZY197NPOWNy8qJsNZNO+UNy8ZGVy+r9JQXnqbkX/b9kZrywrB2oivYqjvl9ceVE2GDrK5TXnfuy3krbPBdZpTXDlXHrinPj9pTR5T3mF7L+ZBQ3l9uG2FI14mkLG+Qcj4kqcm7ciIM/tRs7PJGL+dDEqO8WycdRn1LRCzykrlEwAVZXtSXBewDkjzIcj4k2uW1Xl1OCY3yoirnQ6JFnkmJF7zVrx1a5JnLsecKxgEF920CQ3nAcFUBDHs5+Mxc1095ANgzChMr7f61E8pTjO8dPspTRl7WZ/Y9oYk98rUTylNA17dnKW8k7Fn0iRV22mUUlDcwbdKiD8obgFBPclNeIPpIiz4or2fslRwTezFAUCivB2xanFlpvaVFH5TXESctzuzNRoNDeS0ZMi36oLw9GCst+qC8Hdi02JT3o6RFH5T3AJsWp7s+BmuC8pwHdO3voK8eQ5KsPIS06CM5eUhp0UcS8lDToo9o5e3aOhAT0cnzbR2IiSjkuTuqYkqLPmDlpZAWfcDJSykt+oCQ1+fWgZhQKy/U1oGYUCVviK0DMaFF3ol53pNpsR1a5B1rWNxEg0e8gKE8YCgPGMoDhvKAoTxgKA8YygOG8oChPGAoDxjKA4bygKE8YCgPGMoDhvKAoTxgKA+YI3uTOkFDRP4AB98TWLPMsOcAAAAASUVORK5CYII=" type="image/x-icon">
+    <title>eduVerse | Bookmark</title>
+  <script type="module" crossorigin src="/assets/bookmark-33e9a81b.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-3cfb730f.js">
+  <link rel="stylesheet" href="/assets/main.88fb275c.css">
+</head>
+<body class="bg-darkblue w-full h-screen font-gilroy">
+    <div class="h-screen w-screen z-50 absolute bg-darkblue overflow-hidden loader-main hidden">
+        <div class="loader">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+            <h1 class="text-tailblue w-[300px] pt-20 text-lg pr-20">
+                Fetching Data . . . . . . . 
+            </h1>
+        </div>
+    </div>
+
+    <div class="main h-screen w-full"> 
+
+        <!-- navbar -->
+        <nav class="px-3 h-24 border-b-2 border-tailblue flex items-center justify-between md:px-16">
+
+            <div>
+                <a href="./home.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
+                    <span class="hidden md:block">Home</span> 
+                    <i class="ri-home-line text-2xl md:hidden"></i>
+                </a>
+            </div>
+
+            <div class="h-full flex items-center">
+                <a class="text-white font-monument text-2xl" href="./index.html"><span class="text-tailblue">edu</span>Verse</a>
+            </div>
+
+            <div>
+                <a href="./about.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
+                    <span class="hidden md:block">About Us</span>
+                    <i class="ri-information-line text-2xl md:hidden"></i>
+                </a>
+            </div>
+        </nav>
+
+
+
+        <main class="px-3 md:px-16 py-5">
+            <section class="h-96 hidden" id="log-in-section">
+                
+            </section>
+
+            <section class="profile bg-[#38bdf8] w-full p-4 rounded-lg shadow-md shadow-[#38bff8ca] mb-10 hidden" id="profile-section">
+                
+            </section>
+
+            <section id="bookmark-section" class="hidden">
+                <h1 class="text-tailblue text-2xl font-monument tracking-wide mb-3 " >Saved Docs</h1>
+                
+                <ul class="border-2 list-none border-tailblue rounded-sm p-2" id="bookmark-docs">
+                   
+                </ul>
+            </section>
+
+
+
+
+            <section id="notification" class="w-[85%] absolute top-5 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0">
+                
+            </section>
+        </main>
+    </div>
+    
+</body>
+</html>
