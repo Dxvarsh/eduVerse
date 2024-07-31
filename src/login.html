@@ -15,15 +15,14 @@
     <!-- custom css -->
     <link rel="stylesheet" href="../main.css">
     <!-- logo -->
-    <link rel="shortcut icon" href="../src/img/evLOGO.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/evLOGO.png" type="image/x-icon">
     <title>eduVerse | Bookmark</title>
 </head>
 <body class="bg-darkblue w-full h-screen font-gilroy">
-    <div class="main h-screen w-full"> 
+    <div class="main h-screen w-full relative"> 
 
         <!-- navbar -->
         <nav class="px-3 h-24 border-b-2 border-tailblue flex items-center justify-between md:px-16">
-
             <div>
                 <a href="./home.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
                     <span class="hidden md:block">Home</span> 
@@ -36,20 +35,16 @@
             </div>
 
             <div>
-                <a href="./src/about.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
+                <a href="../index.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
                     <span class="hidden md:block">About Us</span>
                     <i class="ri-information-line text-2xl md:hidden"></i>
                 </a>
             </div>
         </nav>
 
-
-
         <main class="px-3 md:px-16">
             <section class="pt-4">
                 <li class="text-2xl text-white">Welcome back to <span class="text-tailblue">edu</span>Verse.</li>
-                
-
                 <div class="login max-w-xl mt-10 p-2 flex flex-col justify-center items-center gap-2">
                     <h2 class="text-white text-2xl">Log in using <span class="text-tailblue">edu</span> ID</h2>
 
@@ -69,62 +64,74 @@
                             Don't have an account? <a href="./signup.html" class="text-tailblue">Sign Up.</a>
                         </h3>
                     </form>
-
                 </div>
-
             </section>
         </main>
+
+        <footer class="bg-gray-700 py-4 px-4 absolute -bottom-5 right-0 left-0 ">
+            <div class="text-white">
+                <p class="text-center">
+                    Developed by
+                    <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra">Kirtan Mojidra</a></span>
+                    & <span class="text-tailblue"><a href="https://github.com/Dxvarsh">Devarsh Nagar</a></span>
+                </p>
+                <p class="text-center">
+                    Managed with 
+                    <i class="ri-heart-fill text-red-500"></i>
+                    by our great community.
+                </p>
+            </div>
+        </footer>
     </div>
 
 
     <script>
         document.querySelector('#login-submit').addEventListener('click', function(e) {
-        e.preventDefault();
-        let clickedElement = document.getElementById('clicked');
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
+            e.preventDefault();
+            let clickedElement = document.getElementById('clicked');
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
 
-        // Perform fetch request to login API
-        fetch("https://kirtanmojidra.pythonanywhere.com/api/v1/login", {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ "username": username, "password": password })
-        })
-        .then(res => {
-            // Check response status
-            if (res.ok) {
+            // Perform fetch request to login API
+            fetch("https://kirtanmojidra.pythonanywhere.com/api/v1/login", {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "username": username, "password": password })
+            })
+            .then(res => {
+                // Check response status
+                if (res.ok) {
+                    clickedElement.innerHTML += `
+                        <h2 class="text-white text-md text-red-300">${res.status}</h2>
+                    `;
+                    return res.json(); // Parse JSON response
+                } else {
+                    console.log(res);
+                    throw new Error('Invalid username or password.'); // Throw error for non-200 status
+                }
+            })
+            .then(data => {
+                // Handle successful login response
                 clickedElement.innerHTML += `
-                    <h2 class="text-white text-md text-red-300">${res.status}</h2>
+                    <h2 class="text-white text-md">${data.message}</h2>
                 `;
-                return res.json(); // Parse JSON response
-            } else {
-                console.log(res);
-                throw new Error('Invalid username or password.'); // Throw error for non-200 status
-            }
-        })
-        .then(data => {
-            // Handle successful login response
-            clickedElement.innerHTML += `
-                <h2 class="text-white text-md">${data.message}</h2>
-            `;
-            // Redirect to index.html upon successful login
-            window.location.replace("./home.html");
-        })
-        .catch(error => {
-            // Handle fetch error or login failure
-            console.error('Error logging in:', error);
-            clickedElement.innerHTML += `
-                <h2 class="text-white text-md text-red-400">${error.message}</h2>
-            `;
-            setTimeout(() => {
-                clickedElement.innerHTML = ''; // Clear error message after 5 seconds
-            }, 5000);
+                // Redirect to index.html upon successful login
+                window.location.replace("./home.html");
+            })
+            .catch(error => {
+                // Handle fetch error or login failure
+                console.error('Error logging in:', error);
+                clickedElement.innerHTML += `
+                    <h2 class="text-white text-md text-red-400">${error.message}</h2>
+                `;
+                setTimeout(() => {
+                    clickedElement.innerHTML = ''; // Clear error message after 5 seconds
+                }, 5000);
+            });
         });
-    });
-
     </script>
 </body>
 </html>

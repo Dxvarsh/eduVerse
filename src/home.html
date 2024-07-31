@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        
+    <style>   
         .loader {
             position: absolute;
             top: calc(50% - 32px);
@@ -99,9 +98,8 @@
         </div>
     </div>
 
-    <div class="main h-screen w-full"> 
+    <div class="main h-screen w-full relative"> 
 
-        <!-- navbar -->
         <nav class="px-3 h-24 border-b-2 border-tailblue flex items-center justify-between md:px-16">
 
             <div>
@@ -125,9 +123,7 @@
             </div>
 
         </nav>
-        
 
-        <!-- main content -->
         <main class="p-3 md:p-16 h-fit">
             
             <div class="flex items-center justify-between flex-wrap" id="greet-area">
@@ -248,7 +244,7 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[27rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
                         <ul id="pdf-container-sem1" class="mb-2 h-full"></ul>
                     </div>
                 </section>
@@ -290,7 +286,7 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[27rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
                         <ul id="pdf-container-sem2" class="mb-2 h-full"></ul>
                     </div>
                 </section>
@@ -320,7 +316,7 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[27rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
                         <ul id="pdf-container-sem3" class="mb-2 h-full"></ul>
                     </div>
                 </section>
@@ -349,7 +345,7 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[27rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
                         <ul id="pdf-container-sem4" class="mb-2 h-full"></ul>
                     </div>
                 </section>
@@ -390,7 +386,7 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[27rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
                         <ul id="pdf-container-sem5" class="mb-2 h-full"></ul>
                     </div>
                 </section>
@@ -431,18 +427,17 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[27rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
                         <ul id="pdf-container-sem6" class="mb-2 h-full"></ul>
                     </div>
                 </section>
             </div>
 
-            <section id="notification" class="w-[85%] absolute -top-5 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0">
-                
+            <section id="notification" class="w-[85%] absolute -top-5 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0"> 
             </section>
         </main>
 
-        <footer class="bg-gray-700 py-4 px-4"> <!-- absolute bottom-0 right-0 left-0 -->
+        <footer class="bg-gray-700 py-4 px-4 absolute -bottom-10 right-0 left-0 ">
             <div class="text-white">
                 <p class="text-center">
                     Developed by
