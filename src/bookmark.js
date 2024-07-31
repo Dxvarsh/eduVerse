@@ -85,7 +85,7 @@ const getUser = () => {
                     profile.classList.add('hidden');
                     bookmarks.classList.add('hidden');
                     document.querySelector("#refresh").addEventListener('click', ()=>{window.location.replace('./login.html');})
-                    document.querySelector("#home").addEventListener('click', ()=>{window.location.replace('../index.html');})
+                    document.querySelector("#home").addEventListener('click', ()=>{window.location.replace('./home.html');})
                 })
                 .catch(error => {
                     console.error('Error logging out:', error);
@@ -109,11 +109,13 @@ const getUser = () => {
             return response.json();
         })
         .then(data => {
+            console.log(data);
             saariPdf(data.data, currentUser)
             // Handle bookmarks data as needed
         })
         .catch(error => {
             console.error('Error fetching bookmarks:', error);
+            showNotification(error, 'red' )
             // Handle error, display error message, etc.
         });
     })
@@ -127,9 +129,11 @@ const getUser = () => {
             <div class="w-fit md:w-fit p-8 rounded-lg bg-red-300">
                 <h2 class="text-2xl font-semibold">🚫${error} You are not Logged in.</h2>
                 <button class="mt-5 px-5 py-1 rounded bg-red-500 font-bold" id="refresh">Log in</button>
+                <button class="mt-5 px-5 py-1 rounded bg-red-500 font-bold" id="home">Back</button>
             </div>
         `;
         document.querySelector("#refresh").addEventListener('click', ()=>{window.location.replace('./login.html');})
+        document.querySelector("#home").addEventListener('click', ()=>{window.location.replace('./home.html');})
     })
 }
 getUser();
@@ -202,6 +206,7 @@ const showKaro = (book, currentUser=0) => {
                     console.log(data);
                     document.getElementById(`bookmark-docs`).innerHTML = '';
                     saariPdf(data.data, currentUser);
+
                 })
                 .catch(error => {
                     console.error('Error adding bookmark:', error);
@@ -211,7 +216,6 @@ const showKaro = (book, currentUser=0) => {
         })
         .catch(error => {
             console.error('Error adding bookmark:', error);
-            showNotification('Failed to bookmark PDF', 'red');
         });
     });
     document.getElementById(`bookmark-docs`).appendChild(li);
@@ -219,7 +223,9 @@ const showKaro = (book, currentUser=0) => {
 
 
 const saariPdf = (pdf, currentUser) =>{
+    console.log(pdf, "--hello");
     pdf.forEach((book) => {
+        console.log(book);
         showKaro(book, currentUser);
     });
 }

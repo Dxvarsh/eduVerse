@@ -25,7 +25,7 @@
         <nav class="px-3 h-24 border-b-2 border-tailblue flex items-center justify-between md:px-16">
 
             <div>
-                <a href="../index.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
+                <a href="./home.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
                     <span class="hidden md:block">Home</span> 
                     <i class="ri-home-line text-2xl md:hidden"></i>
                 </a>
@@ -111,7 +111,7 @@
                 <h2 class="text-white text-md">${data.message}</h2>
             `;
             // Redirect to index.html upon successful login
-            window.location.replace("../index.html");
+            window.location.replace("./home.html");
         })
         .catch(error => {
             // Handle fetch error or login failure
@@ -119,6 +119,9 @@
             clickedElement.innerHTML += `
                 <h2 class="text-white text-md text-red-400">${error.message}</h2>
             `;
+            setTimeout(() => {
+                clickedElement.innerHTML = ''; // Clear error message after 5 seconds
+            }, 5000);
         });
     });
 

@@ -3,74 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        
-        .loader {
-            position: absolute;
-            top: calc(50% - 32px);
-            left: calc(50% - 32px);
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            perspective: 800px;
-        }
-        
-        .inner {
-            position: absolute;
-            box-sizing: border-box;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;  
-        }
-        
-        .inner.one {
-            left: 0%;
-            top: 0%;
-            animation: rotate-one 1s linear infinite;
-            border-bottom: 3px solid #FF0000;
-        }
-        
-        .inner.two {
-            right: 0%;
-            top: 0%;
-            animation: rotate-two 1s linear infinite;
-            border-right: 3px solid #0000FF;
-        }
-        
-        .inner.three {
-            right: 0%;
-            bottom: 0%;
-            animation: rotate-three 1s linear infinite;
-            border-top: 3px solid #00FF00;
-        }
-        
-        @keyframes rotate-one {
-            0% {
-            transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
-            }
-            100% {
-            transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
-            }
-        }
-        
-        @keyframes rotate-two {
-            0% {
-            transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
-            }
-            100% {
-            transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
-            }
-        }
-        
-        @keyframes rotate-three {
-            0% {
-            transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
-            }
-            100% {
-            transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
-            }
-        }
-    </style>
 
     <!-- tailwind cdn -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -82,367 +14,96 @@
     />
     <!-- custom css -->
     <link rel="stylesheet" href="./main.css">
+
     <!-- logo -->
     <link rel="shortcut icon" href="./src/img/evLOGO.png" type="image/x-icon">
-    <title>eduVerse | Study Buddy</title>
+    <title>eduVerse | A Study Mate</title>
 </head>
 <body class="bg-darkblue w-full h-screen font-gilroy">
-    <div class="h-screen w-screen z-50 absolute bg-darkblue overflow-hidden loader-main hidden">
-        <div class="loader">
-            <div class="inner one"></div>
-            <div class="inner two"></div>
-            <div class="inner three"></div>
-            <h1 class="text-tailblue w-[300px] pt-20 text-lg pr-20">
-                L o d i n g . . . 
-            </h1>
-        </div>
-    </div>
-    <div class="main h-screen w-full"> 
 
+    <div class="main h-screen w-full"> 
+        
         <!-- navbar -->
         <nav class="px-3 h-24 border-b-2 border-tailblue flex items-center justify-between md:px-16">
-
-            <div>
-                <a href="./src/about.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
-                    <span class="hidden md:block">About Us</span>
-                    <i class="ri-information-line text-2xl md:hidden"></i>
-                </a>
+            
+            <div class="logo">
+                <img src="./src/img/evLOGO.png" width="30" alt="">
             </div>
+
 
             <div class="h-full flex items-center">
                 <a class="text-white font-monument text-2xl" href="./index.html"><span class="text-tailblue">edu</span>Verse</a>
             </div>
 
+
             <div>
-                <a href="./src/bookmark.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
-                    <span class="hidden md:block">Bookmark</span>
-                    <i class="ri-bookmark-line text-2xl md:hidden"></i>
+                <a href="./index.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
+                    <span class="hidden md:block">Home</span> 
+                    <i class="ri-home-line text-2xl md:hidden"></i>
                 </a>
             </div>
 
         </nav>
-        
 
-        <!-- main content -->
-        <main class="p-3 md:p-16">
-            <div id="greeting">
-                
+        <main>
+            <div id="main-content" class="px-3 md:px-16 py-3 pb-3">
+                <section class="">
+                    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                        <div class="mr-auto place-self-center lg:col-span-7">
+                            <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white">"Collaborate, Learn, and Grow Together"</h1>
+                            <p class="max-w-2xl mb-6 font-light text-white lg:mb-8 md:text-lg lg:text-xl">Welcome to <span class="text-white"><span class="text-tailblue">edu</span>Verse</span>!</p>
+                            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl ">
+                                <span class="text-tailblue">eduVerse</span> is a free, online learning platform designed to help students connect, learn, and grow together. Our mission is to empower students to achieve their full potential by fostering a supportive, inclusive, and collaborative learning environment.
+                            </p>
+                            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl ">Be a part of our community.</p> 
+                            <a href="https://chat.whatsapp.com/Ek1eQQOUPIbJc2MFtQg9T8" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 hover:ring-tailblue">
+                                Join community
+                                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </a>
+                            <a href="./src/home.html" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 text-white">
+                                Select Semester
+                            </a> 
+                        </div>              
+                    </div>
+                </section>
+
+    
+                <section id="about-us" class="mt-5">
+                    <p>
+                        <h1 class="text-tailblue font-semibold tracking-wide mb-1 text-xl">What We Offer:</h1>
+                        
+                        <p class="mb-3">
+                            <p class="mb-1 text-gray-500 text-sm px-1"><span class="text-white">1. Semester-Wise Study Material:</span> Students can effortlessly find and download study resources tailored to their specific semester and subject. </p>
+                            <p class="mb-1 text-gray-500 text-sm px-1"><span class="text-white">2. Collaborative Platform:</span> Registered users have the ability to contribute by uploading and sharing their own study materials, fostering a community-driven learning environment.</p>
+                        </p>
+    
+                        <h1 class="text-tailblue font-semibold tracking-wide mb-1 text-xl">Join Us:</h1>
+                        
+                        <p class="mb-5 text-gray-500 text-sm px-1">
+                            Sign up today to explore a wealth of study materials and contribute to the EduVerse community. Together, we can build a richer, more connected academic world.
+                        </p>
+                    </p>
+                </section>
             </div>
-            <div id="sem-selection" class="transition-all">
-                <h2 class="my-4 text-3xl text-tailblue font-medium">Select Your Semester.</h2>
-                <div class="main-content flex gap-4 flex-wrap mx-auto justify-center">
-                    
-                    <input type="radio" name="semester" id="s1" value="1" class="hidden" onchange="selectedSem('container-sem1')"> 
-                    <label for="s1" class="text-white">
-                        <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
-                            <!-- <a href="./src/sem1.html" class="flex gap-1 items-center flex-col"> -->
-                                <img width="48" height="48" src="https://img.icons8.com/color/48/1.png" alt="1"/>
-                                <p class="text-white text-2xl">Sem 1</p>
-                            </a>
-                        </div>
-                    </label>
 
-                    <input type="radio" name="semester" id="s2" value="2" class="hidden" onchange="selectedSem('container-sem2')"> 
-                    <label for="s2" class="text-white">
-                        <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
-                            <!-- <a href="./src/sem2.html" class="flex gap-1 items-center flex-col"> -->
-                                <img width="48" height="48" src="https://img.icons8.com/color/48/2.png" alt="2"/>
-                                <p class="text-white text-2xl">Sem 2</p>
-                            </a>
-                        </div>
-                    </label>
-
-                    <input type="radio" name="semester" id="s3" value="3" class="hidden" onchange="selectedSem('container-sem3')"> 
-                    <label for="s3" class="text-white">
-                        <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
-                            <!-- <a href="./src/sem3.html" class="flex gap-1 items-center flex-col"> -->
-                                <img width="48" height="48" src="https://img.icons8.com/color/48/3.png" alt="3"/>
-                                <p class="text-white text-2xl">Sem 3</p>
-                            </a>
-                        </div>
-                    </label>
-
-                    <input type="radio" name="semester" id="s4" value="4" class="hidden" onchange="selectedSem('container-sem4')"> 
-                    <label for="s4" class="text-white">
-                        <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
-                            <!-- <a href="./src/sem4.html" class="flex gap-1 items-center flex-col"> -->
-                                <img width="48" height="48" src="https://img.icons8.com/color/48/4.png" alt="4"/>
-                                <p class="text-white text-2xl">Sem 4</p>
-                            </a>
-                        </div>
-                    </label>
-
-                    <input type="radio" name="semester" id="s5" value="5" class="hidden" onchange="selectedSem('container-sem5')"> 
-                    <label for="s5" class="text-white">
-                        <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
-                            <!-- <a href="./src/sem5.html" class="flex gap-1 items-center flex-col"> -->
-                                <img width="48" height="48" src="https://img.icons8.com/color/48/5.png" alt="5"/>
-                                <p class="text-white text-2xl">Sem 5</p>
-                            </a>
-                        </div>
-                    </label>
-
-                    <input type="radio" name="semester" id="s6" value="6" class="hidden" onchange="selectedSem('container-sem6')"> 
-                    <label for="s6" class="text-white">
-                        <div class="w-36 h-36 p-6 border-tailblue border-2 rounded-md flex justify-center items-center flex-col">
-                            <!-- <a href="./src/sem6.html" class="flex gap-1 items-center flex-col"> -->
-                                <img width="48" height="48" src="https://img.icons8.com/color/48/6.png" alt="6"/>
-                                <p class="text-white text-2xl">Sem 6</p>
-                            </a>
-                        </div>
-                    </label>
+            <footer class="bg-gray-700 py-4 px-4">
+                <div class="text-white">
+                    <p class="text-center">
+                        Developed by
+                        <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra">Kirtan Mojidra</a></span>
+                        & <span class="text-tailblue"><a href="https://github.com/Dxvarsh">Devarsh Nagar</a></span>
+                    </p>
+                    <p class="text-center">
+                        Managed with 
+                        <i class="ri-heart-fill text-red-500"></i>
+                        by our great community.
+                    </p>
                 </div>
-                <p class="text-red-400 mt-4">Note:
-                    <p class="ml-10 text-white text-sm">👨‍💻 this symbol indicates <span class="text-red-300 tracking-wide font-semibold">Practical subject</span>.</p>
-                        
-                        
-                    <p class="ml-10 text-white text-sm">🚀 this symbol indicates <span class="text-red-300 tracking-wide font-semibold">Oldpaper</span>.</p>
-                </p>
-            </div>        
-
-            <div id="container-sem1" class="container text-white hidden">
-                <!-- sem1 content goes here -->
-                <section class="p-3 relative">
-                    <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
-                        <img width="48" height="48" src="https://img.icons8.com/color/48/1-circle-c--v1.png" alt="1-circle-c--v1"/>
-                        <button class="border border-tailblue rounded h-fit">
-                            <a href="./src/addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
-                                <i class="ri-add-line text-3xl font-semibold"></i>
-                                <p class="font-normal">add PDF</p>
-                            </a>
-                        </button>
-                    </div>
-        
-                    <div class="text-tailblue">
-                        <label for="subject-sem1" class="text-white md:w-[40%] text-2xl mb-2 mr-2">Select Subject:</label>
-                        <select id="subject-sem1" class="border text-xl mb-4 border-tailblue bg-darkblue mt-3 w-full p-1 focus:border-tailblue">
-                            <option value="sem-1-syllabus">Syllabus Sem-1</option>
-                            <option value="DSC-C-BCA-111T">DSC-C-BCA-111T Elements of Programming & Computer Organization</option>
-                            <option value="DSC-M-BCA-113T">DSC-M-BCA-113T Introduction to Web Technologies</option>
-                            <option value="MDC-BCA-114 T">MDC-BCA-114 T Emerging Computer Technologies</option>
-                            <option value="AEC-ENG-115">AEC-ENG-115 English (Literature and language-1)</option>
-                            <option value="SEC-OOS-116">SEC-OOS-116 Open Office Software</option>
-                            <option value="VAC-117">VAC-117 (IKS) Indic Knowledge System</option>
-
-                            <option value="DSC-C-BCA-112P">👨‍💻 DSC-C-BCA-112P C Programming Practical</option>
-                            <option value="DSC-M-BCA-113P">👨‍💻 DSC-M-BCA-113P Web Designing - Practical</option>
-                            <option value="MDC-BCA-114P">👨‍💻 MDC-BCA-114P Office Applications in Business- Practical</option>
-
-                            <option value="DSC-C-BCA-111T-old-paper">🚀 Elements of Prog. & Com. Org. (Old Paper)</option>
-                            <option value="DSC-M-BCA-113T-old-paper">🚀 Introduction to Web Technologies (Old Paper)</option>
-                            <option value="MDC-BCA-114 T-old-paper">🚀 Emerging Computer Technologies (Old Paper)</option>
-                            <option value="AEC-ENG-115-old-paper">🚀 English (Old Paper)</option>
-                            <option value="SEC-OOS-116-old-paper">🚀 Open Office Software (Old Paper)</option>
-                            <option value="VAC-117-old-paper">🚀 Indic Knowledge System (Old Paper)</option>
-                            
-                        </select>
-                    </div>
-        
-                    <div class="border-2 border-tailblue rounded p-2">
-                        <ul id="pdf-container-sem1" class="mb-2">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-
-            <div id="container-sem2" class="container text-white hidden">
-                <!-- sem2 content goes here -->
-                <section class="p-3 relative">
-                    <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
-                        <img width="48" height="48" src="https://img.icons8.com/color/48/2-circle-c--v1.png" alt="2-circle-c--v1"/>
-                        <button class="border border-tailblue rounded h-fit">
-                            <a href="./src/addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
-                                <i class="ri-add-line text-3xl font-semibold"></i>
-                                <p class="font-normal">add PDF</p>
-                            </a>
-                        </button>
-                    </div>
-        
-                    <div class="text-tailblue">
-                        <label for="subject-sem2" class="text-white md:w-[40%] text-2xl mb-2 mr-2">Select Subject:</label>
-                        <select id="subject-sem2" class="border text-xl mb-4 border-tailblue bg-darkblue mt-3 w-full p-1 focus:border-tailblue">
-                            <option value="sem-2-syllabus">Syllabus Sem-2</option>
-                            <option value="DSC-C-BCA-121 T">DSC-C-BCA-121 T Data Structure using C</option>
-                            <option value="SEC-BCA-126">SEC-BCA-126 Business Enhancement using WordPress </option>
-                            <option value="IDC-BCA-124 T">IDC-BCA-124 T Data Management Software for Business</option>
-                            <option value="DSC-M-BCA-123 T">DSC-M-BCA-123 T Advance Web Technology</option>
-                            
-                            <option value="DSC-M-BCA-123 P">👨‍💻 DSC-M-BCA-123 P Application of Dynamic Web Technology</option>
-                            <option value="DSC-C-BCA-122 P">👨‍💻 DSC-C-BCA-122 P Data Structure using C Practical</option>
-                            <option value="IDC-BCA-124 P">👨‍💻 IDC-BCA-124 Working with Data using MySQL</option>
-
-                            <option value="DSC-C-BCA-121 T-old-paper">🚀 Data Structure using C (Old Paper)</option>
-                            <option value="SEC-BCA-126-old-T-old-paper">🚀 Business Enhancement using WordPress (Old Paper) </option>
-                            <option value="IDC-BCA-124 T-old-paper">🚀 Data Management Software for Business (Old Paper)</option>
-                            <option value="DSC-M-BCA-123 T-old-paper">🚀 Advance Web Technology (Old Paper)</option>
-
-                        </select>
-                    </div>
-        
-                    <div class="border-2 border-tailblue rounded p-2">
-                        <ul id="pdf-container-sem2" class="mb-2">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-
-            <div id="container-sem3" class="container text-white hidden">
-                <!-- sem3 content goes here -->
-                <section class="p-3 relative">
-                    <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
-                        <img width="48" height="48" src="https://img.icons8.com/color/48/3-circle-c--v1.png" alt="3-circle-c--v1"/>
-                        <button class="border border-tailblue rounded h-fit">
-                            <a href="./src/addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
-                                <i class="ri-add-line text-3xl font-semibold"></i>
-                                <p class="font-normal">add PDF</p>
-                            </a>
-                        </button>
-                    </div>
-        
-                    <div class="text-tailblue">
-                        <label for="subject-sem3" class="text-white md:w-[40%] text-2xl mb-2 mr-2">Select Subject:</label>
-                        <select id="subject-sem3" class="border text-xl mb-4 border-tailblue bg-darkblue mt-3 w-full p-1 focus:border-tailblue">
-                            <option value="sem-3-syllabus">Syllabus sem-3</option>
-                            
-                            
-                        </select>
-                    </div>
-        
-                    <div class="border-2 border-tailblue rounded p-2">
-                        <ul id="pdf-container-sem3" class="mb-2">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-
-            <div id="container-sem4" class="container text-white hidden">
-                <!-- sem4 content goes here -->
-                <section class="p-3 relative">
-                    <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
-                        <img width="48" height="48" src="https://img.icons8.com/color/48/4-circle-c--v1.png" alt="5-circle-c--v1"/>
-                        <button class="border border-tailblue rounded h-fit">
-                            <a href="./src/addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
-                                <i class="ri-add-line text-3xl font-semibold"></i>
-                                <p class="font-normal">add PDF</p>
-                            </a>
-                        </button>
-                    </div>
-        
-                    <div class="text-tailblue">
-                        <label for="subject-sem4" class="text-white md:w-[40%] text-2xl mb-2 mr-2">Select Subject:</label>
-                        <select id="subject-sem4" class="border text-xl mb-4 border-tailblue bg-darkblue mt-3 w-full p-1 focus:border-tailblue">
-                            <option value="sem-4-syllabus">Syllabus</option>
-                                                        
-                        </select>
-                    </div>
-        
-                    <div class="border-2 border-tailblue rounded p-2">
-                        <ul id="pdf-container-sem4" class="mb-2">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-
-            <div id="container-sem5" class="container text-white hidden">
-                <!-- sem5 content goes here -->
-                <section class="p-3 relative">
-                    <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer" onclick="reloadPage()">Back</span></h2>
-                        <img width="48" height="48" src="https://img.icons8.com/color/48/5-circle-c--v1.png" alt="5-circle-c--v1"/>
-                        <button class="border border-tailblue rounded h-fit">
-                            <a href="./src/addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
-                                <i class="ri-add-line text-3xl font-semibold"></i>
-                                <p class="font-normal">add PDF</p>
-                            </a>
-                        </button>
-                    </div>
-        
-                    <div class="text-tailblue">
-                        <label for="subject-sem5" class="text-white md:w-[40%] text-2xl mb-2 mr-2">Select Subject:</label>
-                        <select id="subject-sem5" class="border text-xl mb-4 border-tailblue bg-darkblue mt-3 w-full p-1 focus:border-tailblue">
-                            <option value="sem-5-syllabus">Syllabus sem-5</option>
-                            <option value="cc-301">CC-301 WAD-1 using C#</option>
-                            <option value="cc-302">CC-302 Python Programming</option>
-                            <option value="cc-303">CC-303 Computer Network </option>
-                            <option value="sec-301">SEC-301 Mobile App Development</option>
-
-                            <option value="cc-304">👨‍💻 CC-304 WAD-1 Practicals</option>
-                            <option value="cc-305">👨‍💻 CC-305 Python Practicals</option>
-                            
-                            <option value="cc-301-old-paper">🚀 WAD-1 (oldpaper)</option>
-                            <option value="cc-302-old-paper">🚀 Python (oldpaper)</option>
-                            <option value="cc-303-old-paper">🚀 Computer Network (oldpaper)</option>
-                            <option value="sec-301-c-old-paper">🚀 MAD (oldpaper)</option>
-                            
-                        </select>
-                    </div>
-        
-                    <div class="border-2 border-tailblue rounded p-2">
-                        <ul id="pdf-container-sem5" class="mb-2">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-
-            <div id="container-sem6" class="container text-white hidden">
-                <!-- sem6 content goes here -->
-                <section class="p-3 relative">
-                    <div class="flex items-center justify-between py-2 mb-5">
-                        <h2 class="text-2xl text-tailblue font-medium"><i class="ri-arrow-left-line block md:hidden" onclick="reloadPage()"></i><span class="hidden md:block cursor-pointer">Back</span></h2>
-                        <img width="48" height="48" src="https://img.icons8.com/color/48/6-circle-c--v1.png" alt="6-circle-c--v1"/>
-                        <button class="border border-tailblue rounded h-fit">
-                            <a href="./src/addDoc.html" class="flex items-center gap-1 px-2 text-tailblue">
-                                <i class="ri-add-line text-3xl font-semibold"></i>
-                                <p class="font-normal">add PDF</p>
-                            </a>
-                        </button>
-                    </div>
-        
-                    <div class="text-tailblue">
-                        <label for="subject-sem6" class="text-white md:w-[40%] text-2xl mb-2 mr-2">Select Subject:</label>
-                        <select id="subject-sem6" class="border text-xl mb-4 border-tailblue bg-darkblue mt-3 w-full p-1 focus:border-tailblue">
-                            <option value="sem-6-syllabus">Syllabus sem-6</option>
-                            <option value="CC-307">CC-307 Software Testing</option>
-                            <option value="CC-308">CC-308 Introduction to Data Mining and Data Ware housing</option>
-                            <option value="CC-309">CC-309 Introduction to Artificial Intelligence and Machine Learning </option>
-                            <option value="SEC-302 (C)">SEC-302 (C) Advance Java</option>
-
-                            <option value="cc-310">👨‍💻 CC-310 WAD-2 Practicals</option>
-                            <option value="cc-311">👨‍💻 CC-311 Shell Programming Practical</option>
-                            
-                            <option value="CC-307-oldpaper">🚀 Software Testing (oldpaper)</option>
-                            <option value="CC-308-oldpaper">🚀 Data Mining and Data Ware housing (oldpaper)</option>
-                            <option value="CC-309-oldpaper">🚀 AI-ML (oldpaper)</option>
-                            <option value="SEC-302 (C)-oldpaper">🚀 Advance Java (oldpaper)</option>
-                            
-                        </select>
-                    </div>
-        
-                    <div class="border-2 border-tailblue rounded p-2">
-                        <ul id="pdf-container-sem6" class="mb-2">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-
-
-            <section id="notification" class="w-[85%] absolute -top-5 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0">
-                
-            </section>
+            </footer>
         </main>
 
+        
+        
     </div>
-
-    <script src="./script.js"></script>
 </body>
 </html>

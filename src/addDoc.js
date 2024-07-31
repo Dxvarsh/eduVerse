@@ -83,7 +83,7 @@ addDocForm.addEventListener("submit", async (e) => {
 
     setTimeout(() => {
       document.querySelector("#video").style.opacity = 0;
-      window.location.replace('../index.html');
+      window.location.replace('./home.html');
     }, 13000);
   }
 });
