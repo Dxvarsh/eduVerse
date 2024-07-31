@@ -38,6 +38,7 @@ function reloadPage() {
     location.reload();
 }
 
+
 // Function to handle semester and subject selection
 function selectedSem(semId) {
     console.log(semId);
