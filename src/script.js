@@ -168,7 +168,7 @@ const showKaro = (pdf) => {
                             showNotification('PDF deleted successfully', 'green');
                             setTimeout(() => {
                                 selectKar(Sem, subject); // Refresh PDF list after deletion
-                            }, 6000);
+                            }, 3000);
                         }else{
                             console.log("--responce")
                             throw new Error('Failed to delete PDF');
@@ -197,6 +197,9 @@ const showKaro = (pdf) => {
                 .then(data => {
                     console.log('Bookmark added successfully:', data);
                     showNotification('PDF bookmarked', 'green');
+                    setTimeout(() => {
+                        selectKar(Sem, subject); // Refresh PDF list after deletion
+                    }, 3000);
                 })
                 .catch(error => {
                     console.error('Error adding bookmark:', error);

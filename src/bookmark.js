@@ -115,7 +115,7 @@ const getUser = () => {
         })
         .catch(error => {
             console.error('Error fetching bookmarks:', error);
-            showNotification(error, 'red' )
+            // showNotification(error, 'red' )
             // Handle error, display error message, etc.
         });
     })
