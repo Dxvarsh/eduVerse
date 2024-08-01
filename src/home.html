@@ -100,7 +100,7 @@
 
     <div class="main h-screen w-full relative"> 
 
-        <nav class="px-3 h-24 border-b-2 border-tailblue flex items-center justify-between md:px-16">
+        <nav class="px-3 h-24 border-b-2 border-tailblue flex items-center justify-between md:px-16 fixed right-0 left-0 backdrop-blur-md z-30">
 
             <div>
                 <a href="../index.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
@@ -124,7 +124,7 @@
 
         </nav>
 
-        <main class="p-3 md:p-16 h-fit">
+        <main class="h-screen px-3 md:px-16 pt-28">
             
             <div class="flex items-center justify-between flex-wrap" id="greet-area">
                 <div id="greeting" class="my-3"></div>
@@ -143,7 +143,7 @@
                 </div>
             </div>
 
-            <div id="sem-selection" class="transition-all">
+            <div id="sem-selection" class="transition-all pb-28">
                 <h2 class="my-4 text-3xl text-tailblue font-medium">Select Your Semester.</h2>
                 
                 <div class="main-content flex gap-4 flex-wrap mx-auto justify-center">
@@ -204,7 +204,7 @@
                 </p>
             </div>        
 
-            <div id="container-sem1" class="container text-white hidden">
+            <div id="container-sem1" class="container text-white hidden pb-24">
                 <!-- sem1 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
@@ -244,13 +244,13 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[30rem] overflow-y-scroll">
                         <ul id="pdf-container-sem1" class="mb-2 h-full"></ul>
                     </div>
                 </section>
             </div>
 
-            <div id="container-sem2" class="container text-white hidden">
+            <div id="container-sem2" class="container text-white hidden pb-24">
                 <!-- sem2 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
@@ -286,13 +286,13 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[30rem] overflow-y-scroll">
                         <ul id="pdf-container-sem2" class="mb-2 h-full"></ul>
                     </div>
                 </section>
             </div>
 
-            <div id="container-sem3" class="container text-white hidden">
+            <div id="container-sem3" class="container text-white hidden pb-24">
                 <!-- sem3 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
@@ -316,13 +316,13 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[30rem] overflow-y-scroll">
                         <ul id="pdf-container-sem3" class="mb-2 h-full"></ul>
                     </div>
                 </section>
             </div>
 
-            <div id="container-sem4" class="container text-white hidden">
+            <div id="container-sem4" class="container text-white hidden pb-24">
                 <!-- sem4 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
@@ -345,13 +345,13 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[30rem] overflow-y-scroll">
                         <ul id="pdf-container-sem4" class="mb-2 h-full"></ul>
                     </div>
                 </section>
             </div>
 
-            <div id="container-sem5" class="container text-white hidden">
+            <div id="container-sem5" class="container text-white hidden pb-24">
                 <!-- sem5 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
@@ -386,13 +386,13 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[30rem] overflow-y-scroll">
                         <ul id="pdf-container-sem5" class="mb-2 h-full"></ul>
                     </div>
                 </section>
             </div>
 
-            <div id="container-sem6" class="container text-white hidden">
+            <div id="container-sem6" class="container text-white hidden pb-24">
                 <!-- sem6 content goes here -->
                 <section class="p-3 relative">
                     <div class="flex items-center justify-between py-2 mb-5">
@@ -427,29 +427,27 @@
                         </select>
                     </div>
         
-                    <div class="border-2 border-tailblue rounded p-2 h-[35rem] overflow-y-scroll">
+                    <div class="border-2 border-tailblue rounded p-2 h-[30rem] overflow-y-scroll">
                         <ul id="pdf-container-sem6" class="mb-2 h-full"></ul>
                     </div>
                 </section>
             </div>
 
-            <section id="notification" class="w-[85%] absolute -top-5 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0"> 
+            <section id="notification" class="z-40 w-[85%] absolute -top-5 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0"> 
             </section>
         </main>
 
-        <footer class="bg-gray-700 py-4 px-4 absolute -bottom-10 right-0 left-0 ">
-            <div class="text-white">
-                <p class="text-center">
-                    Developed by
-                    <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra">Kirtan Mojidra</a></span>
-                    & <span class="text-tailblue"><a href="https://github.com/Dxvarsh">Devarsh Nagar</a></span>
-                </p>
-                <p class="text-center">
-                    Managed with 
-                    <i class="ri-heart-fill text-red-500"></i>
-                    by our great community.
-                </p>
-            </div>
+        <footer class="px-3 h-20 border-t-2 border-tailblue flex items-center justify-center md:px-16 fixed bottom-0 right-0 left-0 backdrop-blur-md text-white flex-col transition-all overflow-hidden">
+            <p class="text-center">
+                Developed by
+                <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra">Kirtan Mojidra</a></span>
+                & <span class="text-tailblue"><a href="https://github.com/Dxvarsh">Devarsh Nagar</a></span>
+            </p>
+            <p class="text-center">
+                Managed with 
+                <i class="ri-heart-fill text-red-500"></i>
+                by our great community.
+            </p>
         </footer>
     </div>
 
