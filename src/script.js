@@ -4,10 +4,10 @@ const main = document.querySelector("main");
 const greet = document.getElementById("greeting");
 const loginbtn2 = document.getElementById("log-in-btn2")
 
-// window.addEventListener("scroll",function(){
-//     const footer = document.querySelector('footer')
-//     // footer.classList.toggle("h-20",window.scrollY > 0);
-// })
+window.addEventListener("scroll",function(){
+    const footer = document.querySelector('footer')
+    footer.classList.toggle("h-20",window.scrollY > 0);
+})
 
 // Function to fetch user information
 const getUser = () => {
