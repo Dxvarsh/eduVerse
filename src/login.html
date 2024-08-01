@@ -112,10 +112,6 @@
                 }
             })
             .then(data => {
-                // Handle successful login response
-                clickedElement.innerHTML += `
-                    <h2 class="text-white text-md">${data.message}</h2>
-                `;
                 // Redirect to index.html upon successful login
                 window.location.replace("./home.html");
             })
