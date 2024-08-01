@@ -22,7 +22,7 @@
     <div class="main h-screen w-full relative"> 
 
         <!-- navbar -->
-        <nav class="px-3 h-24 border-b-2 border-tailblue flex items-center justify-between md:px-16">
+        <nav class="px-3 h-24 border-b-2 border-tailblue flex items-center justify-between md:px-16 fixed right-0 left-0 backdrop-blur-md">
             <div>
                 <a href="./home.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
                     <span class="hidden md:block">Home</span> 
@@ -42,8 +42,8 @@
             </div>
         </nav>
 
-        <main class="px-3 md:px-16">
-            <section class="pt-4">
+        <main class="h-screen px-3 md:px-16 pt-28">
+            <section class="pb-24">
                 <li class="text-2xl text-white">Welcome back to <span class="text-tailblue">edu</span>Verse.</li>
                 <div class="login max-w-xl mt-10 p-2 flex flex-col justify-center items-center gap-2">
                     <h2 class="text-white text-2xl">Log in using <span class="text-tailblue">edu</span> ID</h2>
@@ -68,19 +68,17 @@
             </section>
         </main>
 
-        <footer class="bg-gray-700 py-4 px-4 absolute -bottom-5 right-0 left-0 ">
-            <div class="text-white">
-                <p class="text-center">
-                    Developed by
-                    <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra">Kirtan Mojidra</a></span>
-                    & <span class="text-tailblue"><a href="https://github.com/Dxvarsh">Devarsh Nagar</a></span>
-                </p>
-                <p class="text-center">
-                    Managed with 
-                    <i class="ri-heart-fill text-red-500"></i>
-                    by our great community.
-                </p>
-            </div>
+        <footer class="px-3 h-20 border-t-2 border-tailblue flex items-center justify-center md:px-16 fixed bottom-0 right-0 left-0 backdrop-blur-md text-white flex-col">
+            <p class="text-center">
+                Developed by
+                <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra">Kirtan Mojidra</a></span>
+                & <span class="text-tailblue"><a href="https://github.com/Dxvarsh">Devarsh Nagar</a></span>
+            </p>
+            <p class="text-center">
+                Managed with 
+                <i class="ri-heart-fill text-red-500"></i>
+                by our great community.
+            </p>
         </footer>
     </div>
 
