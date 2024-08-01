@@ -1,5 +1,4 @@
 const addDocForm = document.querySelector("#add-doc-form");
-const vid = document.querySelector("#vid");
 const radioButtons = document.querySelectorAll('input[type="radio"]');
 const selects = document.querySelectorAll("select");
 const pdfNameInp = document.querySelector("#pdf-name");
@@ -55,9 +54,6 @@ addDocForm.addEventListener("submit", async (e) => {
           <h2 class="text-2xl font-semibold">✅ ${pdfName} added Successfully</h2>
         </div>  
       `;
-      document.querySelector("#video").style.opacity = 1;
-      document.querySelector("#video").style.bottom = "75px";
-      vid.play();
     } else {
       yesMessage.innerHTML = `
         <div class="w-full md:w-fit p-8 rounded-lg bg-red-300">
@@ -79,11 +75,8 @@ addDocForm.addEventListener("submit", async (e) => {
     setTimeout(() => {
       yesMessage.style.top = "12px";
       yesMessage.style.opacity = 0;
-    }, 7000);
+    }, 3000);
 
-    setTimeout(() => {
-      document.querySelector("#video").style.opacity = 0;
-      window.location.replace('./home.html');
-    }, 13000);
+    window.location.replace('./home.html');
   }
 });
