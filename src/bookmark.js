@@ -127,7 +127,7 @@ const getUser = () => {
 
         loginSection.innerHTML = `
             <div class="w-fit md:w-fit p-8 rounded-lg bg-red-300">
-                <h2 class="text-2xl font-semibold">🚫${error} You are not Logged in.</h2>
+                <h2 class="text-2xl font-semibold">🚫You are not Logged in.</h2>
                 <button class="mt-5 px-5 py-1 rounded bg-red-500 font-bold" id="refresh">Log in</button>
                 <button class="mt-5 px-5 py-1 rounded bg-red-500 font-bold" id="home">Back</button>
             </div>
