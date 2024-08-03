@@ -54,6 +54,15 @@ addDocForm.addEventListener("submit", async (e) => {
           <h2 class="text-2xl font-semibold">✅ ${pdfName} added Successfully</h2>
         </div>  
       `;
+      addDocForm.innerHTML = `
+        <div class="w-[95%] md:w-fit p-5 rounded-lg bg-slate-900 shadow-tailblue shadow-lg border-2 border-tailblue">
+            <h2 class="text-2xl font-semibold text-white">Do you want to add another Document? 🤔</h2>
+            <button class="mt-5 px-5 py-1 rounded bg-[#38bdf8] font-bold mr-1 text-lg" id="confirm-add">Yes.!</button>
+            <button class="mt-5 px-5 py-1 rounded bg-red-400 font-bold text-lg" id="home">No</button>
+        </div>    
+      `
+      document.querySelector("#confirm-add").addEventListener('click', ()=>{window.location.replace('./addDoc.html');})
+      document.querySelector("#home").addEventListener('click', ()=>{window.location.replace('./home.html');})
     } else {
       yesMessage.innerHTML = `
         <div class="w-full md:w-fit p-8 rounded-lg bg-red-300">
@@ -69,14 +78,17 @@ addDocForm.addEventListener("submit", async (e) => {
   } finally {
     loader.classList.add("hidden");
     main.classList.remove("hidden");
-    yesMessage.style.top = "25px";
+    yesMessage.style.top = "200px";
     yesMessage.style.opacity = 1;
 
     setTimeout(() => {
       yesMessage.style.top = "12px";
       yesMessage.style.opacity = 0;
+      // location.reload();
     }, 3000);
-
-    window.location.replace('./home.html');
   }
 });
+
+/* 
+  
+*/

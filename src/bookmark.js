@@ -50,7 +50,7 @@ const getUser = () => {
                     <p class="text-lg">@${currentUser.username}</p>
                 </div>
                 <div id="log-out" class="absolute -right-2 -top-1 flex items-center">
-                    <button class="text-white px-2 py-1 md:px-6 md:py-2 border border-red-500 rounded-md bg-red-500 hover:rounded-xl transition-all" id="logout">
+                    <button class="text-white font-semibold w-10 md:w-fit x-2 py-1 md:px-6 md:py-2 border-2 border-red-500 rounded-full bg-red-500 hover:bg-transparent transition-all" id="logout">
                         <span class="hidden md:block">Logout</span>
                         <i class="ri-shut-down-line text-xl md:hidden"></i>
                     </button>
@@ -152,25 +152,22 @@ const showKaro = (book, currentUser=0) => {
     
     const li = document.createElement("li");
     li.innerHTML = `
-        <div class="theory mb-2">
-            <div class="w-full rounded overflow-hidden shadow-lg bg-slate-100 dark:bg-gray-800 text-white md:flex">
-                <div class="p-4 md:w-[70%]">
-                    <div class="font-bold text-xl mb-2 tracking-wider text-gray-900 dark:text-gray-300">${title}</div>
-                    <p class="text-gray-900 dark:text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
-                    </p>
-                </div>
-                <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                    <a href="https://kirtanmojidra.pythonanywhere.com/api/v1/pdf/${path}" download="${title} eduVerse" id="download-btn">
-                        <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent hover:text-gray-900 dark:hover:text-white border border-tailblue transition-colors">
-                            <i class="ri-download-line mr-2"></i> Download
-                        </button>
-                    </a>
-                    
-                    
-                    <button class="text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-2 bookmark-btn" id="${path}">
-                        <i class="ri-bookmark-fill text-gray-900 dark:text-white" id="${path}"></i>
+        <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
+            <div class="p-4 md:w-[70%]">
+                <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
+                <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
+                </p>
+            </div>
+            <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
+                <a href="https://kirtanmojidra.pythonanywhere.com/api/v1/pdf/${path}" id="download-btn">
+                    <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors">
+                        <i class="ri-download-line mr-2"></i> Download
                     </button>
-                </div>
+                </a>
+                
+                <button class="text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-2 bookmark-btn" id="${path}">
+                    <i class="ri-bookmark-fill" id="${path}"></i>
+                </button>
             </div>
         </div>`;
 
