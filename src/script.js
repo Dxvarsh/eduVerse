@@ -6,7 +6,9 @@ const loginbtn2 = document.getElementById("log-in-btn2")
 
 window.addEventListener("scroll",function(){
     const footer = document.querySelector('footer')
+    const footText = document.querySelector('#foot-text')
     footer.classList.toggle("h-20",window.scrollY > 0);
+    footText.classList.toggle("opacity-0",window.scrollY > 0);
 })
 
 // Function to fetch user information
