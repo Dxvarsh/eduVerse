@@ -20,9 +20,21 @@
         } */
         #sw-btn{
             background: linear-gradient(to right, red, orange);
+            animation: btn-bit 0.5s ease-in-out infinite alternate;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.4);
+        }
+        @keyframes btn-bit {
+            0%{
+                transform: scale(0.9);
+            }
+            100%{
+                box-shadow: 0 0 50px orange;
+                transform: scale(1);
+            }
         }
         #sw-btn:hover{
             background: linear-gradient(to top, orange, red);
+            animation: none;
         }
     </style>
 
@@ -107,7 +119,7 @@
             
         </main>
 
-        <footer class="px-3 h-20 border-t-2 border-tailblue flex items-center justify-center md:px-16 fixed bottom-0 right-0 left-0 backdrop-blur-md text-white flex-col">
+        <footer class="px-3 h-0 border-t-2 border-tailblue flex items-center justify-center md:px-16 fixed bottom-0 right-0 left-0 backdrop-blur-md text-white flex-col">
             <p class="text-center">
                 Developed by
                 <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra">Kirtan Mojidra</a></span>
@@ -120,5 +132,11 @@
             </p>
         </footer>
     </div>
+    <script>
+        window.addEventListener("scroll",function(){
+            const footer = document.querySelector('footer')
+            footer.classList.toggle("h-20",window.scrollY > 0);
+        })
+    </script>
 </body>
 </html>
