@@ -42,7 +42,7 @@ addDocForm.addEventListener("submit", async (e) => {
   formdata.append("title", pdfName);
 
   try {
-    const response = await fetch('https://kirtanmojidra.pythonanywhere.com/api/v1/upload', {
+    const response = await fetch('https://eduversebackend-hd6t.onrender.com/api/v1/upload', {
       method: 'POST',
       credentials: 'include',
       body: formdata

@@ -9,7 +9,7 @@ const main = document.querySelector("main")
 loader.classList.remove("hidden");
 main.classList.add("hidden");
 const getUser = () => {
-    fetch('https://kirtanmojidra.pythonanywhere.com/api/v1/getuser', {
+    fetch('https://eduversebackend-hd6t.onrender.com/api/v1/getuser', {
         method: 'GET',
         credentials: 'include'
     })
@@ -61,7 +61,7 @@ const getUser = () => {
         // Attach logout button event listener
         document.getElementById('logout').addEventListener('click', () => {
             if(confirm('Are you sure want to log out?')){
-                fetch('https://kirtanmojidra.pythonanywhere.com/api/v1/logout', {
+                fetch('https://eduversebackend-hd6t.onrender.com/api/v1/logout', {
                     method: 'GET',
                     credentials: 'include'
                 })
@@ -97,7 +97,7 @@ const getUser = () => {
         });
 
         // Fetch bookmarks
-        fetch(`https://kirtanmojidra.pythonanywhere.com/api/v1/bookmarks`, {
+        fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/bookmarks`, {
             method: 'GET',
             credentials: 'include'
         })
@@ -159,7 +159,7 @@ const showKaro = (book, currentUser=0) => {
                 </p>
             </div>
             <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                <a href="https://kirtanmojidra.pythonanywhere.com/api/v1/pdf/${path}" id="download-btn">
+                <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" id="download-btn">
                     <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors">
                         <i class="ri-download-line mr-2"></i> Download
                     </button>
@@ -173,7 +173,7 @@ const showKaro = (book, currentUser=0) => {
 
     li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
         const path = e.target.id;
-        fetch(`https://kirtanmojidra.pythonanywhere.com/api/v1/deletebookmark/${path}`, {
+        fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}`, {
             method: 'GET',
             credentials: 'include'
         })
@@ -188,7 +188,7 @@ const showKaro = (book, currentUser=0) => {
             console.log('Bookmark removed successfully:', data);
             showNotification('Bookmark removed successfully', 'green');
             {
-                fetch(`https://kirtanmojidra.pythonanywhere.com/api/v1/bookmarks`, {
+                fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/bookmarks`, {
                     method: 'GET',
                     credentials: 'include'
                 })

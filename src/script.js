@@ -8,7 +8,7 @@ const loginbtn2 = document.getElementById("log-in-btn2")
 const getUser = () => {
     loader.classList.remove("hidden");
     main.classList.add("hidden");
-    return fetch('https://kirtanmojidra.pythonanywhere.com/api/v1/getuser', {
+    return fetch('https://eduversebackend-hd6t.onrender.com/api/v1/getuser', {
         method: 'GET',
         credentials: 'include'
     })
@@ -82,7 +82,7 @@ const selectKar = (semester, subject) => {
         document.getElementById(`pdf-container-sem${i}`).innerHTML = "";
     }
 
-    fetch(`https://kirtanmojidra.pythonanywhere.com/api/v1/getpdf?subject=${subject}&sem=${semester}`, {
+    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/getpdf?subject=${subject}&sem=${semester}`, {
         method: 'GET',
         credentials: 'include'
     })
@@ -140,7 +140,7 @@ const showKaro = (pdf) => {
                             </p>
                         </div>
                         <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                            <a href="https://kirtanmojidra.pythonanywhere.com/api/v1/pdf/${path}" download="${title} eduVerse" id="download-btn">
+                            <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" download="${title} eduVerse" id="download-btn">
                                 <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-tailblue hover:bg-transparent border border-tailblue transition-colors">
                                     <i class="ri-download-line mr-2"></i> Download
                                 </button>
@@ -160,7 +160,7 @@ const showKaro = (pdf) => {
             li.querySelector('.dlt-btn').addEventListener('click', (e) => {
                 const path = e.target.id;
                 if (confirm("Are You sure Want to delete?")) {
-                    fetch(`https://kirtanmojidra.pythonanywhere.com/api/v1/deletepdf/${path}`, {
+                    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
                         method: 'GET',
                         credentials: 'include'
                     })
@@ -193,7 +193,7 @@ const showKaro = (pdf) => {
 
             li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
                 const path = e.target.id;
-                fetch(`https://kirtanmojidra.pythonanywhere.com/api/v1/bookmark/${path}`, {
+                fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`, {
                     method: 'GET',
                     credentials: 'include'
                 })
@@ -232,7 +232,7 @@ const showKaro = (pdf) => {
                             </p>
                         </div>
                         <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                            <a href="https://kirtanmojidra.pythonanywhere.com/api/v1/pdf/${path}" download="${title} eduVerse" id="download-btn">
+                            <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" download="${title} eduVerse" id="download-btn">
                                 <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-tailblue hover:bg-transparent border border-tailblue transition-colors">
                                     <i class="ri-download-line mr-2"></i> Download
                                 </button>
@@ -252,7 +252,7 @@ const showKaro = (pdf) => {
             li.querySelector('.dlt-btn').addEventListener('click', (e) => {
                 const path = e.target.id;
                 if (confirm("Are You sure Want to delete?")) {
-                    fetch(`https://kirtanmojidra.pythonanywhere.com/api/v1/deletepdf/${path}`, {
+                    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
                         method: 'GET',
                         credentials: 'include'
                     })
@@ -281,7 +281,7 @@ const showKaro = (pdf) => {
 
             li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
                 const path = e.target.id;
-                fetch(`https://kirtanmojidra.pythonanywhere.com/api/v1/bookmark/${path}`, {
+                fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`, {
                     method: 'GET',
                     credentials: 'include'
                 })
