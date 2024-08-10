@@ -14,11 +14,95 @@
     />
     <!-- custom css -->
     <link rel="stylesheet" href="../main.css">
+
+    <style>
+        
+        .loader {
+            position: absolute;
+            top: calc(50% - 32px);
+            left: calc(50% - 32px);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            perspective: 800px;
+        }
+        
+        .inner {
+            position: absolute;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;  
+        }
+        
+        .inner.one {
+            left: 0%;
+            top: 0%;
+            animation: rotate-one 1s linear infinite;
+            border-bottom: 3px solid #FF0000;
+        }
+        
+        .inner.two {
+            right: 0%;
+            top: 0%;
+            animation: rotate-two 1s linear infinite;
+            border-right: 3px solid #0000FF;
+        }
+        
+        .inner.three {
+            right: 0%;
+            bottom: 0%;
+            animation: rotate-three 1s linear infinite;
+            border-top: 3px solid #00FF00;
+        }
+        
+        @keyframes rotate-one {
+            0% {
+            transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+            }
+            100% {
+            transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+            }
+        }
+        
+        @keyframes rotate-two {
+            0% {
+            transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+            }
+            100% {
+            transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+            }
+        }
+        
+        @keyframes rotate-three {
+            0% {
+            transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+            }
+            100% {
+            transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+            }
+        }
+    </style>
+
+
     <!-- logo -->
     <link rel="shortcut icon" href="./img/evLOGO.png" type="image/x-icon">
     <title>eduVerse | Log in</title>
 </head>
 <body class="bg-darkblue w-full h-screen font-gilroy">
+
+    <div class="h-screen w-screen z-50 absolute bg-[#0b1121] overflow-hidden loader-main hidden">
+        <div class="loader">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+            <h1 class="text-tailblue w-[300px] pt-20 text-lg pr-20">
+                Sending Data . . . . . . . 
+            </h1>
+        </div>
+    </div>
+
+
     <div class="main h-screen w-full relative"> 
 
         <!-- navbar -->
@@ -84,8 +168,14 @@
 
 
     <script>
+        const loader = document.querySelector(".loader-main");
+        const main = document.querySelector("main")
+
         document.querySelector('#login-submit').addEventListener('click', function(e) {
             e.preventDefault();
+            
+            loader.classList.remove("hidden");
+            main.classList.add("hidden");
             let clickedElement = document.getElementById('clicked');
             let username = document.getElementById("username").value;
             let password = document.getElementById("password").value;
@@ -112,11 +202,16 @@
                 }
             })
             .then(data => {
+                loader.classList.add("hidden");
+                main.classList.remove("hidden");
                 // Redirect to index.html upon successful login
                 window.location.replace("./home.html");
             })
             .catch(error => {
                 // Handle fetch error or login failure
+                
+                loader.classList.add("hidden");
+                main.classList.remove("hidden");
                 console.error('Error logging in:', error);
                 clickedElement.innerHTML += `
                     <h2 class="text-white text-md text-red-400">${error.message}</h2>
@@ -124,7 +219,7 @@
                 setTimeout(() => {
                     clickedElement.innerHTML = ''; // Clear error message after 5 seconds
                 }, 5000);
-            });
+            })
         });
     </script>
 </body>
