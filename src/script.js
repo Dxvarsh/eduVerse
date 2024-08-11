@@ -60,7 +60,7 @@ radioButtons.forEach(radio => {
                 container.style.display = 'none';
             }
         });
-        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         const semSelection = document.getElementById('sem-selection'); 
         semSelection.style.display = 'none';
         document.getElementById('greet-area').style.display = 'none';
