@@ -15,8 +15,6 @@ window.addEventListener("scroll",function(){
 
 // Function to fetch user information
 const getUser = () => {
-    loader.classList.remove("hidden");
-    main.classList.add("hidden");
     return fetch('https://eduversebackend-hd6t.onrender.com/api/v1/getuser', {
         method: 'GET',
         credentials: 'include'
@@ -29,8 +27,6 @@ const getUser = () => {
         return response.json();
     })
     .then(user => {
-        loader.classList.add("hidden");
-        main.classList.remove("hidden");
         if (user.status_code > 200) {
             console.log(user.status_code);
             throw new Error(user.status_code);

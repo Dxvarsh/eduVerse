@@ -81,7 +81,7 @@
                             Join community
                             <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         </a>
-                        <a href="./src/home.html" class="inline-flex items-center justify-center px-3 py-3 text-base font-medium text-center border border-gray-300 rounded-lg hover:bg-tailblue focus:ring-4 focus:ring-gray-100 text-white">
+                        <a href="./src/home.html" class="inline-flex items-center justify-center px-3 py-3 text-base font-medium text-center border border-gray-300 rounded-lg hover:bg-tailblue text-white">
                             Select Semester
                         </a> 
                     </div>              
@@ -128,8 +128,8 @@
         <footer class="px-3 h-0 border-t-2 border-tailblue flex items-center justify-center md:px-16 fixed bottom-0 right-0 left-0 backdrop-blur-md text-gray-200 flex-col transition-all overflow-hidden">
             <p class="text-center">
                 Developed by
-                <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra">Kirtan Mojidra</a></span>
-                & <span class="text-tailblue"><a href="https://github.com/Dxvarsh">Devarsh Nagar</a></span>
+                <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra" target="_blank">Kirtan Mojidra</a></span>
+                & <span class="text-tailblue"><a href="https://dxvarsh.github.io/Portfolio1/" target="_blank">Devarsh Nagar</a></span>
             </p>
             <p class="text-center">
                 Managed with 
@@ -142,6 +142,17 @@
         window.addEventListener("scroll",function(){
             const footer = document.querySelector('footer')
             footer.classList.toggle("h-20",window.scrollY > 0);
+        })
+        fetch('https://eduversebackend-hd6t.onrender.com/api/v1/getuser', {
+            method: 'GET',
+            credentials: 'include'
+        })
+        .then(response => {
+            if (!response.ok) {
+                // throw new Error('Failed to fetch user information');
+                console.log("failed to fetch user information");
+            }
+            return response.json();
         })
     </script>
 </body>
