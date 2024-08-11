@@ -9,7 +9,7 @@ window.addEventListener("scroll",function(){
     const practicalPopups = document.querySelectorAll('#practical-popup');
     
     practicalPopups.forEach(popup => {
-        popup.classList.toggle("-bottom-16", window.scrollY > 0);
+        popup.classList.toggle("-bottom-96", window.scrollY > 0);
     });
 })
 
