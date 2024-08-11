@@ -123,6 +123,9 @@ const showKaro = (pdf) => {
         isBookmarked
     } = pdf;
 
+    console.log(pdf);
+    
+
     let bookmark = true
     if(isBookmarked === 'false')
         bookmark = false
@@ -140,7 +143,7 @@ const showKaro = (pdf) => {
                             </p>
                         </div>
                         <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                            <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" download="${title} eduVerse" id="download-btn">
+                            <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" id="download-btn">
                                 <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-tailblue hover:bg-transparent border border-tailblue transition-colors">
                                     <i class="ri-download-line mr-2"></i> Download
                                 </button>
@@ -159,20 +162,19 @@ const showKaro = (pdf) => {
 
             li.querySelector('.dlt-btn').addEventListener('click', (e) => {
                 const path = e.target.id;
+                console.log(path);
+                
                 if (confirm("Are You sure Want to delete?")) {
                     fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
                         method: 'GET',
                         credentials: 'include'
                     })
                     .then(res => {
-                        // if (res.ok) {
-                            return res.json();
-                        // } else {
-                        //     console.log("--response--");
-                        //     throw new Error('Failed to delete PDF');
-                        // }
+                        return res.json();
                     })
                     .then(data => {
+                        console.log(data);
+                        
                         if(data.status_code == 200){
                             console.log(data);
                             showNotification('PDF deleted successfully', 'green');
