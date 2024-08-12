@@ -241,4 +241,3 @@ const showNotification = (message, color) => {
         notification.style.opacity = 0;
     }, 5000);
 };
-getUser();
