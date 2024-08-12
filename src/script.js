@@ -219,6 +219,126 @@ const showKaro = (pdf) => {
                         console.log('Bookmark added successfully:', data);
                         showNotification('PDF bookmarked', 'green');
                         setTimeout(() => {
+                            selectKar(Sem, subject); // Refresh PDF list 
+                        }, 2000);
+                    })
+                    .catch(error => {
+                        console.error('Error adding bookmark:', error);
+                        showNotification('Failed to bookmark PDF', 'red');
+                    });
+                }else if(bookmark){
+                    console.log("bookmarked");
+                    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}`, {
+                        method: 'GET',
+                        credentials: 'include'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            console.log(response);
+                            throw new Error('Bookmark API request failed');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Bookmark removed successfully:', data);
+                        showNotification('Bookmark removed successfully', 'red');
+                        setTimeout(() => {
+                            selectKar(Sem, subject); // Refresh PDF list 
+                        }, 2000);
+                    })
+                    .catch(error => {
+                        console.error('Error adding bookmark:', error);
+                    });
+                }else{
+                    showNotification('Daya, Kuch to gadbad hai..', 'red');
+                }
+                
+            });
+
+            
+            document.getElementById(`pdf-container-sem${Sem}`).appendChild(li);
+        })
+        .catch(error => {
+            console.error('Error fetching user:', error);
+            console.log("in catch");
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <div class="theory mb-2">
+                    <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
+                        <div class="p-4 md:w-[70%]">
+                            <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
+                            <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
+                            </p>
+                        </div>
+                        <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
+                            <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" id="download-btn">
+                                <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-tailblue hover:bg-transparent border border-tailblue transition-colors">
+                                    <i class="ri-download-line mr-2"></i> Download
+                                </button>
+                            </a>
+                            
+                            <button class=" text-white text-xl font-bold rounded-full hover:bg-tailblue px-2 py-2 dlt-btn">
+                                <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
+                            </button>
+                            
+                            <button class="text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-2 bookmark-btn" id="${path}">
+                                <i class="${ bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>`;
+
+            li.querySelector('.dlt-btn').addEventListener('click', (e) => {
+                const path = e.target.id;
+                if (confirm("Are You sure Want to delete?")) {
+                    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
+                        method: 'GET',
+                        credentials: 'include'
+                    })
+                    .then(res => {
+                        if (res.ok) {
+                            console.log("--res");
+                            return res.json();
+                        } else {
+                            console.log("--response--");
+                            throw new Error('Failed to delete PDF');
+                        }
+                    })
+                    .then(data => {
+                        console.log(data);
+                        showNotification('PDF deleted successfully', 'green');
+                        setTimeout(() => {
+                            selectKar(Sem, subject); // Refresh PDF list after deletion
+                        }, 6000);
+                    })
+                    .catch(error => {
+                        console.error('Error deleting PDF:', error);
+                        showNotification('Failed to delete PDF', 'red');
+                    });
+                }
+            });
+
+            li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
+                const path = e.target.id;
+                console.log(bookmark);
+                
+                if(!bookmark){
+                    console.log('notBookmarked');
+                    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`, {
+                        method: 'GET',
+                        credentials: 'include'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            console.log(response);
+                            throw new Error('Bookmark API request failed');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Bookmark added successfully:', data);
+                        showNotification('PDF bookmarked', 'green');
+                        setTimeout(() => {
                             selectKar(Sem, subject); // Refresh PDF list after deletion
                         }, 3000);
                     })
@@ -276,91 +396,6 @@ const showKaro = (pdf) => {
                     showNotification('Daya, Kuch to gadbad hai..', 'red');
                 }
                 
-            });
-
-            
-            document.getElementById(`pdf-container-sem${Sem}`).appendChild(li);
-        })
-        .catch(error => {
-            console.error('Error fetching user:', error);
-            console.log("in catch");
-            const li = document.createElement("li");
-            li.innerHTML = `
-                <div class="theory mb-2">
-                    <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
-                        <div class="p-4 md:w-[70%]">
-                            <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
-                            <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
-                            </p>
-                        </div>
-                        <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                            <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" download="${title} eduVerse" id="download-btn">
-                                <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-tailblue hover:bg-transparent border border-tailblue transition-colors">
-                                    <i class="ri-download-line mr-2"></i> Download
-                                </button>
-                            </a>
-                            
-                            <button class="text-white text-xl font-bold rounded-full hover:bg-tailblue px-2 py-2 dlt-btn">
-                                <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
-                            </button>
-                            
-                            <button class="text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-2 bookmark-btn" id="${path}">
-                                <i class="ri-bookmark-line" id="${path}"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>`;
-
-            li.querySelector('.dlt-btn').addEventListener('click', (e) => {
-                const path = e.target.id;
-                if (confirm("Are You sure Want to delete?")) {
-                    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
-                        method: 'GET',
-                        credentials: 'include'
-                    })
-                    .then(res => {
-                        if (res.ok) {
-                            console.log("--res");
-                            return res.json();
-                        } else {
-                            console.log("--response--");
-                            throw new Error('Failed to delete PDF');
-                        }
-                    })
-                    .then(data => {
-                        console.log(data);
-                        showNotification('PDF deleted successfully', 'green');
-                        setTimeout(() => {
-                            selectKar(Sem, subject); // Refresh PDF list after deletion
-                        }, 6000);
-                    })
-                    .catch(error => {
-                        console.error('Error deleting PDF:', error);
-                        showNotification('Failed to delete PDF', 'red');
-                    });
-                }
-            });
-
-            li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
-                const path = e.target.id;
-                fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`, {
-                    method: 'GET',
-                    credentials: 'include'
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Bookmark API request failed');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Bookmark added successfully:', data);
-                    showNotification('PDF bookmarked', 'green');
-                })
-                .catch(error => {
-                    console.error('Error adding bookmark:', error);
-                    showNotification('Failed to bookmark PDF', 'red');
-                });
             });
 
             document.getElementById(`pdf-container-sem${Sem}`).appendChild(li);
