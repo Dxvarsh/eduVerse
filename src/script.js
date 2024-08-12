@@ -184,7 +184,7 @@ const showKaro = (pdf) => {
                             console.log(data);
                             showNotification('PDF deleted successfully', 'green');
                             setTimeout(() => {
-                                selectKar(Sem, subject); // Refresh PDF list after deletion
+                                selectKar(Sem, subject); 
                             }, 3000);
                         }else{
                             console.log("--responce")
@@ -200,30 +200,85 @@ const showKaro = (pdf) => {
 
             li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
                 const path = e.target.id;
-                fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`, {
-                    method: 'GET',
-                    credentials: 'include'
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        console.log(response);
-                        throw new Error('Bookmark API request failed');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Bookmark added successfully:', data);
-                    showNotification('PDF bookmarked', 'green');
-                    setTimeout(() => {
-                        selectKar(Sem, subject); // Refresh PDF list after deletion
-                    }, 3000);
-                })
-                .catch(error => {
-                    console.error('Error adding bookmark:', error);
-                    showNotification('Failed to bookmark PDF', 'red');
-                });
+                console.log(bookmark);
+                
+                if(!bookmark){
+                    console.log('notBookmarked');
+                    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`, {
+                        method: 'GET',
+                        credentials: 'include'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            console.log(response);
+                            throw new Error('Bookmark API request failed');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Bookmark added successfully:', data);
+                        showNotification('PDF bookmarked', 'green');
+                        setTimeout(() => {
+                            selectKar(Sem, subject); // Refresh PDF list after deletion
+                        }, 3000);
+                    })
+                    .catch(error => {
+                        console.error('Error adding bookmark:', error);
+                        showNotification('Failed to bookmark PDF', 'red');
+                    });
+                }else if(bookmark){
+                    console.log("bookmarked");
+                    li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
+                        const path = e.target.id;
+                        fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}`, {
+                            method: 'GET',
+                            credentials: 'include'
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                console.log(response);
+                                throw new Error('Bookmark API request failed');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Bookmark removed successfully:', data);
+                            showNotification('Bookmark removed successfully', 'green');
+                            {
+                                fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/bookmarks`, {
+                                    method: 'GET',
+                                    credentials: 'include'
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        console.log(response);
+                                        throw new Error('Bookmark API request failed');
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    console.log(data);
+                                    document.getElementById(`bookmark-docs`).innerHTML = '';
+                                    saariPdf(data.data, currentUser);
+                
+                                })
+                                .catch(error => {
+                                    console.error('Error adding bookmark:', error);
+                                    showNotification('Failed to bookmark PDF', 'red');
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error adding bookmark:', error);
+                        });
+                    });
+                }else{
+                    showNotification('Daya, Kuch to gadbad hai..', 'red');
+                }
+                
             });
 
+            
             document.getElementById(`pdf-container-sem${Sem}`).appendChild(li);
         })
         .catch(error => {
@@ -323,7 +378,7 @@ const showNotification = (message, color) => {
     notification.style.opacity = 1;
 
     setTimeout(() => {
-        notification.style.top = "12px";
+        notification.style.top = "22px";
         notification.style.opacity = 0;
     }, 3000);
 };
