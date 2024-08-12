@@ -145,15 +145,16 @@ const showKaro = (book, currentUser=0) => {
         username,
         date,
         path,
-        sem
+        sem,
+        subject
     } = book;
     console.log(currentUser);
-    console.log(title, username, date, path, sem);
+    console.log(title, username, date, path, sem, subject);
     
     const li = document.createElement("li");
     li.innerHTML = `
         <div class="theory mb-2">
-            <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
+            <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative">
                 <div class="p-4 md:w-[70%]">
                     <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
                     <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
@@ -170,6 +171,7 @@ const showKaro = (book, currentUser=0) => {
                         <i class="ri-bookmark-fill" id="${path}"></i>
                     </button>
                 </div>
+                <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1">Document Location: <span class="text-tailblue tracking-wider">Sem: ${sem}, ${subject}</span>.
             </div>
         </div>`;
 
