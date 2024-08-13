@@ -16,97 +16,95 @@
     <link rel="stylesheet" href="../main.css" />
 
     <style>
-        
-        .loader {
-            position: absolute;
-            top: calc(50% - 32px);
-            left: calc(50% - 32px);
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            perspective: 800px;
-        }
-        
-        .inner {
-            position: absolute;
-            box-sizing: border-box;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;  
-        }
-        
-        .inner.one {
-            left: 0%;
-            top: 0%;
-            animation: rotate-one 1s linear infinite;
-            border-bottom: 3px solid #FF0000;
-        }
-        
-        .inner.two {
-            right: 0%;
-            top: 0%;
-            animation: rotate-two 1s linear infinite;
-            border-right: 3px solid #0000FF;
-        }
-        
-        .inner.three {
-            right: 0%;
-            bottom: 0%;
-            animation: rotate-three 1s linear infinite;
-            border-top: 3px solid #00FF00;
-        }
-        
-        @keyframes rotate-one {
-            0% {
-            transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
-            }
-            100% {
-            transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
-            }
-        }
-        
-        @keyframes rotate-two {
-            0% {
-            transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
-            }
-            100% {
-            transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
-            }
-        }
-        
-        @keyframes rotate-three {
-            0% {
-            transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
-            }
-            100% {
-            transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
-            }
-        }
-    </style>
+      .loader {
+        position: absolute;
+        top: calc(50% - 32px);
+        left: calc(50% - 32px);
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        perspective: 800px;
+      }
 
+      .inner {
+        position: absolute;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+
+      .inner.one {
+        left: 0%;
+        top: 0%;
+        animation: rotate-one 1s linear infinite;
+        border-bottom: 3px solid #ff0000;
+      }
+
+      .inner.two {
+        right: 0%;
+        top: 0%;
+        animation: rotate-two 1s linear infinite;
+        border-right: 3px solid #0000ff;
+      }
+
+      .inner.three {
+        right: 0%;
+        bottom: 0%;
+        animation: rotate-three 1s linear infinite;
+        border-top: 3px solid #00ff00;
+      }
+
+      @keyframes rotate-one {
+        0% {
+          transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+        }
+        100% {
+          transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+        }
+      }
+
+      @keyframes rotate-two {
+        0% {
+          transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+        }
+        100% {
+          transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+        }
+      }
+
+      @keyframes rotate-three {
+        0% {
+          transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+        }
+        100% {
+          transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+        }
+      }
+    </style>
 
     <!-- logo -->
     <link rel="shortcut icon" href="./img/evLOGO.png" type="image/x-icon" />
     <title>eduVerse | Register</title>
   </head>
   <body class="bg-darkblue w-full h-screen font-gilroy">
-
-    <div class="h-screen w-screen z-50 absolute bg-[#0b1121] overflow-hidden loader-main hidden">
-        <div class="loader">
-            <div class="inner one"></div>
-            <div class="inner two"></div>
-            <div class="inner three"></div>
-            <h1 class="text-tailblue w-[300px] pt-20 text-lg pr-20">
-                Sending Data . . . . . . . 
-            </h1>
-        </div>
+    <div
+      class="h-screen w-screen z-50 absolute bg-[#0b1121] overflow-hidden loader-main hidden"
+    >
+      <div class="loader">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+        <h1 class="text-tailblue w-[300px] pt-20 text-lg pr-20">
+          Sending Data . . . . . . .
+        </h1>
+      </div>
     </div>
-
 
     <div class="main h-screen w-full relative">
       <!-- navbar -->
       <nav
-        class="px-3 h-20 border-b-2 border-tailblue flex items-center justify-between md:px-16 fixed right-0 left-0 backdrop-blur-md"
+        class="px-3 h-20 border-b-2 border-tailblue flex items-center z-20 justify-between md:px-16 fixed right-0 left-0 backdrop-blur-md"
       >
         <div>
           <a
@@ -135,14 +133,24 @@
         </div>
       </nav>
 
-      <main class="h-screen px-3 md:px-16 pt-28">
-        <section class="pt-4 pb-24">
+      <main class="h-screen px-3 md:px-16 pt-20">
+
+
+        <!-- <section class="pt-4 pb-24">
           <li class="text-2xl text-white">
             New to <span class="text-tailblue">edu</span>Verse.?
           </li>
 
+          <ul class="text=-white mb-2">
+            <h3 class="list-none text-red-300">Note:</h3>
+            <li class="text-white ml-5">Username must have 6 Character.</li>
+            <li class="text-white ml-5">password must have 8 character.</li>
+            <li class="text-white ml-5">Fullname must have 8 character.</li>
+            <li class="text-white ml-5">Email must have 8 character.</li>
+          </ul>
+          <div class="h-[1px] mt-1 bg-[#38bdf8]"></div>
           <div
-            class="signUp max-w-xl mt-10 p-2 flex flex-col justify-center items-center gap-2"
+            class="signUp max-w-xl mt- p-2 flex flex-col justify-center items-center gap-2"
           >
             <h2 class="text-white text-2xl">
               Create <span class="text-tailblue">edu</span> ID
@@ -153,7 +161,7 @@
               class="flex flex-col justify-center items-center gap-2"
             >
               <input
-                class="w-full focus:text-tailblue rounded p-1"
+                class="w-full focus:text-tailblue rounded px-4 py-2 text-lg"
                 type="text"
                 name=""
                 id="username"
@@ -161,7 +169,7 @@
               />
 
               <input
-                class="w-full focus:text-tailblue rounded p-1"
+                class="w-full focus:text-tailblue rounded px-4 py-2 text-lg"
                 type="text"
                 name=""
                 id="fullname"
@@ -169,23 +177,30 @@
               />
 
               <input
-                class="w-full focus:text-tailblue rounded p-1"
+                class="w-full focus:text-tailblue rounded px-4 py-2 text-lg"
                 type="email"
                 name=""
                 id="email"
                 placeholder="xyz@email.com"
               />
 
-              <input
-                class="w-full focus:text-tailblue rounded p-1"
+              <div class="flex w-full">
+                <input
                 type="password"
-                name=""
                 id="password"
-                placeholder="password"
+                placeholder="Enter your password"
+                class="w-full px-4 py-2 text-lg rounded"
               />
+              <button
+                id="togglePassword"
+                class="eye-icon ml-[-30px] bg-white border-none outline-none"
+              >
+                👁️
+              </button>
+              </div>
 
               <input
-                class="w-full focus:text-tailblue rounded p-1"
+                class="w-full px-4 py-2 text-lg rounded hidden"
                 type="text"
                 placeholder="Enter OTP"
                 id="otp-box"
@@ -216,14 +231,124 @@
             </form>
           </div>
 
-          <ul class="text=-white">
-            <h3 class="list-none text-red-300">Note:</h3>
-            <li class="text-white ml-5">Username must have 6 Character.</li>
-            <li class="text-white ml-5">password must have 8 character.</li>
-            <li class="text-white ml-5">Fullname must have 8 character.</li>
-            <li class="text-white ml-5">Email must have 8 character.</li>
-          </ul>
-        </section>
+          
+        </section> -->
+
+
+        <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+          <div class="sm:mx-auto sm:w-full sm:max-w-md">
+              <img class="mx-auto h-10 w-auto" src="/src/img/evLOGO.png" alt="Workflow">
+              <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-white">
+                  Create a new account
+              </h2>
+              <p class="mt-2 text-center text-sm leading-5 text-zinc-400 max-w">
+                  Or
+                  <a href="/src/login.html"
+                      class="font-medium text-tailblue hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                      login to your account
+                  </a>
+              </p>
+          </div>
+      
+          <div class="mt-8 sm:mx-auto bg-transparent sm:w-full sm:max-w-md">
+              <div class="py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                  <form method="POST" action="">
+                      <div>
+                          <label for="username" class="block text-sm font-medium leading-5  text-tailblue">Username</label>
+                          <div class="mt-1 relative rounded-md shadow-sm">
+                              <input id="username" name="username" placeholder="🆔 Must be 6 characters long!" type="text" required=""
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm">
+                          </div>
+                      </div>
+      
+                      <div class="mt-6">
+                          <label for="fullname" class="block text-sm font-medium leading-5 text-tailblue">Full Name</label>
+                          <div class="mt-1 flex rounded-md shadow-sm">
+                              <input id="fullname" name="fullname" placeholder="🔤 Must be 8 characters long!" type="text" required=""
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm">
+                          </div>
+                      </div>
+      
+                      <div class="mt-6">
+                          <label for="email" class="block text-sm font-medium leading-5 text-tailblue">
+                              Email address
+                          </label>
+                          <div class="mt-1 relative rounded-md shadow-sm">
+                              <input id="email" name="email" placeholder="📧 user@example.com" type="email"
+                                  required=""
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm">
+                          </div>
+                      </div>
+      
+                      <div class="mt-6">
+                        <label for="password" class="block text-sm font-medium leading-5 text-tailblue">
+                          Password <span class="ml-5 text-red-400 text-xs">*⚠️ Must be 8 characters long!</span>
+                        </label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                          <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            required=""
+                            placeholder="Enter your password"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm"
+                          />
+                          <button
+                            type="button"
+                            id="togglePassword"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                          >
+                            <i id="toggleIcon" class="ri-eye-line"></i> <!-- Default icon for password hidden -->
+                          </button>
+                        </div>
+                      </div>
+                      
+      
+                      <div class="mt-6">
+                          <label for="password_confirmation" class="block text-sm font-medium leading-5 text-tailblue">
+                              Confirm Password
+                          </label>
+                          <div class="mt-1 rounded-md shadow-sm">
+                              <input id="password_confirmation" type="text" required="" placeholder="🔐 Re-enter your secret code"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm">
+                          </div>
+                      </div>
+      
+                      <div class="mt-6">
+                          <label for="otp-box" class="block text-sm font-medium leading-5 text-tailblue">OTP</label>
+                          <div class="mt-1 flex rounded-md shadow-sm">
+                              <input id="otp-box" name="otp-box" placeholder="📲 Enter OTP" type="text" required=""
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm">
+                          </div>
+                      </div>
+
+                      <div
+                        id="clicked"
+                        class="flex flex-col justify-center items-center gap-2"
+                      ></div>
+      
+                      <div class="mt-6">
+                          <span class="block w-full rounded-md shadow-sm">
+                              <button type="button" id="otp-btn"
+                                  class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#38bdf8] hover:bg-blue-500 focus:outline-none focus:shadow-outline-indigo active:bg-[#38bdf8] transition duration-150 ease-in-out">
+                                  Send OTP
+                              </button>
+                          </span>
+                      </div>
+      
+                      <div class="mt-6">
+                          <span class="hidden w-full rounded-md shadow-sm">
+                              <button type="button" id="signup-submit"
+                                  class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#38bdf8] hover:bg-blue-500 focus:outline-none focus:shadow-outline-indigo active:bg-[#38bdf8] transition duration-150 ease-in-out">
+                                  Create account
+                              </button>
+                          </span>
+                      </div>
+                  </form>
+      
+              </div>
+          </div>
+      </div>
       </main>
 
       <footer
@@ -245,109 +370,140 @@
           by our great community.
         </p>
       </footer>
+
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const clickedElement = document.getElementById("clicked");
-          const otpButton = document.querySelector("#otp-btn");
-          const signupButton = document.querySelector("#signup-submit");
-          const loader = document.querySelector(".loader-main");
-          const main = document.querySelector("main");
-      
-          // Initialize state
-          signupButton.classList.add("hidden");
-          otpButton.classList.add("block");
-      
-          const showLoader = () => {
-            loader.classList.remove("hidden");
-            main.classList.add("hidden");
-          };
-      
-          const hideLoader = () => {
-            loader.classList.add("hidden");
-            main.classList.remove("hidden");
-          };
-      
-          const displayMessage = (message, isError = false) => {
-            clickedElement.innerHTML = `
-              <h2 class="text-white text-md ${isError ? 'text-red-400' : 'text-green-400'}">${message}</h2>
-            `;
-            setTimeout(() => {
-              clickedElement.innerHTML = "";
-            }, 5000);
-          };
-      
-          const sendOTP = () => {
-            showLoader();
-            const userOtp = document.querySelector("#otp-box").value;
-      
-            fetch("https://eduversebackend-hd6t.onrender.com/api/v1/otp", {
-              method: "POST",
-              credentials: "include",
-              body: JSON.stringify({ 'otp': userOtp }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                hideLoader();
-                window.location.replace("./login.html");
-              })
-              .catch((error) => {
-                hideLoader();
-                console.error("Error:", error);
-                displayMessage(error.message, true);
-              });
-          };
-      
-          otpButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            showLoader();
-      
-            const username = document.querySelector("#username").value;
-            const fullname = document.querySelector("#fullname").value;
-            const email = document.querySelector("#email").value;
-            const password = document.querySelector("#password").value;
-      
-            fetch("https://eduversebackend-hd6t.onrender.com/api/v1/signup", {
-              method: "POST",
-              credentials: "include",
-              body: JSON.stringify({
-                fullname: fullname,
-                username: username,
-                password: password,
-                email: email,
-              }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                hideLoader();
-                if (data.status_code === 200) {
-                  displayMessage(data.message || "Signup successful!");
-                  signupButton.classList.remove("hidden");
-                  otpButton.classList.add("hidden");
-                } else {
-                  displayMessage(data.message || "An error occurred", true);
-                }
-              })
-              .catch((error) => {
-                hideLoader();
-                console.error("Error:", error);
-                displayMessage(error.message || "An error occurred", true);
-              });
-          });
-      
-          signupButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            sendOTP();
-          });
+      document.addEventListener("DOMContentLoaded", () => {
+        const clickedElement = document.getElementById("clicked");
+        const otpButton = document.querySelector("#otp-btn");
+        const signupButton = document.querySelector("#signup-submit");
+        const loader = document.querySelector(".loader-main");
+        const main = document.querySelector("main");
+        const otpBox = document.querySelector('#otp-box')
+        const togglePasswordButton = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+        const toggleIcon = document.getElementById("toggleIcon");
+
+        // Initialize state 
+        signupButton.classList.add("hidden");
+        otpButton.classList.add("block");
+
+        togglePasswordButton.addEventListener("click", () => {
+          const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+          passwordInput.setAttribute("type", type);
+
+          // Toggle the icon
+          if (type === "password") {
+            toggleIcon.classList.remove("ri-eye-off-line");
+            toggleIcon.classList.add("ri-eye-line");
+          } else {
+            toggleIcon.classList.remove("ri-eye-line");
+            toggleIcon.classList.add("ri-eye-off-line");
+          }
         });
-      </script>
-      
+
+        const showLoader = () => {
+          loader.classList.remove("hidden");
+          main.classList.add("hidden");
+        };
+
+        const hideLoader = () => {
+          loader.classList.add("hidden");
+          main.classList.remove("hidden");
+        };
+
+        const displayMessage = (message, isError = false) => {
+          clickedElement.innerHTML = `
+              <h2 class="text-white text-md ${
+                isError ? "text-red-400" : "text-green-400"
+              }">${message}</h2>
+            `;
+          setTimeout(() => {
+            clickedElement.innerHTML = "";
+          }, 5000);
+        };
+
+        const sendOTP = () => {
+          showLoader();
+          const userOtp = document.querySelector("#otp-box").value;
+
+          fetch("https://eduversebackend-hd6t.onrender.com/api/v1/otp", {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify({ otp: userOtp }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              hideLoader();
+              window.location.replace("./login.html");
+            })
+            .catch((error) => {
+              hideLoader();
+              console.error("Error:", error);
+              displayMessage(error.message, true);
+            });
+        };
+
+        otpButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          otpBox.classList.remove("hidden");
+          showLoader();
+
+          const username = document.querySelector("#username").value;
+          const fullname = document.querySelector("#fullname").value;
+          const email = document.querySelector("#email").value;
+          const password = document.querySelector("#password").value;
+          const confirm_password = document.querySelector("#password_confirmation").value;
+
+
+          if(password === confirm_password){
+
+            fetch("https://eduversebackend-hd6t.onrender.com/api/v1/signup", {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify({
+              fullname: fullname,
+              username: username,
+              password: password,
+              email: email,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              hideLoader();
+              if (data.status_code === 200) {
+                displayMessage(data.message || "Signup successful!");
+                signupButton.classList.remove("hidden");
+                otpButton.classList.add("hidden");
+              } else {
+                displayMessage(data.message || "An error occurred", true);
+              }
+            })
+            .catch((error) => {
+              hideLoader();
+              console.error("Error:", error);
+              displayMessage(error.message || "An error occurred", true);
+            });
+          }
+          else{
+            hideLoader();
+            displayMessage("⚠️ Passwords do not match. Please re-enter", true);
+            return;
+          }  
+        });
+
+        signupButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          sendOTP();
+        });
+      });
+    </script>
   </body>
 </html>
