@@ -171,7 +171,7 @@ const showKaro = (book, currentUser=0) => {
                         <i class="ri-bookmark-fill" id="${path}"></i>
                     </button>
                 </div>
-                <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1">Document Location: <span class="text-tailblue tracking-wider">Sem: ${sem}, ${subject}</span>.
+                <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${sem}, ${subject}</span></p>.
             </div>
         </div>`;
 
