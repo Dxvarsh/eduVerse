@@ -345,10 +345,9 @@
                           </span>
                       </div>
                   </form>
-      
               </div>
           </div>
-      </div>
+        </div>
       </main>
 
       <footer
@@ -463,18 +462,18 @@
           if(password === confirm_password){
 
             fetch("https://eduversebackend-hd6t.onrender.com/api/v1/signup", {
-            method: "POST",
-            credentials: "include",
-            body: JSON.stringify({
-              fullname: fullname,
-              username: username,
-              password: password,
-              email: email,
-            }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
+              method: "POST",
+              credentials: "include",
+              body: JSON.stringify({
+                fullname: fullname,
+                username: username,
+                password: password,
+                email: email,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
             .then((response) => response.json())
             .then((data) => {
               hideLoader();
