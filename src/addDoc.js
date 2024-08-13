@@ -8,7 +8,6 @@ let subject;
 
 const loader = document.querySelector(".loader-main");
 const main = document.querySelector("main");
-const yesMessage = document.querySelector("#yes");
 
 // Event listener for radio buttons and corresponding selects
 radioButtons.forEach((radio) => {
@@ -27,7 +26,7 @@ radioButtons.forEach((radio) => {
 });
 
 // Form submit event listener
-addDocForm.addEventListener("submit", async (e) => {
+addDocForm.addEventListener("submit", (e) => {
   e.preventDefault();
   loader.classList.remove("hidden");
   main.classList.add("hidden");
@@ -41,19 +40,20 @@ addDocForm.addEventListener("submit", async (e) => {
   formdata.append("sem", sem);
   formdata.append("title", pdfName);
 
-  try {
-    const response = await fetch('https://eduversebackend-hd6t.onrender.com/api/v1/upload', {
+    fetch('https://eduversebackend-hd6t.onrender.com/api/v1/upload', {
       method: 'POST',
       credentials: 'include',
       body: formdata
-    });
-
-    if (response.ok) {
-      yesMessage.innerHTML = `
-        <div class="w-full md:w-fit p-8 rounded-lg bg-green-300">
-          <h2 class="text-2xl font-semibold">✅ ${pdfName} added Successfully</h2>
-        </div>  
-      `;
+    })
+    .then(response =>{
+      return response.json();
+    })
+    .then(data => {
+      loader.classList.add("hidden");
+      main.classList.remove("hidden");
+      
+      if(data.status_code == 200) {
+      showNotification(data.message, 'green')
       addDocForm.innerHTML = `
         <div class="w-[95%] md:w-fit p-5 rounded-lg bg-slate-900 shadow-tailblue shadow-lg border-2 border-tailblue">
             <h2 class="text-2xl font-semibold text-white">Do you want to add another Document? 🤔</h2>
@@ -63,32 +63,26 @@ addDocForm.addEventListener("submit", async (e) => {
       `
       document.querySelector("#confirm-add").addEventListener('click', ()=>{window.location.replace('./addDoc.html');})
       document.querySelector("#home").addEventListener('click', ()=>{window.location.replace('./home.html');})
-    } else {
-      yesMessage.innerHTML = `
-        <div class="w-full md:w-fit p-8 rounded-lg bg-red-300">
-          <h2 class="text-2xl font-semibold">🚫 ${response.statusText} user, Please login and try again later.</h2>
-        </div>`;
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    yesMessage.innerHTML = `
-      <div class="w-full md:w-fit p-8 rounded-lg bg-red-300">
-        <h2 class="text-2xl font-semibold">🚫 ${error.message}</h2>
-      </div>`;
-  } finally {
-    loader.classList.add("hidden");
-    main.classList.remove("hidden");
-    yesMessage.style.top = "200px";
-    yesMessage.style.opacity = 1;
-
-    setTimeout(() => {
-      yesMessage.style.top = "12px";
-      yesMessage.style.opacity = 0;
-      // location.reload();
-    }, 3000);
-  }
+      }
+      else {
+        showNotification(data.message, 'red')
+      }
+    })
+  
 });
 
-/* 
+
+const showNotification = (message, color) => {
+  const notification = document.querySelector("#yes");
+  notification.innerHTML = `
+      <div class="w-[100%] md:w-[80%] p-8 rounded-lg bg-${color}-300">
+          <h2 class="text-2xl font-semibold">${message}</h2>
+      </div>`;
+  notification.style.top = "200px";
+  notification.style.opacity = 1;
   
-*/
+  setTimeout(() => {
+      notification.style.top = "12px";
+      notification.style.opacity = 0;
+  }, 5000);
+};
