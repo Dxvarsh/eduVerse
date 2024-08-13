@@ -171,7 +171,7 @@ const showKaro = (book, currentUser=0) => {
                         <i class="ri-bookmark-fill" id="${path}"></i>
                     </button>
                 </div>
-                <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${sem}, ${subject}</span></p>.
+                <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${sem}, ${subject}</span>.</p>
             </div>
         </div>`;
 
@@ -234,14 +234,15 @@ const saariPdf = (pdf, currentUser) =>{
 const showNotification = (message, color) => {
     const notification = document.querySelector("#notification");
     notification.innerHTML = `
-        <div class="w-[100%] md:w-[80%] p-8 rounded-lg bg-${color}-300">
-            <h2 class="text-2xl font-semibold">${message}</h2>
+        <div class="w-full px-4 py-2 rounded-lg text-${color}-500 font-extrabold border border-${color}-500 bg-${color}-200 drop-shadow-sm">
+            <h2 class="text-xl text-center drop-shadow-2xl">${message}</h2>
         </div>`;
-    notification.style.top = "100px";
     notification.style.opacity = 1;
-    
+    notification.classList.add('bottom-16')
+
     setTimeout(() => {
-        notification.style.top = "12px";
+        notification.classList.remove('bottom-16')
+        notification.classList.add('-bottom-20')
         notification.style.opacity = 0;
-    }, 5000);
+    }, 3000);
 };

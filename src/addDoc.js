@@ -73,16 +73,17 @@ addDocForm.addEventListener("submit", (e) => {
 
 
 const showNotification = (message, color) => {
-  const notification = document.querySelector("#yes");
+  const notification = document.querySelector("#notification");
   notification.innerHTML = `
-      <div class="w-[100%] md:w-[80%] p-8 rounded-lg bg-${color}-300">
-          <h2 class="text-2xl font-semibold">${message}</h2>
+      <div class="w-full px-4 py-2 rounded-lg text-${color}-500 font-extrabold border border-${color}-500 bg-${color}-200 drop-shadow-sm">
+          <h2 class="text-xl text-center drop-shadow-2xl">${message}</h2>
       </div>`;
-  notification.style.top = "200px";
   notification.style.opacity = 1;
-  
+  notification.classList.add('bottom-16')
+
   setTimeout(() => {
-      notification.style.top = "12px";
+      notification.classList.remove('bottom-16')
+      notification.classList.add('-bottom-20')
       notification.style.opacity = 0;
-  }, 5000);
+  }, 3000);
 };
