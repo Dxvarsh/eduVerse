@@ -1,35 +1,33 @@
-// DOM elements
 const loginSection = document.getElementById('log-in-section');
 const profile = document.getElementById('profile-section');
 const bookmarks = document.getElementById('bookmark-section');
-const bookmarksDocs = document.getElementById('bookmarks-docs');
+const bookmarksDocs = document.getElementById('bookmark-docs');
 const loader = document.querySelector(".loader-main");
-const main = document.querySelector("main");
+const main = document.querySelector("main")
 
-// Show loader and hide main content
+
 loader.classList.remove("hidden");
 main.classList.add("hidden");
-
 const getUser = () => {
     fetch('https://eduversebackend-hd6t.onrender.com/api/v1/getuser', {
         method: 'GET',
         credentials: 'include'
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Error ${response.status}: ${response.statusText}`);
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error(res.status);
         }
-        return response.json();
+        return res.json(); // Assuming response is JSON
     })
-    .then(res => {
-        if (res.status_code !== 200) {
-            showNotification(res.message || 'An error occurred', 'red');
-            throw new Error(res.message || 'Unknown error');
+    .then((res) => {
+        if (res.status_code > 200) {
+        } else if (res.status_code === 200) {
+            console.log(res.status_code);
+            return res.data;
         }
-        return res.data;
     })
     .then(currentUser => {
-        // Update UI for logged-in user
+        // Example: Initialize any UI or logic that depends on user data here
         loader.classList.add("hidden");
         main.classList.remove("hidden");
         profile.classList.remove('hidden');
@@ -51,12 +49,12 @@ const getUser = () => {
                         <i class="ri-shut-down-line text-xl md:hidden"></i>
                     </button>
                 </div>
-            </div>
-        `;
+            </div>`
+        ;
 
         // Attach logout button event listener
         document.getElementById('logout').addEventListener('click', () => {
-            if (confirm('Are you sure you want to log out?')) {
+            if(confirm('Are you sure want to log out?')){
                 fetch('https://eduversebackend-hd6t.onrender.com/api/v1/logout', {
                     method: 'GET',
                     credentials: 'include'
@@ -67,25 +65,28 @@ const getUser = () => {
                     }
                     return response.json();
                 })
-                .then(() => {
+                .then(data => {
+                    console.log('Logout successful:', data);
                     loginSection.classList.remove('hidden');
                     loginSection.innerHTML = `
                         <div class="w-fit md:w-fit p-8 rounded-lg bg-red-300">
                             <h2 class="text-2xl font-semibold">🚫Abhi bhi time hai log in kr le🥲</h2>
                             <button class="mt-5 px-5 py-1 rounded bg-red-500 font-bold" id="refresh">Log in</button>
-                            <button class="mt-5 px-5 py-1 rounded bg-red-500 font-bold" id="home">Nahi karunga</button>
-                        </div>
-                    `;
+                            <button class="mt-5 px-5 py-1 rounded bg-red-500 font-bold" id="home">Nahi karuga</button>
+                        </div>`
+                    ;
                     profile.classList.add('hidden');
                     bookmarks.classList.add('hidden');
-                    document.getElementById('refresh').addEventListener('click', () => window.location.replace('./login.html'));
-                    document.getElementById('home').addEventListener('click', () => window.location.replace('./home.html'));
+                    document.querySelector("#refresh").addEventListener('click', ()=>{window.location.replace('./login.html');})
+                    document.querySelector("#home").addEventListener('click', ()=>{window.location.replace('./home.html');})
                 })
                 .catch(error => {
-                    showNotification('Error while logging out', 'red');
                     console.error('Error logging out:', error);
+                    // Handle error, display error message, etc.
+                    showNotification('Error while logging out', 'red');
                 });
             }
+            
         });
 
         // Fetch bookmarks
@@ -100,39 +101,51 @@ const getUser = () => {
             return response.json();
         })
         .then(data => {
-            saariPdf(data.data, currentUser);
+            saariPdf(data.data)
+            // Handle bookmarks data as needed
         })
         .catch(error => {
-            showNotification('Failed to fetch bookmarks', 'red');
             console.error('Error fetching bookmarks:', error);
+            // showNotification(error, 'red' )
+            // Handle error, display error message, etc.
         });
     })
     .catch(error => {
+        console.error('Error:', error);
         loader.classList.add("hidden");
         main.classList.remove("hidden");
         loginSection.classList.remove('hidden');
+
         loginSection.innerHTML = `
             <div class="w-fit md:w-fit p-8 rounded-lg bg-red-300">
-                <h2 class="text-2xl font-semibold">🚫You are not Logged in.</h2>
+            <h2 class="text-2xl font-semibold">🚫You are not Logged in.</h2>
                 <button class="mt-5 px-5 py-1 rounded bg-red-500 font-bold" id="refresh">Log in</button>
                 <button class="mt-5 px-5 py-1 rounded bg-red-500 font-bold" id="home">Back</button>
-            </div>
-        `;
-        document.getElementById('refresh').addEventListener('click', () => window.location.replace('./login.html'));
-        document.getElementById('home').addEventListener('click', () => window.location.replace('./home.html'));
-        console.error('Error:', error);
-    });
-};
-
-const showKaro = (book, currentUser = {}) => {
-    const { title, username, date, path, sem, subject } = book;
+            </div>`
+        ;
+        document.querySelector("#refresh").addEventListener('click', ()=>{window.location.replace('./login.html');})
+        document.querySelector("#home").addEventListener('click', ()=>{window.location.replace('./home.html');})
+    })
+}
+getUser();
+        
+const showKaro = (book) => {
+    const {
+        title,
+        username,
+        date,
+        path,
+        sem,
+        subject
+    } = book;
     const li = document.createElement("li");
     li.innerHTML = `
         <div class="theory mb-2">
             <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative">
                 <div class="p-4 md:w-[70%]">
                     <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
-                    <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
+                    <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
+                    </p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
                     <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" id="download-btn">
@@ -140,6 +153,7 @@ const showKaro = (book, currentUser = {}) => {
                             <i class="ri-download-line mr-2"></i> Download
                         </button>
                     </a>
+                    
                     <button class="text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-1.5 bookmark-btn">
                         <i class="ri-bookmark-fill" id="${path}"></i>
                     </button>
@@ -147,10 +161,10 @@ const showKaro = (book, currentUser = {}) => {
                 <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${sem}, ${subject}</span>.</p>
             </div>
         </div>`;
-    
+
     li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
         const path = e.target.id;
-        fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}`, {
+        fetch('https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}', {
             method: 'GET',
             credentials: 'include'
         })
@@ -160,41 +174,41 @@ const showKaro = (book, currentUser = {}) => {
             }
             return response.json();
         })
-        .then(() => {
+        .then(data => {
+            console.log('Bookmark removed successfully:', data);
             showNotification('Bookmark removed successfully', 'green');
-            const bookIdTag = document.getElementById(path);
+            const bookIdTag = document.getElementById(path)
             const parentLi = bookIdTag.closest('li');
             if (parentLi) {
-                parentLi.remove();
+                parentLi.remove(); // Remove the <li> element
             }
-        })
+            })
         .catch(error => {
-            console.error('Error handling bookmark:', error);
+            console.error('Error adding bookmark:', error);
         });
     });
-
     bookmarksDocs.appendChild(li);
-};
+}
 
-const saariPdf = (pdfs, currentUser) => {
-    pdfs.forEach(book => showKaro(book, currentUser));
-};
+
+const saariPdf = (pdf) =>{
+    pdf.forEach((book) => {
+        showKaro(book);
+    });
+}
 
 const showNotification = (message, color) => {
     const notification = document.querySelector("#notification");
     notification.innerHTML = `
-        <div class="w-full px-4 py-2 rounded-lg text-${color}-500 font-extrabold border border-${color}-500 bg-${color}-200 drop-shadow-sm">
+        <div class="w-full px-4 py-2 rounded-lg text-${color}-600 font-extrabold border border-${color}-700 bg-${color}-200 drop-shadow-sm">
             <h2 class="text-xl text-center drop-shadow-2xl">${message}</h2>
         </div>`;
     notification.style.opacity = 1;
-    notification.classList.add('bottom-16');
+    notification.classList.add('bottom-16')
 
     setTimeout(() => {
-        notification.classList.remove('bottom-16');
-        notification.classList.add('-bottom-20');
+        notification.classList.remove('bottom-16')
+        notification.classList.add('-bottom-20')
         notification.style.opacity = 0;
     }, 3000);
 };
-
-// Start the user fetch process
-getUser();
