@@ -12,7 +12,8 @@ module.exports = {
         tailblue: "#38bdf8",
         darkblue: "#0b1121",
         offwhite: "#FAF9F6",
-      },},
+      },
+    },
   },
   plugins: [],
 }

@@ -7,7 +7,9 @@ const radioButtons = document.querySelectorAll('input[type="radio"]');
 const semContainers = document.querySelectorAll('.container');
 const backbtn = document.querySelectorAll('#back-btn');
 const semSelection = document.getElementById('sem-selection');
+const subjects = document.querySelectorAll('select');
 const footer = document.querySelector('footer');
+let currentSem = ''; 
 
 // Function to fetch user information
 const getUser = () => {
@@ -20,13 +22,13 @@ const getUser = () => {
             if (user.status_code > 200) {
                 throw new Error(user.status_code);
             } else {
-                loginbtn2.classList.add('hidden');
                 sayHello(user.data.fullname);
                 return user.data; // Assuming user.data contains the user information
             }
         })
         .catch(error => {
             console.error('Error fetching user:', error);
+            loginbtn2.classList.remove('hidden');
             if (error.message === '401') {
                 sayHello(); // Handle unauthorized access
             }
@@ -36,12 +38,14 @@ const getUser = () => {
 // Function to display a greeting message
 function sayHello(user = 'Buddy') {
     greet.innerHTML = `
-        <h1 class="text-white text-3xl font-monument">Hello, 👋<br><span class="text-tailblue">${user}</span></h1>
+        <h1 class="text-white text-3xl font-monument">Hellow, 👋<br><span class="text-tailblue">${user}</span></h1>
     `;
 }
 
 // Event listener for scroll to toggle popup class
 window.addEventListener("scroll", function () {
+    footer.classList.toggle("h-fit",window.scrollY > 0);
+    footer.classList.toggle("py-5",window.scrollY > 0);
     const practicalPopups = document.querySelectorAll('#practical-popup');
     practicalPopups.forEach(popup => {
         popup.classList.toggle("-bottom-96", window.scrollY > 0);
@@ -52,33 +56,39 @@ window.addEventListener("scroll", function () {
 backbtn.forEach(back => {
     back.addEventListener('click', () => {
         semContainers.forEach(container => container.style.display = 'none');
+        subjects.forEach(sub => console.log(sub));
         radioButtons.forEach(button => button.checked = false);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        footer.classList.remove('h-0');
         semSelection.style.display = 'block';
         document.getElementById('greet-area').classList.remove('h-0');
     });
 });
 
+function handleSubjectChange(e) {
+    const selectedSubject = e.target.value;
+    console.log(`line 80: Subject = ${selectedSubject}, selected sem = ${currentSem}`);
+    
+    // Call the function to fetch PDFs
+    selectKar(currentSem, selectedSubject);
+}
+
 // Event listener for radio button change
 radioButtons.forEach(radio => {
     radio.addEventListener('change', () => {
-        const selectedValue = radio.value;
+        currentSem = radio.value;
         semContainers.forEach(container => {
-            container.style.display = container.id === `container-sem${selectedValue}` ? 'block' : 'none';
+            container.style.display = container.id === `container-sem${currentSem}` ? 'block' : 'none';
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        footer.classList.add('h-0');
         semSelection.style.display = 'none';
         document.getElementById('greet-area').classList.add('h-0');
-
-        // Fetch PDFs based on semester and subject
-        const subjects = document.querySelectorAll('select');
+        // Remove previous event listeners
         subjects.forEach(sub => {
-            sub.addEventListener('change', (e) => {
-                const selectedSubject = e.target.value;
-                selectKar(selectedValue, selectedSubject);
-            });
+            sub.removeEventListener('change', handleSubjectChange);
+        });
+        // Add new event listeners
+        subjects.forEach(sub => {
+            sub.addEventListener('change', handleSubjectChange);
         });
     });
 });
@@ -135,7 +145,7 @@ const showKaro = (pdf) => {
         
         const li = document.createElement("li");
         li.innerHTML = `
-            <div class="theory mb-2">
+            <div class="theory mb-2 border border-tailblue rounded">
                 <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
                     <div class="p-4 md:w-[70%]">
                         <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
@@ -147,10 +157,10 @@ const showKaro = (pdf) => {
                                 <i class="ri-download-line mr-2"></i> Download
                             </button>
                         </a>
-                        <button class="text-white text-xl font-bold rounded-full hover:bg-tailblue px-2 py-1.5 dlt-btn ${String(currentUserUsername) === username ? "block" : "hidden"}">
+                        <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${String(currentUserUsername) === username ? "block" : "hidden"}" id="${path}">
                             <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
                         </button>
-                        <button class="text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
+                        <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
                             <i class="${bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}" bookmark-btn-icon></i>
                         </button>
                     </div>
@@ -168,7 +178,12 @@ const showKaro = (pdf) => {
                     .then(data => {
                         if (data.status_code === 200) {
                             showNotification('PDF deleted successfully', 'green');
-                            setTimeout(() => selectKar(Sem, subject), 3000);
+                            const bookIdTag = document.getElementById(path)
+                            const parentLi = bookIdTag.closest('li');
+                            console.log(parentLi, 'line 269');
+                            if (parentLi) {
+                                parentLi.remove(); // Remove the <li> element
+                            }
                         } else {
                             throw new Error('Failed to delete PDF');
                         }
@@ -232,10 +247,10 @@ const showKaro = (pdf) => {
                                 <i class="ri-download-line mr-2"></i> Download
                             </button>
                         </a>
-                        <button class="text-white text-xl font-bold rounded-full hover:bg-tailblue px-2 py-1.5 dlt-btn">
+                        <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn">
                             <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
                         </button>
-                        <button class="text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
+                        <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
                             <i class="${bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}" bookmark-btn-icon></i>
                         </button>
                     </div>
@@ -253,7 +268,12 @@ const showKaro = (pdf) => {
                     .then(data => {
                         if (data.status_code === 200) {
                             showNotification('PDF deleted successfully', 'green');
-                            setTimeout(() => selectKar(Sem, subject), 6000);
+                            const bookIdTag = document.getElementById(path)
+                            const parentLi = bookIdTag.closest('li');
+                            console.log(parentLi, 'line 269');
+                            if (parentLi) {
+                                parentLi.remove(); // Remove the <li> element
+                            }
                         } else {
                             throw new Error('Failed to delete PDF');
                         }
