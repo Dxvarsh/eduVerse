@@ -51,8 +51,8 @@ function selectSemPNG(){
             document.getElementById(`pdf-container-sem${i}`).innerHTML = "";
             document.getElementById(`pdf-container-sem${i}`).innerHTML = `
                 <div class="pointing-up">
-                    <img src="${selectSemImg}" alt="" srcset="" class="w-10/12 mx-auto">
-                    <span class="text-xl text-center leading-9 font-extrabold text-tailblue mt-4">Select Subject using this dropdown.</span>
+                    <img src="${selectSemImg}" alt="" srcset="" class="w-10/12 md:w-1/4 mx-auto">
+                    <p class="text-xl text-center leading-9 font-extrabold text-tailblue mt-4">Select Subject using this dropdown.</p>
                 </div>
             `;
         }
@@ -178,7 +178,7 @@ const showKaro = (pdf) => {
                     </div>
                     <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
                         <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" id="download-btn">
-                            <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-tailblue hover:bg-transparent border border-tailblue transition-colors">
+                            <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors">
                                 <i class="ri-download-line mr-2"></i> Download
                             </button>
                         </a>
@@ -268,7 +268,7 @@ const showKaro = (pdf) => {
                     </div>
                     <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
                         <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" id="download-btn">
-                            <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-tailblue hover:bg-transparent border border-tailblue transition-colors">
+                            <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors">
                                 <i class="ri-download-line mr-2"></i> Download
                             </button>
                         </a>
