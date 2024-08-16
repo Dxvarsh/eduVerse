@@ -151,7 +151,8 @@
     <script>
         window.addEventListener("scroll",function(){
             const footer = document.querySelector('footer')
-            footer.classList.toggle("h-20",window.scrollY > 0);
+            footer.classList.toggle("h-fit",window.scrollY > 0);
+            footer.classList.toggle("py-2",window.scrollY > 0);
         })
         fetch('https://eduversebackend-hd6t.onrender.com/api/v1/getuser', {
             method: 'GET',
