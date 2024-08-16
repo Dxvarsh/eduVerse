@@ -1,4 +1,5 @@
 // DOM elements
+import selectSemImg from './img/select-sem.png'
 const loader = document.querySelector(".loader-main");
 const main = document.querySelector("main");
 const greet = document.getElementById("greeting");
@@ -50,7 +51,7 @@ function selectSemPNG(){
             document.getElementById(`pdf-container-sem${i}`).innerHTML = "";
             document.getElementById(`pdf-container-sem${i}`).innerHTML = `
                 <div class="pointing-up">
-                    <img src="/src/img/select-sem.png" alt="" srcset="" class="w-10/12 mx-auto">
+                    <img src="${selectSemImg}" alt="" srcset="" class="w-10/12 mx-auto">
                     <span class="text-xl text-center leading-9 font-extrabold text-tailblue mt-4">Select Subject using this dropdown.</span>
                 </div>
             `;

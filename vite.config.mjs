@@ -1,7 +1,18 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'src/assets/img/**/*',
+          dest: 'assets/img'
+        }
+      ]
+    })
+  ],
   build: {
     rollupOptions: {
       input: {
@@ -13,10 +24,9 @@ export default defineConfig({
         signup: resolve(__dirname, 'src/signup.html')
       },
       output: {
-        addDoc: 'assets/addDoc.[hash].js',
-        bookmark: 'assets/bookmark.[hash].js',
-        script: 'assets/script.[hash].js',
-        assetFileNames: 'assets/[name].[hash].[ext]'
+        assetFileNames: 'assets/[name].[hash].[ext]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js'
       }
     },
     outDir: 'dist',
