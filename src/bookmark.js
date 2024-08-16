@@ -16,7 +16,7 @@ window.addEventListener("scroll", function () {
 function noBookmarks(){
     bookmarksDocs.innerHTML = `
         <div class="pointing-up">
-            <img src="${bookmarkImg}" alt="" srcset="" class="w-10/12 mx-auto -mt-5">
+            <img src="${bookmarkImg}" alt="" srcset="" class="w-10/12 md:w-1/4 mx-auto -mt-5">
             <p class="text-xl text-center leading-9 font-extrabold text-tailblue -mt-5">No Bookmarks Found.</p>
             <p class="text-sm text-center font-semibold text-white">You haven’t saved any documents yet. Bookmark your essential Documents/PDF for easy to access!.</p>
         </div>
