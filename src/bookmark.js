@@ -1,4 +1,4 @@
-import bookmarkImg from './img/no-bookmarks.png';
+import bookmarkImg from './assets/img/no-bookmarks.png';
 const loginSection = document.getElementById('log-in-section');
 const profile = document.getElementById('profile-section');
 const bookmarks = document.getElementById('bookmark-section');

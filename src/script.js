@@ -1,5 +1,5 @@
 // DOM elements
-import selectSemImg from './img/select-sem.png'
+import selectSemImg from './assets/img/select-sem.png'
 const loader = document.querySelector(".loader-main");
 const main = document.querySelector("main");
 const greet = document.getElementById("greeting");
