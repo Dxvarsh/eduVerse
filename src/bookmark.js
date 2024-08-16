@@ -12,6 +12,16 @@ window.addEventListener("scroll", function () {
     footer.classList.toggle("py-0",window.scrollY > 0);
 })
 
+function noBookmarks(){
+    bookmarksDocs.innerHTML = `
+        <div class="pointing-up">
+            <img src="./img/no-bookmarks.png" alt="" srcset="" class="w-10/12 mx-auto -mt-16">
+            <p class="text-xl text-center leading-9 font-extrabold text-tailblue -mt-8">No Bookmarks Found.</p>
+            <p class="text-sm text-center font-semibold text-white">You haven’t saved any documents yet. Bookmark your essential Documents/PDF for easy to access!.</p>
+        </div>
+    `;
+}
+
 loader.classList.remove("hidden");
 main.classList.add("hidden");
 footer.classList.add("h-0");
@@ -111,17 +121,11 @@ const getUser = () => {
         })
         .then(data => {
             // {"data":{},"message":"No Bookmarks","status_code":200}
-            if(data.message == 'No Bookmarks'){
-                bookmarksDocs.innerHTML = `
-                <div class="pointing-up">
-                    <img src="/src/img/no-bookmarks.png" alt="" srcset="" class="w-10/12 mx-auto -mt-5">
-                    <p class="text-xl text-center leading-9 font-extrabold text-tailblue">No Bookmarks Found.</p>
-                    <p class="text-sm text-center font-semibold text-white">You haven’t saved any documents yet. Bookmark your essential Documents/PDF for easy to access!.</p>
-                </div>
-            `;
-            }else{
+            if(data.message == 'No Bookmarks')
+                noBookmarks()
+            else
                 saariPdf(data.data)
-            }
+            
         })
         .catch(error => {
             console.error('Error fetching bookmarks:', error);
@@ -199,6 +203,8 @@ const showKaro = (book) => {
             if (parentLi) {
                 parentLi.remove(); // Remove the <li> element
             }
+            if(bookmarksDocs.children.length == 0)
+                noBookmarks()
             })
         .catch(error => {
             console.error('Error adding bookmark:', error);
