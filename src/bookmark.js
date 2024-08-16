@@ -4,10 +4,17 @@ const bookmarks = document.getElementById('bookmark-section');
 const bookmarksDocs = document.getElementById('bookmark-docs');
 const loader = document.querySelector(".loader-main");
 const main = document.querySelector("main")
+const footer =  document.querySelector('footer');
 
+
+window.addEventListener("scroll", function () {
+    footer.classList.toggle("h-0",window.scrollY > 0);
+    footer.classList.toggle("py-0",window.scrollY > 0);
+})
 
 loader.classList.remove("hidden");
 main.classList.add("hidden");
+footer.classList.add("h-0");
 const getUser = () => {
     fetch('https://eduversebackend-hd6t.onrender.com/api/v1/getuser', {
         method: 'GET',
@@ -30,6 +37,8 @@ const getUser = () => {
         // Example: Initialize any UI or logic that depends on user data here
         loader.classList.add("hidden");
         main.classList.remove("hidden");
+        footer.classList.remove("h-0");
+        footer.classList.add("py-2");
         profile.classList.remove('hidden');
         bookmarks.classList.remove('hidden');
 
@@ -101,13 +110,21 @@ const getUser = () => {
             return response.json();
         })
         .then(data => {
-            saariPdf(data.data)
-            // Handle bookmarks data as needed
+            // {"data":{},"message":"No Bookmarks","status_code":200}
+            if(data.message == 'No Bookmarks'){
+                bookmarksDocs.innerHTML = `
+                <div class="pointing-up">
+                    <img src="/src/img/no-bookmarks.png" alt="" srcset="" class="w-10/12 mx-auto -mt-5">
+                    <p class="text-xl text-center leading-9 font-extrabold text-tailblue">No Bookmarks Found.</p>
+                    <p class="text-sm text-center font-semibold text-white">You haven’t saved any documents yet. Bookmark your essential Documents/PDF for easy to access!.</p>
+                </div>
+            `;
+            }else{
+                saariPdf(data.data)
+            }
         })
         .catch(error => {
             console.error('Error fetching bookmarks:', error);
-            // showNotification(error, 'red' )
-            // Handle error, display error message, etc.
         });
     })
     .catch(error => {
@@ -140,7 +157,7 @@ const showKaro = (book) => {
     } = book;
     const li = document.createElement("li");
     li.innerHTML = `
-        <div class="theory mb-2">
+        <div class="theory mb-2 border border-tailblue rounded">
             <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative">
                 <div class="p-4 md:w-[70%]">
                     <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
@@ -164,7 +181,7 @@ const showKaro = (book) => {
 
     li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
         const path = e.target.id;
-        fetch('https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}', {
+        fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}`, {
             method: 'GET',
             credentials: 'include'
         })

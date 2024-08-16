@@ -3,7 +3,7 @@ const loader = document.querySelector(".loader-main");
 const main = document.querySelector("main");
 const greet = document.getElementById("greeting");
 const loginbtn2 = document.getElementById("log-in-btn2");
-const radioButtons = document.querySelectorAll('input[type="radio"]');
+const semesters = document.querySelectorAll('input[type="radio"]');
 const semContainers = document.querySelectorAll('.container');
 const backbtn = document.querySelectorAll('#back-btn');
 const semSelection = document.getElementById('sem-selection');
@@ -42,10 +42,27 @@ function sayHello(user = 'Buddy') {
     `;
 }
 
+function selectSemPNG(){
+    for (let i = 1; i <= 6; i++) {
+        if (i == String(currentSem))
+            continue
+        else{
+            document.getElementById(`pdf-container-sem${i}`).innerHTML = "";
+            document.getElementById(`pdf-container-sem${i}`).innerHTML = `
+                <div class="pointing-up">
+                    <img src="/src/img/select-sem.png" alt="" srcset="" class="w-10/12 mx-auto">
+                    <span class="text-xl text-center leading-9 font-extrabold text-tailblue mt-4">Select Subject using this dropdown.</span>
+                </div>
+            `;
+        }
+    }
+}
+selectSemPNG();
+
 // Event listener for scroll to toggle popup class
 window.addEventListener("scroll", function () {
     footer.classList.toggle("h-fit",window.scrollY > 0);
-    footer.classList.toggle("py-5",window.scrollY > 0);
+    footer.classList.toggle("py-2",window.scrollY > 0);
     const practicalPopups = document.querySelectorAll('#practical-popup');
     practicalPopups.forEach(popup => {
         popup.classList.toggle("-bottom-96", window.scrollY > 0);
@@ -56,8 +73,7 @@ window.addEventListener("scroll", function () {
 backbtn.forEach(back => {
     back.addEventListener('click', () => {
         semContainers.forEach(container => container.style.display = 'none');
-        subjects.forEach(sub => console.log(sub));
-        radioButtons.forEach(button => button.checked = false);
+        semesters.forEach(button => button.checked = false);
         window.scrollTo({ top: 0, behavior: 'smooth' });
         semSelection.style.display = 'block';
         document.getElementById('greet-area').classList.remove('h-0');
@@ -73,9 +89,17 @@ function handleSubjectChange(e) {
 }
 
 // Event listener for radio button change
-radioButtons.forEach(radio => {
+semesters.forEach(radio => {
     radio.addEventListener('change', () => {
+        selectSemPNG();
         currentSem = radio.value;
+        subjects.forEach(sub =>  {
+            sub.selectedIndex = 0
+            console.log('line-97', sub);
+            
+            console.log('line-99', sub.selectedIndex);
+        });
+        selectSemPNG();
         semContainers.forEach(container => {
             container.style.display = container.id === `container-sem${currentSem}` ? 'block' : 'none';
         });
@@ -202,15 +226,7 @@ const showKaro = (pdf) => {
             const apiUrl = bookmark ? `https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}` : `https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`;
             const successMessage = bookmark ? 'Bookmark removed successfully' : 'PDF bookmarked';
             const failureMessage = bookmark ? 'Failed to remove bookmark' : 'Failed to bookmark PDF';
-
-            if (!bookmark) {
-                bookmarkIcon.classList.remove('ri-bookmark-line');
-                bookmarkIcon.classList.add('ri-bookmark-fill');
-            } else {
-                bookmarkIcon.classList.remove('ri-bookmark-fill');
-                bookmarkIcon.classList.add('ri-bookmark-line');
-            }
-
+            
             fetch(apiUrl, {
                 method: 'GET',
                 credentials: 'include'
@@ -219,7 +235,15 @@ const showKaro = (pdf) => {
                 .then(data => {
                     if (data.status_code === 200) {
                         showNotification(successMessage, 'green');
-                        bookmark = !bookmark; // Toggle bookmark state
+                        bookmark = !bookmark; 
+
+                        if(bookmark){
+                            bookmarkIcon.classList.remove('ri-bookmark-line');
+                            bookmarkIcon.classList.add('ri-bookmark-fill');
+                        }else{
+                            bookmarkIcon.classList.remove('ri-bookmark-fill');
+                            bookmarkIcon.classList.add('ri-bookmark-line');
+                        }
                     } else {
                         throw new Error(failureMessage);
                     }
