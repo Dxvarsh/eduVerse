@@ -163,9 +163,11 @@ const showKaro = (pdf) => {
     let bookmark = isBookmarked === 'true';
     getUser().then(currentUser => {
         const {
-            username: currentUserUsername
+            username: currentUserUsername,
+            isadmin
         } = currentUser ?? {};
         console.log('--line 133',String(username));
+        console.log('--line 134',isadmin);
         
         
         const li = document.createElement("li");
@@ -182,7 +184,7 @@ const showKaro = (pdf) => {
                                 <i class="ri-download-line mr-2"></i> Download
                             </button>
                         </a>
-                        <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${String(currentUserUsername) === username ? "block" : "hidden"}" id="${path}">
+                        <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUserUsername) === username) || isadmin ? "block" : "hidden"}" id="${path}">
                             <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
                         </button>
                         <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
