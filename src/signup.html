@@ -16,11 +16,11 @@
     <link rel="stylesheet" href="../main.css" />
 
     <!-- logo -->
-    <link rel="shortcut icon" href="./img/evLOGO.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/img/evLOGO.png" type="image/x-icon" />
     <title>eduVerse | Register</title>
   </head>
   <body class="bg-darkblue w-full h-screen font-gilroy">
-    <div class="flex gap-2 justify-center items-center loader-main bg-darkblue h-screen flex-col hidden">
+    <div class="flex gap-2 z-50 justify-center items-center loader-main bg-darkblue h-screen flex-col hidden">
       <div class="flex space-x-2">
           <div class="h-5 w-5 bg-[#38bdf8] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
           <div class="h-5 w-5 bg-[#38bdf8] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
@@ -37,7 +37,7 @@
               <span class="text-[#1976D2] font-semibold -ml-0.5">E</span>
           .🥲)</span>
       </div>
- </div>
+    </div>
 
     <div class="main h-screen w-full relative">
       <!-- navbar -->
@@ -151,7 +151,7 @@
                           </div>
                       </div>
       
-                      <div class="mt-6">
+                      <div class="mt-6 hidden" id="otp-box-div">
                           <label for="otp-box" class="block text-sm font-medium leading-5 text-tailblue">OTP</label>
                           <div class="mt-1 flex rounded-md shadow-sm">
                               <input id="otp-box" name="otp-box" placeholder="📲 Enter OTP" type="text" required=""
@@ -165,7 +165,7 @@
                       ></div>
       
                       <div class="mt-6">
-                          <span class="block w-full rounded-md shadow-sm">
+                          <span class="w-full rounded-md shadow-sm">
                               <button type="button" id="otp-btn"
                                   class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#38bdf8] hover:bg-blue-500 focus:outline-none focus:shadow-outline-indigo active:bg-[#38bdf8] transition duration-150 ease-in-out">
                                   Send OTP
@@ -173,8 +173,8 @@
                           </span>
                       </div>
       
-                      <div class="mt-6">
-                          <span class="hidden w-full rounded-md shadow-sm">
+                      <div class="mt-6" id="signup-submit-div">
+                          <span class="w-full rounded-md shadow-sm">
                               <button type="button" id="signup-submit"
                                   class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#38bdf8] hover:bg-blue-500 focus:outline-none focus:shadow-outline-indigo active:bg-[#38bdf8] transition duration-150 ease-in-out">
                                   Create account
@@ -186,23 +186,26 @@
           </div>
         </div>
       </main>
+      <section id="notification" class="z-40 w-[93%] md:w-fit fixed -bottom-20 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0 backdrop-blur-sm"> 
+      </section>
     </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const clickedElement = document.getElementById("clicked");
         const otpButton = document.querySelector("#otp-btn");
-        const signupButton = document.querySelector("#signup-submit");
+        const signupButton = document.querySelector("#signup-submit-div");
         const loader = document.querySelector(".loader-main");
         const main = document.querySelector("main");
-        const otpBox = document.querySelector('#otp-box')
+        const otpBox = document.querySelector('#otp-box-div')
         const togglePasswordButton = document.getElementById("togglePassword");
         const passwordInput = document.getElementById("password");
         const toggleIcon = document.getElementById("toggleIcon");
 
         // Initialize state 
-        signupButton.classList.add("hidden");
+        // signupButton.style.display = 'none'
         otpButton.classList.add("block");
+        signupButton.classList.add("hidden");
 
         togglePasswordButton.addEventListener("click", () => {
           const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
@@ -219,25 +222,15 @@
         });
 
         const showLoader = () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
           loader.classList.remove("hidden");
           main.classList.add("hidden");
         };
+        // showLoader();
 
         const hideLoader = () => {
           loader.classList.add("hidden");
           main.classList.remove("hidden");
-        };
-
-        
-        const displayMessage = (message, isError = false) => {
-          clickedElement.innerHTML = `
-              <h2 class="text-white text-md ${
-                isError ? "text-red-400" : "text-green-400"
-              }">${message}</h2>
-            `;
-          setTimeout(() => {
-            clickedElement.innerHTML = "";
-          }, 5000);
         };
 
         const sendOTP = () => {
@@ -260,13 +253,12 @@
             .catch((error) => {
               hideLoader();
               console.error("Error:", error);
-              displayMessage(error.message, true);
+              showNotification(error.message, 'red');
             });
         };
 
         otpButton.addEventListener("click", (e) => {
           e.preventDefault();
-          otpBox.classList.remove("hidden");
           showLoader();
 
           const username = document.querySelector("#username").value;
@@ -295,31 +287,51 @@
             .then((data) => {
               hideLoader();
               if (data.status_code === 200) {
-                displayMessage(data.message || "Signup successful!");
+                showNotification(data.message || "Signup successful!", 'green');
+                console.log('line --299');
+                otpBox.classList.remove("hidden");
                 signupButton.classList.remove("hidden");
+                signupButton.classList.add("block");
                 otpButton.classList.add("hidden");
+                console.log(signupButton);
+                
               } else {
-                displayMessage(data.message || "An error occurred", true);
+                showNotification(data.message || "An error occurred", 'red');
               }
             })
             .catch((error) => {
               hideLoader();
               console.error("Error:", error);
-              displayMessage(error.message || "An error occurred", true);
+              showNotification(error.message || "An error occurred", 'red');
             });
           }
           else{
             hideLoader();
-            displayMessage("⚠️ Passwords do not match. Please re-enter", true);
+            showNotification("⚠️ Passwords do not match. Please re-enter", 'red');
             return;
           }  
         });
-        hideLoader();
         signupButton.addEventListener("click", (e) => {
           e.preventDefault();
           sendOTP();
         });
       });
+
+      const showNotification = (message, color) => {
+          const notification = document.querySelector("#notification");
+          notification.innerHTML = `
+              <div class="w-full px-4 py-2 rounded-lg text-${color}-600 font-extrabold border border-${color}-700 bg-${color}-200 drop-shadow-sm">
+                  <h2 class="text-xl text-center drop-shadow-2xl">${message}</h2>
+              </div>`;
+          notification.style.opacity = 1;
+          notification.classList.add('bottom-16')
+
+          setTimeout(() => {
+              notification.classList.remove('bottom-16')
+              notification.classList.add('-bottom-20')
+              notification.style.opacity = 0;
+          }, 3000);
+      };
     </script>
   </body>
 </html>
