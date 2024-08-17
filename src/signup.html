@@ -248,7 +248,11 @@
             .then((res) => res.json())
             .then((data) => {
               hideLoader();
-              window.location.replace("./login.html");
+              if (data.status_code === 200) {
+                window.location.replace("./login.html");
+              }else{
+                showNotification(data.message, 'red');
+              }
             })
             .catch((error) => {
               hideLoader();
