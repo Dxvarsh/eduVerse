@@ -6,11 +6,20 @@ const bookmarksDocs = document.getElementById('bookmark-docs');
 const loader = document.querySelector(".loader-main");
 const main = document.querySelector("main")
 const footer =  document.querySelector('footer');
+const sctDiv = document.getElementById('sct-div');
 
+sctDiv.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior:'smooth'
+    });
+    console.log(sctDiv);
+})
 
 window.addEventListener("scroll", function () {
     footer.classList.toggle("h-0",window.scrollY > 0);
     footer.classList.toggle("py-0",window.scrollY > 0);
+    sctDiv.classList.toggle('hidden', window.scrollY === 0);
 })
 
 function noBookmarks(){

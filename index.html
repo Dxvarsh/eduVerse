@@ -67,16 +67,17 @@
 
         </nav>
 
-        <main class="h-screen px-3 md:px-16 pt-20">
-            <section class="my-5">
+        <main class="h-screen px-3 md:px-16 pt-14">
+            <section class="my-3">
                 <div class="grid max-w-screen-xl mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                     <div class="mr-auto place-self-center lg:col-span-7">
-                        <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white">"Collaborate, Learn, and Grow Together"</h1>
-                        <p class="max-w-2xl mb-6 font-light text-white lg:mb-8 md:text-lg lg:text-xl">Welcome to <span class="text-white"><span class="text-tailblue">edu</span>Verse</span>!</p>
-                        <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl ">
+                        <h1 class="max-w-2xl mb-5 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white">"Collaborate, Learn, and Grow Together"</h1>
+                        <p class="max-w-2xl mb-2 font-light text-white lg:mb-4 md:text-lg lg:text-xl">Welcome to <span class="text-white"><span class="text-tailblue">edu</span>Verse</span>!</p>
+                        <p class="max-w-2xl mb-2 font-light text-gray-500 lg:mb-4 md:text-lg lg:text-xl ">
                             <span class="text-tailblue">eduVerse</span> is a free, online learning platform designed to help students connect, learn, and grow together. Our mission is to empower students to achieve their full potential by fostering a supportive, inclusive, and collaborative learning environment.
                         </p>
-                        <div class="flex mb-6 lg:mb-8 items-center">
+                        
+                        <div class="flex mb-2 lg:mb-4 items-center">
                             <p class="max-w-2xl font-light text-gray-500 md:text-lg lg:text-xl mr-3">Be a part of our <span class="text-tailblue">community</span>.</p> 
                             <a href="https://chat.whatsapp.com/Ek1eQQOUPIbJc2MFtQg9T8" class="inline-flex items-center justify-center px-4 py-2 mr-3 text-base text-center text-white rounded-full bg-green-500 hover:bg-blue-500 font-medium relative">
                                 <i class="ri-whatsapp-line mr-2 text-xl text-white"></i>
@@ -85,7 +86,7 @@
                             </a>
                         </div>
                         
-                        <div class="w-full mx-auto flex justify-center md:justify-start pt-8">
+                        <div class="w-full mx-auto flex justify-center md:justify-start pt-4">
                             <a href="/src/home.html" class="inline-flex items-center justify-center px-3 py-3 text-base text-center border border-gray-300 rounded-lg hover:bg-tailblue text-white mr-4 transition-all font-semibold ">
                                 📚 Select Semester
                             </a>
@@ -135,6 +136,14 @@
             
         </main>
 
+        <!-- Scroll To top  -->
+        <section id="sct-div" class="bg-[#38bdf8] w-fit mt-20 inline-flex justify-center items-center gap-2 fixed bottom-14 right-4 rounded-full transition-all cursor-pointer">
+            <h3 class="text-white text-center font-semibold tracking-wide text-sm md:text-sm rounded-full pl-3" id="scroll-to-top">
+                Scroll Down
+            </h3>
+            <img src="https://img.icons8.com/?size=40&id=101309&format=png&color=000000" alt="" srcset="" class="rounded-full transition-all rotate-180" id="sct-png">          
+        </section>
+
         <footer class="px-3 h-0 border-t-2 border-tailblue flex items-center justify-center md:px-16 fixed bottom-0 right-0 left-0 backdrop-blur-md text-gray-200 flex-col transition-all overflow-hidden text-xs">
             <p class="text-center">
                 Developed by
@@ -149,10 +158,29 @@
         </footer>
     </div>
     <script>
+        const sctDiv = document.getElementById('sct-div');
+        const scrollToTop = document.getElementById('scroll-to-top');
+        const sctPng = document.getElementById('sct-png');
+
+        sctDiv.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior:'smooth'
+            });
+        })
+
         window.addEventListener("scroll",function(){
             const footer = document.querySelector('footer')
             footer.classList.toggle("h-fit",window.scrollY > 0);
             footer.classList.toggle("py-2",window.scrollY > 0);
+            sctPng.classList.toggle('rotate-0', window.scrollY > 0);
+            if (window.scrollY > 100) {
+                scrollToTop.innerHTML = 'Scroll to Top';
+                scrollToTop.classList.add('animate-bounce');
+            } else {
+                scrollToTop.innerHTML = 'Scroll Down';
+                scrollToTop.classList.remove('animate-bounce');
+            }
         })
         fetch('https://eduversebackend-hd6t.onrender.com/api/v1/getuser', {
             method: 'GET',

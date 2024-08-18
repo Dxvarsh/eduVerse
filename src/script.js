@@ -10,6 +10,7 @@ const backbtn = document.querySelectorAll('#back-btn');
 const semSelection = document.getElementById('sem-selection');
 const subjects = document.querySelectorAll('select');
 const footer = document.querySelector('footer');
+const sctDiv = document.getElementById('sct-div');
 let currentSem = ''; 
 
 // Function to fetch user information
@@ -45,25 +46,29 @@ function sayHello(user = 'Buddy') {
 
 function selectSemPNG(){
     for (let i = 1; i <= 6; i++) {
-        if (i == String(currentSem))
-            continue
-        else{
-            document.getElementById(`pdf-container-sem${i}`).innerHTML = "";
-            document.getElementById(`pdf-container-sem${i}`).innerHTML = `
-                <div class="pointing-up">
-                    <img src="${selectSemImg}" alt="" srcset="" class="w-10/12 md:w-1/4 mx-auto">
-                    <p class="text-xl text-center leading-9 font-extrabold text-tailblue mt-4">Select Subject using this dropdown.</p>
-                </div>
-            `;
-        }
+        document.getElementById(`pdf-container-sem${i}`).innerHTML = "";
+        document.getElementById(`pdf-container-sem${i}`).innerHTML = `
+            <div class="pointing-up">
+                <img src="${selectSemImg}" alt="" srcset="" class="w-10/12 md:w-1/4 mx-auto">
+                <p class="text-xl text-center leading-9 font-extrabold text-tailblue mt-4">Select Subject using this dropdown.</p>
+            </div>
+        `;
     }
 }
 selectSemPNG();
 
+sctDiv.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior:'smooth'
+    });
+    console.log(sctDiv);
+})
 // Event listener for scroll to toggle popup class
 window.addEventListener("scroll", function () {
     footer.classList.toggle("h-fit",window.scrollY > 0);
     footer.classList.toggle("py-2",window.scrollY > 0);
+    sctDiv.classList.toggle('hidden', window.scrollY === 0);
     const practicalPopups = document.querySelectorAll('#practical-popup');
     practicalPopups.forEach(popup => {
         popup.classList.toggle("-bottom-96", window.scrollY > 0);
@@ -83,8 +88,6 @@ backbtn.forEach(back => {
 
 function handleSubjectChange(e) {
     const selectedSubject = e.target.value;
-    console.log(`line 80: Subject = ${selectedSubject}, selected sem = ${currentSem}`);
-    
     // Call the function to fetch PDFs
     selectKar(currentSem, selectedSubject);
 }
@@ -96,11 +99,7 @@ semesters.forEach(radio => {
         currentSem = radio.value;
         subjects.forEach(sub =>  {
             sub.selectedIndex = 0
-            console.log('line-97', sub);
-            
-            console.log('line-99', sub.selectedIndex);
         });
-        selectSemPNG();
         semContainers.forEach(container => {
             container.style.display = container.id === `container-sem${currentSem}` ? 'block' : 'none';
         });
@@ -166,9 +165,7 @@ const showKaro = (pdf) => {
             username: currentUserUsername,
             isadmin
         } = currentUser ?? {};
-        console.log('--line 133',String(username));
-        console.log('--line 134',isadmin);
-        
+       
         
         const li = document.createElement("li");
         li.innerHTML = `
@@ -274,7 +271,7 @@ const showKaro = (pdf) => {
                                 <i class="ri-download-line mr-2"></i> Download
                             </button>
                         </a>
-                        <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn">
+                        <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUserUsername) === username) || isadmin ? "block" : "hidden"}" id="${path}">
                             <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
                         </button>
                         <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
