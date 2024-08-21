@@ -1,20 +1,11 @@
-// DOM elements
-import selectSemImg from './assets/img/select-sem.png'
 const loader = document.querySelector(".loader-main");
+const innerLoader = document.querySelector('#inner-loader')
 const main = document.querySelector("main");
-const greet = document.getElementById("greeting");
-const loginbtn2 = document.getElementById("log-in-btn2");
-const semesters = document.querySelectorAll('input[type="radio"]');
-const semContainers = document.querySelectorAll('.container');
-const backbtn = document.querySelectorAll('#back-btn');
-const semSelection = document.getElementById('sem-selection');
-const subjects = document.querySelectorAll('select');
+const nav = document.querySelector('nav');
 const footer = document.querySelector('footer');
 const sctDiv = document.getElementById('sct-div');
-const nav = document.querySelector('nav');
-const innerLoader = document.querySelector('#inner-loader')
-let currentSem = ''; 
-
+const scrollToTop = document.getElementById('scroll-to-top');
+const sctPng = document.getElementById('sct-png');
 document.getElementById('menu-btn').addEventListener('click', function() {
     const bottomNav = document.getElementById('bottom-nav');
     const menuIcon = document.getElementById('menu-icon');
@@ -24,6 +15,45 @@ document.getElementById('menu-btn').addEventListener('click', function() {
     menuIcon.classList.toggle('ri-close-line');
 });
 
+
+/* No data Found */
+function noBookmarks(){
+    document.getElementById(`pdf-container`).innerHTML = `
+        <div class="pointing-up">
+            <img src="${bookmarkImg}" alt="" srcset="" class="w-10/12 md:w-1/4 mx-auto -mt-5">
+            <p class="text-xl text-center leading-9 font-extrabold text-tailblue -mt-5">No Bookmarks Found.</p>
+            <p class="text-sm text-center font-semibold text-white">You haven’t saved any documents yet. Bookmark your essential Documents/PDF for easy to access!.</p>
+        </div>
+    `;
+}
+
+
+/* On Scroll effects */
+sctDiv.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior:'smooth'
+    });
+})
+window.addEventListener("scroll",function(){
+    const footer = document.querySelector('footer')
+    footer.classList.toggle("h-fit",window.scrollY > 0);
+    footer.classList.toggle("py-2",window.scrollY > 0);
+    sctDiv.classList.toggle('hidden', window.scrollY === 0);
+})
+
+/* main loader */
+const showLoader = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    loader.classList.remove("hidden");
+    main.classList.add("hidden");
+};
+const hideLoader = () => {
+    loader.classList.add("hidden");
+    main.classList.remove("hidden");
+};
+
+/* Inner Loader */
 const showInnerLoader = () => {
     innerLoader.classList.remove("hidden");
 };
@@ -31,162 +61,74 @@ const hideInnerLoader = () => {
     innerLoader.classList.add("hidden");
 };
 
+
+showLoader();
 let currentUser = null;
 
-// Function to fetch user information
 const getUser = () => {
-
     if (currentUser) {
         console.log(currentUser);
-        
         return Promise.resolve(currentUser);
     }
-
+    
     return fetch('https://eduversebackend-hd6t.onrender.com/api/v1/getuser', {
         method: 'GET',
         credentials: 'include'
     })
-        .then(response => response.json())
-        .then(user => {
-            if (user.status_code > 200) {
-                throw new Error(user.status_code);
-            } else {
-                currentUser = user.data;
-                sayHello(user.data.fullname);
-                return user.data; // Assuming user.data contains the user information
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching user:', error);
-            loginbtn2.classList.remove('hidden');
-            if (error.message === '401') {
-                sayHello(); // Handle unauthorized access
-            }
-        });
-};
-
-// Function to display a greeting message
-function sayHello(user = 'Buddy') {
-    greet.innerHTML = `
-        <h1 class="text-white text-3xl font-monument">Hellow, 👋<br><span class="text-tailblue">${user}</span></h1>
-    `;
-}
-
-function selectSemPNG(){
-    for (let i = 1; i <= 6; i++) {
-        document.getElementById(`pdf-container-sem${i}`).innerHTML = "";
-        document.getElementById(`pdf-container-sem${i}`).innerHTML = `
-            <div class="pointing-up">
-                <img src="${selectSemImg}" alt="" srcset="" class="w-10/12 md:w-1/4 mx-auto">
-                <p class="text-xl text-center leading-9 font-extrabold text-tailblue mt-4">Select Subject using this dropdown.</p>
-            </div>
-        `;
-    }
-}
-selectSemPNG();
-
-sctDiv.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior:'smooth'
-    });
-    console.log(sctDiv);
-})
-// Event listener for scroll to toggle popup class
-window.addEventListener("scroll", function () {
-    footer.classList.toggle("h-fit",window.scrollY > 0);
-    footer.classList.toggle("py-2",window.scrollY > 0);
-    sctDiv.classList.toggle('hidden', window.scrollY === 0);
-    const practicalPopups = document.querySelectorAll('#practical-popup');
-    practicalPopups.forEach(popup => {
-        popup.classList.toggle("-bottom-96", window.scrollY > 0);
-    });
-});
-
-// Event listener for back button
-backbtn.forEach(back => {
-    back.addEventListener('click', () => {
-        semContainers.forEach(container => container.style.display = 'none');
-        semesters.forEach(button => button.checked = false);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        semSelection.style.display = 'block';
-        document.getElementById('greet-area').classList.remove('h-0');
-    });
-});
-
-function handleSubjectChange(e) {
-    const selectedSubject = e.target.value;
-    // Call the function to fetch PDFs
-    selectKar(currentSem, selectedSubject);
-}
-
-// Event listener for radio button change
-semesters.forEach(radio => {
-    radio.addEventListener('change', () => {
-        selectSemPNG();
-        currentSem = radio.value;
-        subjects.forEach(sub =>  {
-            sub.selectedIndex = 0
-        });
-        semContainers.forEach(container => {
-            container.style.display = container.id === `container-sem${currentSem}` ? 'block' : 'none';
-        });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        semSelection.style.display = 'none';
-        document.getElementById('greet-area').classList.add('h-0');
-        // Remove previous event listeners
-        subjects.forEach(sub => {
-            sub.removeEventListener('change', handleSubjectChange);
-        });
-        // Add new event listeners
-        subjects.forEach(sub => {
-            sub.addEventListener('change', handleSubjectChange);
-        });
-    });
-});
-
-// Function to fetch PDFs based on semester and subject
-const selectKar = (semester, subject) => {
-    loader.classList.remove("hidden");
-    main.classList.add("hidden");
-
-    // Clear previous PDF containers
-    for (let i = 1; i <= 6; i++) {
-        document.getElementById(`pdf-container-sem${i}`).innerHTML = "";
-    }
-
-    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/getpdf?subject=${subject}&sem=${semester}`, {
-        method: 'GET',
-        credentials: 'include'
+    .then(response => response.json())
+    .then(user => {
+        hideLoader();
+        if (user.status_code > 200) {
+            throw new Error(user.status_code);
+        } else {
+            currentUser = user.data; // Store the user data
+            return currentUser;
+        }
     })
-        .then(res => res.json())
-        .then(res => {
-            loader.classList.add("hidden");
-            main.classList.remove("hidden");
-
-            if (res.status_code > 200) {
-                showNotification(res.message, 'red');
-            } else if (res.status_code === 200) {
-                saariPdf(res.data);
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching PDFs:', error);
-            showNotification('Failed to fetch PDFs', 'red');
-        });
+    .catch(error => {
+        console.error('Error fetching user:', error);
+        if (error.message === '401') {
+            // Handle unauthorized error
+        }
+    });
 };
 
-// Function to display PDFs
+getUser();
+
 const saariPdf = (pdfs) => {
     pdfs.forEach(pdf => showKaro(pdf));
 };
 
-// Function to display individual PDF item
+showInnerLoader();
+fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/allpdf`, {
+    method: 'GET',
+    credentials: 'include'
+})
+.then(res => res.json())
+.then(res => {
+    hideInnerLoader();
+    if (res.status_code > 200) {
+        showNotification(res.message, 'red');
+    } else if (res.status_code === 200) {
+        console.log(res.data);
+        saariPdf(res.data);
+    }
+})
+.catch(error => {
+    console.error('Error fetching PDFs:', error);
+    showNotification('Failed to fetch PDFs', 'red');
+});
+
+
+
 const showKaro = (pdf) => {
     const {
         title, username, date, path, Sem, subject, isBookmarked
     } = pdf;
 
+
+    console.log(pdf);
+    
     let bookmark = isBookmarked === 'true';
     
     getUser().then(currentUser => {
@@ -199,7 +141,7 @@ const showKaro = (pdf) => {
         const li = document.createElement("li");
         li.innerHTML = `
             <div class="theory mb-2 border border-tailblue rounded">
-                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
+                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative md:pt-2">
                     <div class="p-4 md:w-[70%]">
                         <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
                         <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
@@ -217,6 +159,7 @@ const showKaro = (pdf) => {
                             <i class="${bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}" bookmark-btn-icon></i>
                         </button>
                     </div>
+                    <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Doc Location: <span class="text-tailblue tracking-wider">Sem: ${Sem}, ${subject}</span>.</p>
                 </div>
             </div>`;
 
@@ -306,13 +249,13 @@ const showKaro = (pdf) => {
                 });
         });
 
-        document.getElementById(`pdf-container-sem${Sem}`).appendChild(li);
+        document.getElementById(`pdf-container`).appendChild(li);
     }).catch(error => {
         console.error('Error fetching user:', error);
         const li = document.createElement("li");
         li.innerHTML = `
             <div class="theory mb-2">
-                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
+                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative">
                     <div class="p-4 md:w-[70%]">
                         <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
                         <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
@@ -330,6 +273,7 @@ const showKaro = (pdf) => {
                             <i class="${bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}" bookmark-btn-icon></i>
                         </button>
                     </div>
+                    <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${Sem}, ${subject}</span>.</p>
                 </div>
             </div>`;
 
@@ -400,11 +344,12 @@ const showKaro = (pdf) => {
                 });
         });
 
-        document.getElementById(`pdf-container-sem${Sem}`).appendChild(li);
+        document.getElementById(`pdf-container`).appendChild(li);
     });
 };
 
-// Function to display notifications
+
+
 const showNotification = (message, color) => {
     const notification = document.querySelector("#notification");
     notification.innerHTML = `
@@ -420,9 +365,3 @@ const showNotification = (message, color) => {
         notification.style.opacity = 0;
     }, 3000);
 };
-
-// Initial setup
-getUser().then(user => {
-    console.log('User data:', user);
-    // Initialize any UI or logic that depends on user data here
-});

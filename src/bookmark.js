@@ -130,6 +130,7 @@ const getUser = () => {
             return response.json();
         })
         .then(data => {
+            bookmarksDocs.innerHTML = ``;
             // {"data":{},"message":"No Bookmarks","status_code":200}
             if(data.message == 'No Bookmarks')
                 noBookmarks()
@@ -172,10 +173,10 @@ const showKaro = (book) => {
     const li = document.createElement("li");
     li.innerHTML = `
         <div class="theory mb-2 border border-tailblue rounded">
-            <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative">
+            <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative md:pt-2">
                 <div class="p-4 md:w-[70%]">
                     <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
-                    <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
+                    <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
                     </p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
@@ -214,7 +215,7 @@ const showKaro = (book) => {
                 parentLi.remove(); // Remove the <li> element
             }
             if(bookmarksDocs.children.length == 0)
-                noBookmarks()
+                noBookmarks();
             })
         .catch(error => {
             console.error('Error adding bookmark:', error);
@@ -245,3 +246,4 @@ const showNotification = (message, color) => {
         notification.style.opacity = 0;
     }, 3000);
 };
+noBookmarks();

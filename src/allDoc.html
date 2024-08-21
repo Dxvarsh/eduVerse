@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- tailwind cdn -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icon pack -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+        rel="stylesheet"
+    />
+    <!-- custom css -->
+    <link rel="stylesheet" href="../main.css">
+
+    <!-- logo -->
+    <link rel="shortcut icon" href="./assets/img/evLOGO.png" type="image/x-icon">
+    <title>eduVerse | Search Doc</title>
+</head>
+<body class="bg-darkblue w-full h-screen font-gilroy">
+
+    <div class="flex z-50 gap-2 justify-center items-center loader-main bg-darkblue h-screen flex-col hidden">
+        <div class="flex space-x-2">
+            <div class="h-5 w-5 bg-[#38bdf8] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+            <div class="h-5 w-5 bg-[#38bdf8] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+            <div class="h-5 w-5 bg-[#38bdf8] rounded-full animate-bounce"></div>
+        </div>
+        <div class="flex flex-col items-center">
+            <span class="text-xl leading-9 font-extrabold text-white">Loading...</span>
+            <span class="text-white text-xs">(It will take time, couse our server is not like 
+                <span class="text-[#1976D2] font-semibold">G</span>
+                <span class="text-[#FF3D00] font-semibold -ml-0.5">O</span>
+                <span class="text-[#FFC107] font-semibold -ml-0.5">O</span>
+                <span class="text-[#1976D2] font-semibold -ml-0.5">G</span>
+                <span class="text-[#4CAF50] font-semibold -ml-0.5">L</span>
+                <span class="text-[#1976D2] font-semibold -ml-0.5">E</span>
+            .🥲)</span>
+        </div>
+    </div>
+
+
+    <div class="main h-screen w-full relative"> 
+
+        <!-- navbar -->
+        <nav class="px-3 h-fit border-b-2 border-tailblue md:px-16 fixed right-0 left-0 backdrop-blur-md z-30 gap-4 transition-all">
+
+            <div id="upper-nav" class="w-full h-20 flex items-center justify-between transition-all">
+                <div>
+                    <a href="./bookmark.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
+                        <span class="hidden md:block">Profile</span>
+                        <img src="https://img.icons8.com/?size=100&id=23265&format=png&color=ffffff" width="30" alt="" srcset="" class="md:hidden">
+                    </a>
+                </div>
+    
+                <div class="h-full flex items-center">
+                    <a class="text-white font-monument text-2xl" href="./index.html"><span class="text-tailblue">edu</span>Verse</a>
+                </div>
+
+                <div>
+                    <p class="text-white font-bold text-xl hover:text-tailblue transition-all cursor-pointer" id="menu-btn">
+                        <i id="menu-icon" class="text-2xl ri-menu-line"></i>
+                    </p>
+                </div>
+            </div>
+
+            <div class="h-fit hidden flex flex-col items-start justify-start gap-4 text-white pb-3 transition-all" id="bottom-nav">
+                <div class="h-[1px] -my-2 w-full bg-zinc-400 mt-3"></div>
+                <a href="./home.html" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-home-line text-2xl mr-4"></i>
+                    <span>Select Sem</span>
+                </a>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="https://chat.whatsapp.com/Ek1eQQOUPIbJc2MFtQg9T8" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-whatsapp-line text-2xl mr-4"></i>
+                    <span>Join Community</span>
+                    <div class="h-2 w-2 bg-green-600 rounded-full animate-pulse"></div>
+
+                </a>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="https://www.instagram.com/eduverse_io?utm_source=qr&igsh=MW1mN3U0czBvcnVoNQ==" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-instagram-line text-2xl mr-4"></i>
+                    <span>Instagram</span>
+                </a>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="https://drive.google.com/drive/folders/19BWsGWZkGU7YVH7cJcEfSjMDGC5PsFxr?usp=sharing" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-download-line text-2xl mr-4"></i>
+                    <span>Download Softwares</span>
+                    <div class="h-2 w-2 bg-red-500 rounded-full animate-pulse"></div>
+                </a>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="../index.html" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-information-line text-2xl mr-4"></i>
+                    <span>About Us</span>
+                </a>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="https://play.google.com/store/apps/details?id=com.cv.docscanner&pli=1" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-book-line text-2xl mr-4"></i>
+                    <span>Doc Scanner</span>
+                </a>
+            </div>
+
+        </nav>
+
+        <main class="h-screen px-3 md:px-16">
+        
+            <div class="min-h-screen flex flex-col justify-center py-24 sm:px-6 lg:px-8">
+                <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                        <img class="mx-auto h-10 w-auto" src="./assets/img/evLOGO.png" alt="Workflow">
+                        <h2 class="my-6 text-center text-3xl leading-9 font-extrabold text-white">
+                            Search Document
+                        </h2>
+                    </div>
+                    <div class="mt-2 text-center text-sm leading-5 text-zinc-400 flex flex-row items-center justify-between w-full">
+                        <div class="w-[65%]">
+                            <input id="search-box" name="search-box" placeholder="🔎 e.g. unit 1" type="text" required=""
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm">
+                        </div>
+                        <button type="button" id="search-btn"
+                            class="shadow-sm w-[30%] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#38bdf8] hover:bg-blue-500 focus:outline-none focus:shadow-outline-indigo active:bg-[#38bdf8] transition duration-150 ease-in-out">
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+                <div class="w-full mt-3 flex gap-2 justify-end" id="recently-upload">
+                    <label for="recents" class="block text-md font-bold leading-5 text-white">Recenty Uploaded</label>
+                    <div class="flex rounded-md shadow-sm">
+                        <input id="recents" name="recents" type="checkbox" required=""
+                            class="w-full px-3 py-5 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm">
+                    </div>
+                </div>
+            
+                <div class="sm:mx-auto mt-6 bg-transparent sm:w-full  min-h-screen relative">
+                    <div class="w-full gap-x-2 flex justify-center items-center bg-[rgba(11,17,33,0.5)] fixed inset-0 hidden z-50" id="inner-loader">
+                        <div
+                          class="w-5 bg-[#38bdf8] animate-pulse h-5 rounded-full [animation-delay:-0.3s]"
+                        ></div>
+                        <div
+                          class="w-5 animate-pulse h-5 bg-[#38bdf8] rounded-full [animation-delay:-0.15s]"
+                        ></div>
+                        <div
+                          class="w-5 h-5 animate-pulse bg-[#38bdf8] rounded-full"
+                        ></div>
+                    </div>
+                    <ul id="pdf-container" class="mb-2">
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+
+        <section id="sct-div" class="bg-[#38bdf8] w-fit fixed bottom-14 right-4 rounded-full transition-all cursor-pointer hidden animate-bounce">
+            <img src="https://img.icons8.com/?size=40&id=101309&format=png&color=000000" alt="" srcset="" class="rounded-full transition-all" id="sct-png">          
+        </section>
+
+        <section id="notification" class="z-40 w-[93%] md:w-fit fixed -bottom-20 transition-all left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0 backdrop-blur-sm"> 
+        </section>
+
+        <footer class="px-3 h-0 border-t-2 border-tailblue flex items-center justify-center md:px-16 fixed bottom-0 right-0 left-0 backdrop-blur-md text-gray-200 flex-col transition-all overflow-hidden text-xs">
+            <p class="text-center">
+                Developed by
+                <span class="text-tailblue"><a href="https://github.com/Kirtanmojidra" target="_blank">Kirtan Mojidra</a></span>
+                & <span class="text-tailblue"><a href="https://dxvarsh.github.io/Portfolio1/" target="_blank">Devarsh Nagar</a></span>
+            </p>
+            <p class="text-center">
+                Managed with 
+                <i class="ri-heart-fill text-red-500"></i>
+                by our great community.
+            </p>
+        </footer>
+    </div>
+
+    <script type="module" src="./allDoc.js"></script>
+</body>
+</html>
