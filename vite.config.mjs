@@ -21,7 +21,8 @@ export default defineConfig({
         bookmark: resolve(__dirname, 'src/bookmark.html'),
         home: resolve(__dirname, 'src/home.html'),
         login: resolve(__dirname, 'src/login.html'),
-        signup: resolve(__dirname, 'src/signup.html')
+        signup: resolve(__dirname, 'src/signup.html'),
+        allDoc: resolve(__dirname, 'src/allDoc.html')
       },
       output: {
         assetFileNames: 'assets/[name].[hash].[ext]',
