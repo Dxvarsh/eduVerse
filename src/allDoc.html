@@ -114,16 +114,17 @@
                         </h2>
                     </div>
                     <div class="mt-2 text-center text-sm leading-5 text-zinc-400 flex flex-row items-center justify-between w-full">
-                        <div class="w-[65%]">
+                        <div class="w-full">
                             <input id="search-box" name="search-box" placeholder="🔎 e.g. unit 1" type="text" required=""
                                 class="w-full px-4 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm">
                         </div>
-                        <button type="button" id="search-btn"
-                            class="shadow-sm w-[30%] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#38bdf8] hover:bg-blue-500 focus:outline-none focus:shadow-outline-indigo active:bg-[#38bdf8] transition duration-150 ease-in-out">
-                            Search
-                        </button>
+                        
                     </div>
                 </div>
+                <!-- <button type="button" id="search-btn"
+                            class="shadow-sm w-[30%] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#38bdf8] hover:bg-blue-500 focus:outline-none focus:shadow-outline-indigo active:bg-[#38bdf8] transition duration-150 ease-in-out">
+                            Search
+                        </button> -->
 
                 <div class="w-full mt-3 flex gap-2 justify-end" id="recently-upload">
                     <label for="recents" class="block text-md font-bold leading-5 text-white">Recenty Uploaded</label>
@@ -133,7 +134,7 @@
                     </div>
                 </div>
             
-                <div class="sm:mx-auto mt-6 bg-transparent sm:w-full  min-h-screen relative">
+                <div class="sm:mx-auto mt-6 bg-transparent sm:w-full min-h-screen relative">
                     <div class="w-full gap-x-2 flex justify-center items-center bg-[rgba(11,17,33,0.5)] fixed inset-0 hidden z-50" id="inner-loader">
                         <div
                           class="w-5 bg-[#38bdf8] animate-pulse h-5 rounded-full [animation-delay:-0.3s]"

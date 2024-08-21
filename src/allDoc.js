@@ -1,3 +1,4 @@
+import bookmarkImg from './assets/img/no-bookmarks.png';
 const loader = document.querySelector(".loader-main");
 const innerLoader = document.querySelector('#inner-loader')
 const main = document.querySelector("main");
@@ -6,6 +7,11 @@ const footer = document.querySelector('footer');
 const sctDiv = document.getElementById('sct-div');
 const scrollToTop = document.getElementById('scroll-to-top');
 const sctPng = document.getElementById('sct-png');
+const searchBox = document.getElementById('search-box');
+const pdfContainer = document.getElementById('pdf-container');
+
+let pdfsData = [];
+
 document.getElementById('menu-btn').addEventListener('click', function() {
     const bottomNav = document.getElementById('bottom-nav');
     const menuIcon = document.getElementById('menu-icon');
@@ -15,6 +21,31 @@ document.getElementById('menu-btn').addEventListener('click', function() {
     menuIcon.classList.toggle('ri-close-line');
 });
 
+// Function to filter and display PDFs based on the search query
+const searchPDFs = (searchQuery) => {
+    const filteredPDFs = pdfsData.filter(pdf => {
+        return pdf.title.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+    console.log('-------------filteredPDFs', filteredPDFs);
+    
+    pdfContainer.innerHTML = '';
+    if(filteredPDFs.length > 0) {
+        filteredPDFs.forEach(pdf => showKaro(pdf));
+    }else{
+        pdfContainer.innerHTML = `
+            <div class="pointing-up">
+                <img src="${bookmarkImg}" alt="" srcset="" class="w-10/12 md:w-1/4 mx-auto -mt-5">
+                <p class="text-xl text-center leading-9 font-extrabold text-tailblue -mt-5">No Results Found.</p>
+                <p class="text-sm text-center font-semibold text-white">No PDFs found with the given search query. Please try with different keywords.</p>
+            </div>
+        `;
+    }
+};
+
+searchBox.addEventListener('input', () => {
+    const searchQuery = searchBox.value.trim();
+    searchPDFs(searchQuery);
+});
 
 /* No data Found */
 function noBookmarks(){
@@ -26,7 +57,6 @@ function noBookmarks(){
         </div>
     `;
 }
-
 
 /* On Scroll effects */
 sctDiv.addEventListener('click', () => {
@@ -60,7 +90,6 @@ const showInnerLoader = () => {
 const hideInnerLoader = () => {
     innerLoader.classList.add("hidden");
 };
-
 
 showLoader();
 let currentUser = null;
@@ -111,7 +140,8 @@ fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/allpdf`, {
         showNotification(res.message, 'red');
     } else if (res.status_code === 200) {
         console.log(res.data);
-        saariPdf(res.data);
+        pdfsData = res.data;
+        saariPdf(pdfsData);
     }
 })
 .catch(error => {
@@ -119,9 +149,44 @@ fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/allpdf`, {
     showNotification('Failed to fetch PDFs', 'red');
 });
 
+const convertToISODate = (customDate) => {
+    // Example customDate: "Tuesday-20-08-24"
+    const parts = customDate.split('-');
+    const day = parts[1];
+    const month = parts[2];
+    const year = parts[3];
+    // Adjust year to be 2000s (e.g., '24' becomes '2024')
+    const fullYear = `20${year}`;
+    return `${fullYear}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+};
+
+// Display PDFs, optionally filtered by date
+const displayPDFs = (filterDate = null) => {
+    pdfContainer.innerHTML = '';
+
+    pdfsData.forEach(pdf => {
+        const pdfDate = convertToISODate(pdf.date); // Convert date format
+        
+        // Display PDF if no filterDate or if it matches the filterDate
+        if (!filterDate || pdfDate === filterDate) {
+            showKaro(pdf);
+        }
+    });
+};
 
 
-const showKaro = (pdf) => {
+// Event listener for checkbox
+document.getElementById('recents').addEventListener('change', (event) => {
+    const isChecked = event.target.checked;
+    // Set filterDate to today's date if checked, otherwise no filter
+    const filterDate = isChecked ? new Date().toISOString().split('T')[0] : null;
+    console.log(`Checkbox checked: ${isChecked}, filterDate: ${filterDate}`);
+    displayPDFs(filterDate);
+});
+
+
+
+const showKaro = (pdf = null) => {
     const {
         title, username, date, path, Sem, subject, isBookmarked
     } = pdf;
