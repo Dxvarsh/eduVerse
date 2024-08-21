@@ -11,7 +11,27 @@ const semSelection = document.getElementById('sem-selection');
 const subjects = document.querySelectorAll('select');
 const footer = document.querySelector('footer');
 const sctDiv = document.getElementById('sct-div');
+const nav = document.querySelector('nav');
+const innerLoader = document.querySelector('#inner-loader')
 let currentSem = ''; 
+
+document.getElementById('menu-btn').addEventListener('click', function() {
+    const bottomNav = document.getElementById('bottom-nav');
+    const menuIcon = document.getElementById('menu-icon');
+    nav.classList.toggle('h-fit');
+    bottomNav.classList.toggle('hidden');
+    menuIcon.classList.toggle('ri-menu-line');
+    menuIcon.classList.toggle('ri-close-line');
+});
+
+const showInnerLoader = () => {
+    innerLoader.classList.remove("hidden");
+};
+const hideInnerLoader = () => {
+    innerLoader.classList.add("hidden");
+};
+
+
 
 // Function to fetch user information
 const getUser = () => {
@@ -160,6 +180,7 @@ const showKaro = (pdf) => {
     } = pdf;
 
     let bookmark = isBookmarked === 'true';
+    
     getUser().then(currentUser => {
         const {
             username: currentUserUsername,
@@ -176,11 +197,11 @@ const showKaro = (pdf) => {
                         <p class="text-gray-300 text-base">Provided by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
                     </div>
                     <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                        <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" id="download-btn">
-                            <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors">
+                        <p id="download-btn">
+                            <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
                                 <i class="ri-download-line mr-2"></i> Download
                             </button>
-                        </a>
+                        </p>
                         <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUserUsername) === username) || isadmin ? "block" : "hidden"}" id="${path}">
                             <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
                         </button>
@@ -191,8 +212,28 @@ const showKaro = (pdf) => {
                 </div>
             </div>`;
 
+
+        li.querySelector('#download-btn').addEventListener('click', e =>{
+
+            console.log('clicked');
+            const path = e.target.id;
+            fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}`,{
+                method: 'get',
+                credentials: 'include',
+
+            }).then( res => res.json())
+            .then( res =>{
+                    if(res.status_code === 200) {
+                        window.location.replace(res.data.path);
+                    }
+                }
+            )
+            // window.location.replace("./home.html");
+        })
+
         li.querySelector('.dlt-btn').addEventListener('click', (e) => {
             const path = e.target.id;
+            showInnerLoader();
             if (confirm("Are you sure you want to delete?")) {
                 fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
                     method: 'GET',
@@ -200,6 +241,7 @@ const showKaro = (pdf) => {
                 })
                     .then(res => res.json())
                     .then(data => {
+                        hideInnerLoader();
                         if (data.status_code === 200) {
                             showNotification('PDF deleted successfully', 'green');
                             const bookIdTag = document.getElementById(path)
@@ -222,6 +264,7 @@ const showKaro = (pdf) => {
         li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
             const bookmarkIcon = li.querySelector('[bookmark-btn-icon]');
             const path = e.target.id;
+            showInnerLoader();
 
             const apiUrl = bookmark ? `https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}` : `https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`;
             const successMessage = bookmark ? 'Bookmark removed successfully' : 'PDF bookmarked';
@@ -233,6 +276,7 @@ const showKaro = (pdf) => {
             })
                 .then(response => response.json())
                 .then(data => {
+                    hideInnerLoader();
                     if (data.status_code === 200) {
                         showNotification(successMessage, 'green');
                         bookmark = !bookmark; 
@@ -283,6 +327,7 @@ const showKaro = (pdf) => {
 
         li.querySelector('.dlt-btn').addEventListener('click', (e) => {
             const path = e.target.id;
+            showInnerLoader();
             if (confirm("Are you sure you want to delete?")) {
                 fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
                     method: 'GET',
@@ -290,6 +335,7 @@ const showKaro = (pdf) => {
                 })
                     .then(res => res.json())
                     .then(data => {
+                        hideInnerLoader();
                         if (data.status_code === 200) {
                             showNotification('PDF deleted successfully', 'green');
                             const bookIdTag = document.getElementById(path)
@@ -312,6 +358,7 @@ const showKaro = (pdf) => {
         li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
             const bookmarkIcon = li.querySelector('[bookmark-btn-icon]');
             const path = e.target.id;
+            showInnerLoader();
 
             const apiUrl = bookmark ? `https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}` : `https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`;
             const successMessage = bookmark ? 'Bookmark removed successfully' : 'PDF bookmarked';
@@ -331,6 +378,7 @@ const showKaro = (pdf) => {
             })
                 .then(response => response.json())
                 .then(data => {
+                    hideInnerLoader();
                     if (data.status_code === 200) {
                         showNotification(successMessage, 'green');
                         bookmark = !bookmark; // Toggle bookmark state

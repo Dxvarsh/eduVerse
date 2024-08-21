@@ -44,31 +44,77 @@
 
     <div class="main h-screen w-full relative"> 
 
-        <nav class="px-3 h-20 border-b-2 border-tailblue flex items-center justify-between md:px-16 fixed right-0 left-0 backdrop-blur-md z-30">
+        <nav class="px-3 h-fit border-b-2 border-tailblue md:px-16 fixed right-0 left-0 backdrop-blur-md z-30 gap-4 transition-all">
 
-            <div>
-                <a href="../index.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
-                    <span class="hidden md:block">About Us</span>
-                    <i class="ri-information-line text-2xl md:hidden"></i>
+            <div id="upper-nav" class="w-full h-20 flex items-center justify-between">
+                <div>
+                    <a href="./bookmark.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
+                        <span class="hidden md:block">Profile</span>
+                        <img src="https://img.icons8.com/?size=100&id=23265&format=png&color=ffffff" width="30" alt="" srcset="" class="md:hidden">
+                    </a>
+                </div>
+    
+                <div class="h-full flex items-center">
+                    <a class="text-white font-monument text-2xl" href="./index.html"><span class="text-tailblue">edu</span>Verse</a>
+                </div>
+
+                <div>
+                    <p class="text-white font-bold text-xl hover:text-tailblue transition-all cursor-pointer" id="menu-btn">
+                        <i id="menu-icon" class="text-2xl ri-menu-line"></i>
+                    </p>
+                </div>
+            </div>
+
+            <div class="h-fit hidden flex flex-col items-start justify-start gap-4 text-white pb-3" id="bottom-nav">
+                <div class="h-[1px] -my-2 w-full bg-zinc-400 mt-3"></div>
+                <a href="./allDoc.html" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-search-line text-2xl mr-4"></i>
+                    <span>Search</span>
                 </a>
-            </div>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="https://chat.whatsapp.com/Ek1eQQOUPIbJc2MFtQg9T8" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-whatsapp-line text-2xl mr-4"></i>
+                    <span>Join Community</span>
+                    <div class="h-2 w-2 bg-green-600 rounded-full animate-pulse"></div>
 
-            <div class="h-full flex items-center">
-                <a class="text-white font-monument text-2xl" href="./index.html"><span class="text-tailblue">edu</span>Verse</a>
-            </div>
-
-            <div>
-                <a href="./bookmark.html" class="text-white font-bold text-xl hover:text-tailblue transition-all">
-                    <span class="hidden md:block">Profile</span>
-                    <img src="https://img.icons8.com/?size=100&id=23265&format=png&color=ffffff" width="30" alt="" srcset="" class="md:hidden">
-                    <!-- <span class="hidden md:block">Bookmark</span> -->
-                    <!-- <i class="ri-bookmark-line text-2xl md:hidden"></i> -->
+                </a>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="https://www.instagram.com/eduverse_io?utm_source=qr&igsh=MW1mN3U0czBvcnVoNQ==" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-instagram-line text-2xl mr-4"></i>
+                    <span>Instagram</span>
+                </a>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="https://drive.google.com/drive/folders/19BWsGWZkGU7YVH7cJcEfSjMDGC5PsFxr?usp=sharing" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-download-line text-2xl mr-4"></i>
+                    <span>Download Softwares</span>
+                    <div class="h-2 w-2 bg-red-500 rounded-full animate-pulse"></div>
+                </a>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="../index.html" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-information-line text-2xl mr-4"></i>
+                    <span>About Us</span>
+                </a>
+                <div class="h-[1px] -my-2 w-full bg-zinc-400"></div>
+                <a href="https://play.google.com/store/apps/details?id=com.cv.docscanner&pli=1" class="w-full flex items-center space-x-2 hover:text-tailblue transition-all">
+                    <i class="ri-book-line text-2xl mr-4"></i>
+                    <span>Doc Scanner</span>
                 </a>
             </div>
 
         </nav>
 
-        <main class="h-screen px-3 md:px-16 pt-28">
+        <main class="h-screen px-3 md:px-16 pt-28 relative">
+            <div class="w-full gap-x-2 flex justify-center items-center bg-[rgba(11,17,33,0.5)] fixed inset-0  hidden z-50" id="inner-loader">
+                <div
+                  class="w-5 bg-[#38bdf8] animate-pulse h-5 rounded-full [animation-delay:-0.3s]"
+                ></div>
+                <div
+                  class="w-5 animate-pulse h-5 bg-[#38bdf8] rounded-full [animation-delay:-0.15s]"
+                ></div>
+                <div
+                  class="w-5 h-5 animate-pulse bg-[#38bdf8] rounded-full"
+                ></div>
+            </div>
             
             <div class="flex items-center w-full justify-between flex-wrap gap-3 overflow-hidden" id="greet-area">
                 <div id="greeting" class="mt-3 sm:w-fit w-full">
