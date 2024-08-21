@@ -206,7 +206,7 @@ const showKaro = (pdf = null) => {
         const li = document.createElement("li");
         li.innerHTML = `
             <div class="theory mb-2 border border-tailblue rounded">
-                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative md:pt-2">
+                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative pt-2">
                     <div class="p-4 md:w-[70%]">
                         <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
                         <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
@@ -320,7 +320,7 @@ const showKaro = (pdf = null) => {
         const li = document.createElement("li");
         li.innerHTML = `
             <div class="theory mb-2">
-                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative">
+                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative pt-2">
                     <div class="p-4 md:w-[70%]">
                         <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
                         <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
