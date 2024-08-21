@@ -178,7 +178,7 @@
             .then((res) =>{
                 if(res.status_code === 200){
                     // registeredUser.textContent = res.data.user_count;
-                    animateCount(registeredUser, 1000);
+                    animateCount(registeredUser, res.data.user_count);
                     console.log(res.data.user_count);   
                 }
             })    
