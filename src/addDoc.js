@@ -28,6 +28,10 @@ radioButtons.forEach((radio) => {
 // Form submit event listener
 addDocForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  window.scrollTo({
+      top: 0,
+      behavior:'smooth'
+  });
   loader.classList.remove("hidden");
   main.classList.add("hidden");
 

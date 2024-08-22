@@ -52,8 +52,7 @@ const getUser = () => {
 
                 throw new Error(user.status_code);
             } else {
-                currentUser = user.data;                
-                console.log(currentUser, 'line 55');                
+                currentUser = user.data;            
                 sayHello(user.data.fullname);
                 return user.data; // Assuming user.data contains the user information
             }
@@ -206,7 +205,7 @@ const showKaro = (pdf) => {
                             <i class="ri-download-line mr-2"></i> Download
                         </button>
                     </p>
-                    <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUser.username) === uploaderUserName) || currentUser.isadmin ? "block" : "hidden"}" id="${path}">
+                    <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUser?.username) === uploaderUserName) || currentUser?.isadmin ? "block" : "hidden"}" id="${path}">
                         <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
                     </button>
                     <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">

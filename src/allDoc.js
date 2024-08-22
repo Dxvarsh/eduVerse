@@ -92,11 +92,11 @@ const hideInnerLoader = () => {
 };
 
 showLoader();
-let currentUser = null;
 
+let currentUser = null;
 const getUser = () => {
     if (currentUser) {
-        console.log(currentUser);
+        console.log(currentUser, 'line 99');
         return Promise.resolve(currentUser);
     }
     
@@ -108,7 +108,10 @@ const getUser = () => {
     .then(user => {
         hideLoader();
         if (user.status_code > 200) {
-            throw new Error(user.status_code);
+            console.log(currentUser);
+            currentUser = 'j8!#uB%K3dFj9^+z7@z*Lf6$kG7E5Y8Q-Md2&p_sNx&]3SWG.}#Mo8|Z_U/L1J&[wU~Q3k3&b8q5LkzC^E)FkZ+A{H}^S.7*7!|q%h@]xKQ_mVe?Y,E#N:s|O+w'
+            console.log(currentUser, 'line 113');
+            throw new Error(user.status_code, 'line 111');
         } else {
             currentUser = user.data; // Store the user data
             return currentUser;
@@ -188,229 +191,127 @@ document.getElementById('recents').addEventListener('change', (event) => {
 
 const showKaro = (pdf = null) => {
     const {
-        title, username, date, path, Sem, subject, isBookmarked
+        title, username : uploaderUserName, date, path, Sem, subject, isBookmarked
     } = pdf;
 
-
     console.log(pdf);
-    
     let bookmark = isBookmarked === 'true';
+    console.log(currentUser.username);
+
     
-    getUser().then(currentUser => {
-        const {
-            username: currentUserUsername,
-            isadmin
-        } = currentUser ?? {};
-       
-        
-        const li = document.createElement("li");
-        li.innerHTML = `
-            <div class="theory mb-2 border border-tailblue rounded">
-                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative pt-2">
-                    <div class="p-4 md:w-[70%]">
-                        <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
-                        <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
-                    </div>
-                    <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                        <p id="download-btn">
-                            <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
-                                <i class="ri-download-line mr-2"></i> Download
-                            </button>
-                        </p>
-                        <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUserUsername) === username) || isadmin ? "block" : "hidden"}" id="${path}">
-                            <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
-                        </button>
-                        <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
-                            <i class="${bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}" bookmark-btn-icon></i>
-                        </button>
-                    </div>
-                    <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Doc Location: <span class="text-tailblue tracking-wider">Sem: ${Sem}, ${subject}</span>.</p>
+    const li = document.createElement("li");
+    li.innerHTML = `
+        <div class="theory mb-2 border border-tailblue rounded">
+            <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative pt-2">
+                <div class="p-4 md:w-[70%]">
+                    <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
+                    <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${uploaderUserName}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
                 </div>
-            </div>`;
+                <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
+                    <p id="download-btn">
+                        <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
+                            <i class="ri-download-line mr-2"></i> Download
+                        </button>
+                    </p>
+                    <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUser?.username) === uploaderUserName) || currentUser?.isadmin ? "block" : "hidden"}" id="${path}">
+                        <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
+                    </button>
+                    <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
+                        <i class="${bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}" bookmark-btn-icon></i>
+                    </button>
+                </div>
+                <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Doc Location: <span class="text-tailblue tracking-wider">Sem: ${Sem}, ${subject}</span>.</p>
+            </div>
+        </div>`;
 
 
-        li.querySelector('#download-btn').addEventListener('click', e =>{
+    li.querySelector('#download-btn').addEventListener('click', e =>{
 
-            console.log('clicked');
-            const path = e.target.id;
-            fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}`,{
-                method: 'get',
-                credentials: 'include',
+        console.log('clicked');
+        const path = e.target.id;
+        fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}`,{
+            method: 'get',
+            credentials: 'include',
 
-            }).then( res => res.json())
-            .then( res =>{
-                    if(res.status_code === 200) {
-                        window.location.replace(res.data.path);
-                    }
+        }).then( res => res.json())
+        .then( res =>{
+                if(res.status_code === 200) {
+                    window.location.replace(res.data.path);
                 }
-            )
-            // window.location.replace("./home.html");
-        })
-
-        li.querySelector('.dlt-btn').addEventListener('click', (e) => {
-            const path = e.target.id;
-            showInnerLoader();
-            if (confirm("Are you sure you want to delete?")) {
-                fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
-                    method: 'GET',
-                    credentials: 'include'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        hideInnerLoader();
-                        if (data.status_code === 200) {
-                            showNotification('PDF deleted successfully', 'green');
-                            const bookIdTag = document.getElementById(path)
-                            const parentLi = bookIdTag.closest('li');
-                            console.log(parentLi, 'line 269');
-                            if (parentLi) {
-                                parentLi.remove(); // Remove the <li> element
-                            }
-                        } else {
-                            throw new Error('Failed to delete PDF');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error deleting PDF:', error);
-                        showNotification('Failed to delete PDF', 'red');
-                    });
             }
-        });
+        )
+        // window.location.replace("./home.html");
+    })
 
-        li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
-            const bookmarkIcon = li.querySelector('[bookmark-btn-icon]');
-            const path = e.target.id;
-            showInnerLoader();
-
-            const apiUrl = bookmark ? `https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}` : `https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`;
-            const successMessage = bookmark ? 'Bookmark removed successfully' : 'PDF bookmarked';
-            const failureMessage = bookmark ? 'Failed to remove bookmark' : 'Failed to bookmark PDF';
-            
-            fetch(apiUrl, {
+    li.querySelector('.dlt-btn').addEventListener('click', (e) => {
+        const path = e.target.id;
+        showInnerLoader();
+        if (confirm("Are you sure you want to delete?")) {
+            fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
                 method: 'GET',
                 credentials: 'include'
             })
-                .then(response => response.json())
+                .then(res => res.json())
                 .then(data => {
                     hideInnerLoader();
                     if (data.status_code === 200) {
-                        showNotification(successMessage, 'green');
-                        bookmark = !bookmark; 
-
-                        if(bookmark){
-                            bookmarkIcon.classList.remove('ri-bookmark-line');
-                            bookmarkIcon.classList.add('ri-bookmark-fill');
-                        }else{
-                            bookmarkIcon.classList.remove('ri-bookmark-fill');
-                            bookmarkIcon.classList.add('ri-bookmark-line');
+                        showNotification('PDF deleted successfully', 'green');
+                        const bookIdTag = document.getElementById(path)
+                        const parentLi = bookIdTag.closest('li');
+                        console.log(parentLi, 'line 269');
+                        if (parentLi) {
+                            parentLi.remove(); // Remove the <li> element
                         }
                     } else {
-                        throw new Error(failureMessage);
+                        throw new Error('Failed to delete PDF');
                     }
                 })
                 .catch(error => {
-                    console.error('Error updating bookmark:', error);
-                    showNotification(failureMessage, 'red');
+                    console.error('Error deleting PDF:', error);
+                    showNotification('Failed to delete PDF', 'red');
                 });
-        });
-
-        document.getElementById(`pdf-container`).appendChild(li);
-    }).catch(error => {
-        console.error('Error fetching user:', error);
-        const li = document.createElement("li");
-        li.innerHTML = `
-            <div class="theory mb-2">
-                <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative pt-2">
-                    <div class="p-4 md:w-[70%]">
-                        <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
-                        <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
-                    </div>
-                    <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                        <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" id="download-btn">
-                            <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors">
-                                <i class="ri-download-line mr-2"></i> Download
-                            </button>
-                        </a>
-                        <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUserUsername) === username) || isadmin ? "block" : "hidden"}" id="${path}">
-                            <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
-                        </button>
-                        <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
-                            <i class="${bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}" bookmark-btn-icon></i>
-                        </button>
-                    </div>
-                    <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${Sem}, ${subject}</span>.</p>
-                </div>
-            </div>`;
-
-        li.querySelector('.dlt-btn').addEventListener('click', (e) => {
-            const path = e.target.id;
-            showInnerLoader();
-            if (confirm("Are you sure you want to delete?")) {
-                fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
-                    method: 'GET',
-                    credentials: 'include'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        hideInnerLoader();
-                        if (data.status_code === 200) {
-                            showNotification('PDF deleted successfully', 'green');
-                            const bookIdTag = document.getElementById(path)
-                            const parentLi = bookIdTag.closest('li');
-                            console.log(parentLi, 'line 269');
-                            if (parentLi) {
-                                parentLi.remove(); // Remove the <li> element
-                            }
-                        } else {
-                            throw new Error('Failed to delete PDF');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error deleting PDF:', error);
-                        showNotification('Failed to delete PDF', 'red');
-                    });
-            }
-        });
-
-        li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
-            const bookmarkIcon = li.querySelector('[bookmark-btn-icon]');
-            const path = e.target.id;
-            showInnerLoader();
-
-            const apiUrl = bookmark ? `https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}` : `https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`;
-            const successMessage = bookmark ? 'Bookmark removed successfully' : 'PDF bookmarked';
-            const failureMessage = bookmark ? 'Failed to remove bookmark' : 'Failed to bookmark PDF';
-
-            if (!bookmark) {
-                bookmarkIcon.classList.remove('ri-bookmark-line');
-                bookmarkIcon.classList.add('ri-bookmark-fill');
-            } else {
-                bookmarkIcon.classList.remove('ri-bookmark-fill');
-                bookmarkIcon.classList.add('ri-bookmark-line');
-            }
-
-            fetch(apiUrl, {
-                method: 'GET',
-                credentials: 'include'
-            })
-                .then(response => response.json())
-                .then(data => {
-                    hideInnerLoader();
-                    if (data.status_code === 200) {
-                        showNotification(successMessage, 'green');
-                        bookmark = !bookmark; // Toggle bookmark state
-                    } else {
-                        throw new Error(failureMessage);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error updating bookmark:', error);
-                    showNotification(failureMessage, 'red');
-                });
-        });
-
-        document.getElementById(`pdf-container`).appendChild(li);
+        }
     });
+
+    li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
+        const bookmarkIcon = li.querySelector('[bookmark-btn-icon]');
+        const path = e.target.id;
+        showInnerLoader();
+
+        const apiUrl = bookmark ? `https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}` : `https://eduversebackend-hd6t.onrender.com/api/v1/bookmark/${path}`;
+        const successMessage = bookmark ? 'Bookmark removed successfully' : 'PDF bookmarked';
+        const failureMessage = bookmark ? 'Failed to remove bookmark' : 'Failed to bookmark PDF';
+        
+        fetch(apiUrl, {
+            method: 'GET',
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                hideInnerLoader();
+                if (data.status_code === 200) {
+                    showNotification(successMessage, 'green');
+                    bookmark = !bookmark; 
+
+                    if(bookmark){
+                        bookmarkIcon.classList.remove('ri-bookmark-line');
+                        bookmarkIcon.classList.add('ri-bookmark-fill');
+                    }else{
+                        bookmarkIcon.classList.remove('ri-bookmark-fill');
+                        bookmarkIcon.classList.add('ri-bookmark-line');
+                    }
+                } else {
+                    throw new Error(failureMessage);
+                }
+            })
+            .catch(error => {
+                console.error('Error updating bookmark:', error);
+                showNotification(failureMessage, 'red');
+            });
+    });
+
+    document.getElementById(`pdf-container`).appendChild(li);
+       
 };
 
 
