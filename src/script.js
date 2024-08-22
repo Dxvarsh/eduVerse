@@ -222,8 +222,6 @@ const showKaro = (pdf) => {
 
 
         li.querySelector('#download-btn').addEventListener('click', e =>{
-
-            console.log('clicked');
             const path = e.target.id;
             fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}`,{
                 method: 'get',
@@ -236,7 +234,6 @@ const showKaro = (pdf) => {
                     }
                 }
             )
-            // window.location.replace("./home.html");
         })
 
         li.querySelector('.dlt-btn').addEventListener('click', (e) => {
