@@ -49,9 +49,13 @@ const getUser = () => {
         .then(response => response.json())
         .then(user => {
             if (user.status_code > 200) {
+                currentUser = 'dummmmmyUser'
                 throw new Error(user.status_code);
             } else {
                 currentUser = user.data;
+                
+                console.log(currentUser, 'line 55');
+                
                 sayHello(user.data.fullname);
                 return user.data; // Assuming user.data contains the user information
             }
@@ -189,11 +193,13 @@ const showKaro = (pdf) => {
 
     let bookmark = isBookmarked === 'true';
     
-    getUser().then(currentUser => {
+    getUser().then(currentUsers => {
         const {
             username: currentUserUsername,
             isadmin
-        } = currentUser ?? {};
+        } = currentUsers ?? {};
+        console.log(currentUser, '-line 197');
+        
        
         
         const li = document.createElement("li");
