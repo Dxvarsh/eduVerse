@@ -125,32 +125,34 @@ const getUser = () => {
     });
 };
 
-getUser();
+
 
 const saariPdf = (pdfs) => {
     pdfs.forEach(pdf => showKaro(pdf));
 };
 
 showInnerLoader();
-fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/allpdf`, {
-    method: 'GET',
-    credentials: 'include'
+getUser().then( user => {
+    fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/allpdf`, {
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(res => res.json())
+    .then(res => {
+        hideInnerLoader();
+        if (res.status_code > 200) {
+            showNotification(res.message, 'red');
+        } else if (res.status_code === 200) {
+            console.log(res.data);
+            pdfsData = res.data;
+            saariPdf(pdfsData);
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching PDFs:', error);
+        showNotification('Failed to fetch PDFs', 'red');
+    })
 })
-.then(res => res.json())
-.then(res => {
-    hideInnerLoader();
-    if (res.status_code > 200) {
-        showNotification(res.message, 'red');
-    } else if (res.status_code === 200) {
-        console.log(res.data);
-        pdfsData = res.data;
-        saariPdf(pdfsData);
-    }
-})
-.catch(error => {
-    console.error('Error fetching PDFs:', error);
-    showNotification('Failed to fetch PDFs', 'red');
-});
 
 const convertToISODate = (customDate) => {
     // Example customDate: "Tuesday-20-08-24"
@@ -196,7 +198,7 @@ const showKaro = (pdf = null) => {
 
     console.log(pdf);
     let bookmark = isBookmarked === 'true';
-    console.log(currentUser.username);
+    console.log(currentUser?.username);
 
     
     const li = document.createElement("li");
