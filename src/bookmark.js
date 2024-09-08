@@ -180,11 +180,11 @@ const showKaro = (book) => {
                     </p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                    <a href="https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}" id="download-btn">
-                        <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors">
+                    <p id="download-btn">
+                        <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
                             <i class="ri-download-line mr-2"></i> Download
                         </button>
-                    </a>
+                    </p>
                     
                     <button class="text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-1.5 bookmark-btn">
                         <i class="ri-bookmark-fill" id="${path}"></i>
@@ -193,6 +193,23 @@ const showKaro = (book) => {
                 <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${sem}, ${subject}</span>.</p>
             </div>
         </div>`;
+
+
+        li.querySelector('#download-btn').addEventListener('click', e =>{
+            const path = e.target.id;
+            fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}`,{
+                method: 'get',
+                credentials: 'include',
+    
+            }).then( res => res.json())
+            .then( res =>{
+                    if(res.status_code === 200) {
+                        window.location.replace(res.data.path);
+                    }
+                }
+            )
+        })
+
 
     li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
         const path = e.target.id;
