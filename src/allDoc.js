@@ -193,7 +193,7 @@ document.getElementById('recents').addEventListener('change', (event) => {
 
 const showKaro = (pdf = null) => {
     const {
-        title, username : uploaderUserName, date, path, Sem, subject, isBookmarked
+        id, title, username : uploaderUserName, date, path, Sem, subject, isBookmarked
     } = pdf;
 
     console.log(pdf);
@@ -204,30 +204,40 @@ const showKaro = (pdf = null) => {
     const li = document.createElement("li");
     li.innerHTML = `
         <div class="theory mb-2 border border-tailblue rounded">
-            <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative pt-2">
-                <div class="p-4 md:w-[70%]">
+            <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative">
+                <div class="px-4 pb-4 pt-6 md:w-[70%]">
                     <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
                     <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${uploaderUserName}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                    <p id="download-btn">
-                        <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
-                            <i class="ri-download-line mr-2"></i> Download
+                    <p id="prev-btn">
+                        <button class="text-white text-lg font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
+                            <i class="ri-eye-line mr-2"></i> Preview
                         </button>
                     </p>
-                    <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUser?.username) === uploaderUserName) || currentUser?.isadmin ? "block" : "hidden"}" id="${path}">
+
+                    <a href="https://drive.usercontent.google.com/u/0/uc?id=${id}&export=download" class="${currentUser?.isadmin ? "hidden" : "block"}">
+                        <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5">
+                            <i class="ri-download-line"></i>
+                        </button>    
+                    </a>
+
+                    <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${currentUser?.isadmin ? "block" : "hidden"}" id="${path}">
                         <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
                     </button>
+                    
                     <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
                         <i class="${bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}" bookmark-btn-icon></i>
                     </button>
                 </div>
                 <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Doc Location: <span class="text-tailblue tracking-wider">Sem: ${Sem}, ${subject}</span>.</p>
             </div>
-        </div>`;
+        </div>
+
+        `;
 
 
-    li.querySelector('#download-btn').addEventListener('click', e =>{
+    li.querySelector('#prev-btn').addEventListener('click', e =>{
 
         console.log('clicked');
         const path = e.target.id;

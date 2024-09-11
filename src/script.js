@@ -52,6 +52,13 @@ const getUser = () => {
 
                 throw new Error(user.status_code);
             } else {
+                loginbtn2.classList.remove('hidden');
+                loginbtn2.innerHTML = `
+                    <a href="./addDoc.html" class="flex items-center gap-1 py-0.5 px-2 text-tailblue">
+                        <i class="ri-add-line text-xl font-semibold"></i>
+                        <p class="font-normal">Add PDF</p>
+                    </a>
+                `;
                 currentUser = user.data;            
                 sayHello(user.data.fullname);
                 return user.data; // Assuming user.data contains the user information
@@ -60,6 +67,12 @@ const getUser = () => {
         .catch(error => {
             console.error('Error fetching user:', error);
             loginbtn2.classList.remove('hidden');
+            loginbtn2.innerHTML = `
+                <a href="./login.html" class="flex items-center gap-1 py-0.5 px-4 text-white">
+                    <i class="ri-login-circle-line text-xl font-semibold"></i>
+                    <p class="font-normal">Log in</p>
+                </a>
+            `;
             if (error.message === '401') {
                 sayHello(); // Handle unauthorized access
             }
@@ -184,30 +197,39 @@ const saariPdf = (pdfs) => {
 
 // Function to display individual PDF item
 const showKaro = (pdf) => {
+    console.log(pdf);
     const {
-        title, username : uploaderUserName, date, path, Sem, subject, isBookmarked
+       id, title, username : uploaderUserName, date, path, Sem, subject, isBookmarked
     } = pdf;
 
-    console.log(currentUser.username);
+    console.log(currentUser.username, path, id);
     
     let bookmark = isBookmarked === 'true';    
     const li = document.createElement("li");
     li.innerHTML = `
         <div class="theory mb-2 border border-tailblue rounded">
-            <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex">
+            <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative">
                 <div class="p-4 md:w-[70%]">
                     <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
                     <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${uploaderUserName}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                    <p id="download-btn">
-                        <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
-                            <i class="ri-download-line mr-2"></i> Download
+                    <p id="prev-btn">
+                        <button class="text-white text-lg font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
+                            <i class="ri-eye-line mr-2"></i> Preview
                         </button>
                     </p>
-                    <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${(String(currentUser?.username) === uploaderUserName) || currentUser?.isadmin ? "block" : "hidden"}" id="${path}">
+
+                    <a href="https://drive.usercontent.google.com/u/0/uc?id=${id}&export=download" >
+                        <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5">
+                            <i class="ri-download-line"></i>
+                        </button>    
+                    </a>
+
+                    <button class="text-white text-xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 dlt-btn ${currentUser?.isadmin ? "block" : "hidden"} md:static absolute top-2 right-2" id="${path}">
                         <i class="ri-delete-bin-line text-red-400" id="${path}"></i>
                     </button>
+                    
                     <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5 bookmark-btn" id="${path}">
                         <i class="${bookmark ? "ri-bookmark-fill" : "ri-bookmark-line"}" id="${path}" bookmark-btn-icon></i>
                     </button>
@@ -216,7 +238,7 @@ const showKaro = (pdf) => {
         </div>`;
 
 
-    li.querySelector('#download-btn').addEventListener('click', e =>{
+    li.querySelector('#prev-btn').addEventListener('click', e =>{
         const path = e.target.id;
         fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}`,{
             method: 'get',
@@ -233,8 +255,8 @@ const showKaro = (pdf) => {
 
     li.querySelector('.dlt-btn').addEventListener('click', (e) => {
         const path = e.target.id;
-        showInnerLoader();
         if (confirm("Are you sure you want to delete?")) {
+            showInnerLoader();
             fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
                 method: 'GET',
                 credentials: 'include'
