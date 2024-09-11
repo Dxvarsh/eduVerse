@@ -234,8 +234,6 @@ const showKaro = (book) => {
         subject,
         apiName
     } = book;
-
-    console.log(apiName, 'line 232');
     
     const li = document.createElement("li");
     li.innerHTML = `
