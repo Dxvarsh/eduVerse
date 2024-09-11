@@ -3,18 +3,41 @@ const loginSection = document.getElementById('log-in-section');
 const profile = document.getElementById('profile-section');
 const bookmarks = document.getElementById('bookmark-section');
 const bookmarksDocs = document.getElementById('bookmark-docs');
+const uploadByYou = document.getElementById('uploaded-by-you');
 const loader = document.querySelector(".loader-main");
 const main = document.querySelector("main")
 const footer =  document.querySelector('footer');
 const sctDiv = document.getElementById('sct-div');
+let cUser;
 
 sctDiv.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
         behavior:'smooth'
     });
-    console.log(sctDiv);
 })
+
+var tab = document.querySelectorAll('.tab');
+var textContent = document.querySelectorAll('.content');
+udaDo();
+textContent[0].style.display = "block";
+tab[0].style.backgroundColor = "#38bdf8";
+
+
+tab.forEach(function(tabs, index){
+    tabs.addEventListener("click", function(){
+        udaDo();
+        textContent[index].style.display = "block";
+        tab[index].style.backgroundColor = "#38bdf8";
+    })
+});
+
+function udaDo(){
+    textContent.forEach(function(texts, index){
+        texts.style.display = 'none';
+        tab[index].style.backgroundColor = '#38bdf833';
+    })
+}
 
 window.addEventListener("scroll", function () {
     footer.classList.toggle("h-0",window.scrollY > 0);
@@ -22,12 +45,18 @@ window.addEventListener("scroll", function () {
     sctDiv.classList.toggle('hidden', window.scrollY === 0);
 })
 
-function noBookmarks(){
-    bookmarksDocs.innerHTML = `
-        <div class="pointing-up">
+const noBookmarkBigMsg = 'No Bookmarks Found.';
+
+function noBookmarks(container = bookmarksDocs, defaultBigMsg = noBookmarkBigMsg, link = "./index.html", btnText = 'Browse Documents'){
+    container.innerHTML = `
+        <div class="pointing-up w-full">
             <img src="${bookmarkImg}" alt="" srcset="" class="w-10/12 md:w-1/4 mx-auto -mt-5">
-            <p class="text-xl text-center leading-9 font-extrabold text-tailblue -mt-5">No Bookmarks Found.</p>
-            <p class="text-sm text-center font-semibold text-white">You haven’t saved any documents yet. Bookmark your essential Documents/PDF for easy to access!.</p>
+            <p class="text-xl text-center leading-9 font-extrabold text-tailblue -mt-7">${defaultBigMsg}</p>
+            <a class="block text-center w-full mt-2" href="${link}">
+                <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors">
+                    ${btnText}
+                </button>
+            </a>
         </div>
     `;
 }
@@ -61,7 +90,7 @@ const getUser = () => {
         footer.classList.add("py-2");
         profile.classList.remove('hidden');
         bookmarks.classList.remove('hidden');
-
+        cUser = currentUser;
         // Render profile section
         profile.innerHTML = `
             <div id="profile" class="flex relative">
@@ -133,7 +162,7 @@ const getUser = () => {
             bookmarksDocs.innerHTML = ``;
             // {"data":{},"message":"No Bookmarks","status_code":200}
             if(data.message == 'No Bookmarks')
-                noBookmarks()
+                noBookmarks();
             else
                 saariPdf(data.data)
             
@@ -141,6 +170,38 @@ const getUser = () => {
         .catch(error => {
             console.error('Error fetching bookmarks:', error);
         });
+
+        fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/allpdf`, {
+            method: 'GET',
+            credentials: 'include'
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.status_code > 200) {
+                showNotification(res.message, 'red');
+            } else if (res.status_code === 200) {
+                let allpdf = [];
+
+                allpdf = res.data;
+                
+                allpdf = allpdf.filter(book => book.username === currentUser.username);
+                allpdf = allpdf.map(book => {
+                    return { ...book, apiName: 'allDoc' };
+                });
+                allpdf.forEach(book => console.log(book, '--188'));
+                
+                if(allpdf.length === 0){
+                    noBookmarks(uploadByYou, 'There is no PDF Uploaded by you..!' ,'./addDoc.html', 'Upload PDF');
+                }
+                else{
+                    saariPdf2(allpdf);
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching PDFs:', error);
+            showNotification('Failed to fetch PDFs', 'red');
+        })
     })
     .catch(error => {
         console.error('Error:', error);
@@ -162,21 +223,27 @@ const getUser = () => {
 getUser();
         
 const showKaro = (book) => {
+    console.log(book);
     const {
         title,
-        username,
+        username : uploaderUserName,
         date,
         path,
         sem,
-        subject
+        Sem,
+        subject,
+        apiName
     } = book;
+
+    console.log(apiName, 'line 232');
+    
     const li = document.createElement("li");
     li.innerHTML = `
         <div class="theory mb-2 border border-tailblue rounded">
             <div class="w-full rounded overflow-hidden shadow-lg bg-gray-800 text-white md:flex relative md:pt-2">
-                <div class="p-4 md:w-[70%]">
+                <div class="px-4 pb-4 md:w-[70%] pt-6">
                     <div class="font-bold text-xl mb-2 tracking-wider">${title}</div>
-                    <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${username}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
+                    <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${uploaderUserName}</span> on <span class="text-tailblue tracking-wider">${date}</span>.
                     </p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
@@ -185,12 +252,16 @@ const showKaro = (book) => {
                             <i class="ri-download-line mr-2"></i> Download
                         </button>
                     </p>
+
+                    <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-red-500 hover:bg-transparent border border-red-500 transition-colors dlt-btn ${(String(cUser?.username) === uploaderUserName) || cUser?.isadmin ? "block" : "hidden"}" id="${path}">
+                        <i class="ri-delete-bin-line hover:text-red-400" id="${path}"></i> Delete
+                    </button>
                     
-                    <button class="text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-1.5 bookmark-btn">
+                    <button class="${(apiName === 'allDoc') ? "hidden" : "block"} text-white text-2xl font-bold rounded-full hover:bg-tailblue px-2 py-1.5 bookmark-btn">
                         <i class="ri-bookmark-fill" id="${path}"></i>
                     </button>
                 </div>
-                <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${sem}, ${subject}</span>.</p>
+                <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${(apiName === 'allDoc') ?  Sem : sem}, ${subject}</span>.</p>
             </div>
         </div>`;
 
@@ -211,40 +282,77 @@ const showKaro = (book) => {
         })
 
 
-    li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
-        const path = e.target.id;
-        fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}`, {
-            method: 'GET',
-            credentials: 'include'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Bookmark API request failed');
+        li.querySelector('.dlt-btn').addEventListener('click', (e) => {
+            const path = e.target.id;
+            if (confirm("Are you sure you want to delete?")) {
+                fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletepdf/${path}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status_code === 200) {
+                        showNotification('PDF deleted successfully', 'green');
+                        const bookIdTag = document.getElementById(path)
+                        const parentLi = bookIdTag.closest('li');
+                        console.log(parentLi, 'line 292');
+                        if (parentLi) {
+                            parentLi.remove(); // Remove the <li> element
+                        }
+                    } else {
+                        throw new Error('Failed to delete PDF');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting PDF:', error);
+                    showNotification('Failed to delete PDF', 'red');
+                });
             }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Bookmark removed successfully:', data);
-            showNotification('Bookmark removed successfully', 'green');
-            const bookIdTag = document.getElementById(path)
-            const parentLi = bookIdTag.closest('li');
-            if (parentLi) {
-                parentLi.remove(); // Remove the <li> element
-            }
-            if(bookmarksDocs.children.length == 0)
-                noBookmarks();
-            })
-        .catch(error => {
-            console.error('Error adding bookmark:', error);
         });
-    });
-    bookmarksDocs.appendChild(li);
+        
+
+        li.querySelector('.bookmark-btn').addEventListener('click', (e) => {
+            const path = e.target.id;
+            fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/deletebookmark/${path}`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Bookmark API request failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Bookmark removed successfully:', data);
+                showNotification('Bookmark removed successfully', 'green');
+                const bookIdTag = document.getElementById(path)
+                const parentLi = bookIdTag.closest('li');
+                if (parentLi) {
+                    parentLi.remove(); // Remove the <li> element
+                }
+                if(bookmarksDocs.children.length == 0)
+                    noBookmarks();
+                })
+            .catch(error => {
+                console.error('Error adding bookmark:', error);
+            });
+        });
+    return li;
 }
 
 
 const saariPdf = (pdf) =>{
     pdf.forEach((book) => {
-        showKaro(book);
+        let li = showKaro(book);
+        bookmarksDocs.appendChild(li);
+    });
+}
+const saariPdf2 = (pdf) =>{
+    pdf.forEach((book) => {
+        console.log(uploadByYou);
+        let li = showKaro(book);
+        uploadByYou.appendChild(li);
     });
 }
 

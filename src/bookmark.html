@@ -73,11 +73,15 @@
             </section>
 
             <section id="bookmark-section" class="hidden pb-24">
-                <h1 class="text-tailblue text-2xl font-monument tracking-wide mb-3 " >Saved Docs</h1>
+                <div class="tabs mb-3">
+                    <button class="tab bg-[#38bdf833] px-5 py-3 text-white font-bold hover:bg-[#38bdf8] border rounded border-tailblue">Saved Doc</button>
+                    <button class="tab bg-[#38bdf833] px-5 py-3 text-white font-bold hover:bg-[#38bdf8] border rounded border-tailblue">Uploaded by you</button>
+                </div>
+                <div class="w-full h-[1px] bg-gray-400 mb-3"></div>
                 
-
                 <div class="w-full h-fit rounded">
-                    <ul id="bookmark-docs" class="mb-2 h-full"></ul>
+                    <ul id="bookmark-docs" class="mb-2 h-full content"></ul>
+                    <ul id="uploaded-by-you" class="mb-2 h-full content"></ul>
                 </div>
             </section>
         </main>
