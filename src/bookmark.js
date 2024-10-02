@@ -245,11 +245,11 @@ const showKaro = (book) => {
                     </p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                    <p id="download-btn">
-                        <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
+                    <a href="https://drive.usercontent.google.com/u/0/uc?id=${path}&export=download" id="prev-btn">
+                        <button class="text-white text-lg font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
                             <i class="ri-download-line mr-2"></i> Download
                         </button>
-                    </p>
+                    </a>
 
                     <button class="text-white font-bold py-2 px-4 rounded-full tracking-wide bg-red-500 hover:bg-transparent border border-red-500 transition-colors dlt-btn ${(String(cUser?.username) === uploaderUserName) || cUser?.isadmin ? "block" : "hidden"}" id="${path}">
                         <i class="ri-delete-bin-line hover:text-red-400" id="${path}"></i> Delete
@@ -262,22 +262,6 @@ const showKaro = (book) => {
                 <p class="rounded-full px-2 py-1 text-gray-300 text-xs absolute bg-slate-900 top-1 right-1 md:right-1/2">Document Location: <span class="text-tailblue tracking-wider">Sem: ${(apiName === 'allDoc') ?  Sem : sem}, ${subject}</span>.</p>
             </div>
         </div>`;
-
-
-        li.querySelector('#download-btn').addEventListener('click', e =>{
-            const path = e.target.id;
-            fetch(`https://eduversebackend-hd6t.onrender.com/api/v1/pdf/${path}`,{
-                method: 'get',
-                credentials: 'include',
-    
-            }).then( res => res.json())
-            .then( res =>{
-                    if(res.status_code === 200) {
-                        window.location.replace(res.data.path);
-                    }
-                }
-            )
-        })
 
 
         li.querySelector('.dlt-btn').addEventListener('click', (e) => {

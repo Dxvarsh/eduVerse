@@ -210,13 +210,13 @@ const showKaro = (pdf = null) => {
                     <p class="text-gray-300 text-base">Uploaded by <span class="text-tailblue tracking-wider">${uploaderUserName}</span> on <span class="text-tailblue tracking-wider">${date}</span>.</p>
                 </div>
                 <div class="px-4 pb-4 flex justify-between items-center md:w-[30%]">
-                    <p id="prev-btn">
+                    <a href="https://drive.google.com/file/d/${path}/preview" id="prev-btn">
                         <button class="text-white text-lg font-bold py-2 px-4 rounded-full tracking-wide bg-[#38bdf8] hover:bg-transparent border border-tailblue transition-colors" id="${path}">
                             <i class="ri-eye-line mr-2"></i> Preview
                         </button>
-                    </p>
+                    </a>
 
-                    <a href="https://drive.usercontent.google.com/u/0/uc?id=${id}&export=download" class="${currentUser?.isadmin ? "hidden" : "block"}">
+                    <a href="https://drive.usercontent.google.com/u/0/uc?id=${path}&export=download" class="${currentUser?.isadmin ? "hidden" : "block"}">
                         <button class="text-white text-2xl font-bold rounded-full active:bg-tailblue hover:bg-tailblue px-2 py-1.5">
                             <i class="ri-download-line"></i>
                         </button>    
